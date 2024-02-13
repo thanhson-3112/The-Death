@@ -22,4 +22,12 @@ public class FireBall : MonoBehaviour
     {
         rb.velocity = transform.right * speed;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }
