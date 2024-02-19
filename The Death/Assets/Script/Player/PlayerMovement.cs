@@ -93,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && fireTimer <= 0f)
         {
+            anim.SetTrigger("attack");
             Instantiate(firePrefab, firingPoint.position, firingPoint.rotation);
             fireTimer = fireRate;
         }
