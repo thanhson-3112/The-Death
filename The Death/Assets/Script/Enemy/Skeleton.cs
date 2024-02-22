@@ -8,37 +8,50 @@ public class Skeleton : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    [SerializeField] protected float health = 3f;
-    public int damage = 1;
+    [SerializeField] protected float skeletonMaxHealth = 100f;
+    [SerializeField] protected float skeletonHealth;
+    public float enemyDamage = 1f;
 
     public PlayerLife playerLife;
+    public HealthBar skeletonHealthBar;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         playerLife = playerObject.GetComponent<PlayerLife>();
+
+        skeletonHealth = skeletonMaxHealth;
+        skeletonHealthBar.SetMaxHealth(skeletonMaxHealth);
     }
 
     void Update()
     {
-        if (health <= 0)
+      
+    }
+
+    public virtual void SkeletonTakeDamage(float damage)
+    {
+        skeletonHealth -= damage;
+        skeletonHealthBar.SetHealth(skeletonHealth);
+        if (skeletonHealth <= 0)
         {
-            anim.SetTrigger("EnemyDeath");
-            Destroy(gameObject, 1.25f);
+            SkeletonDie();
         }
     }
 
-    public virtual void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce)
+    void SkeletonDie()
     {
-        health -= _damageDone;
+        rb.bodyType = RigidbodyType2D.Static;
+        anim.SetTrigger("EnemyDeath");
+        Destroy(gameObject, 1.25f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerLife.TakeDamage(damage);
+            playerLife.TakeDamage(enemyDamage);
         }
     }
 }

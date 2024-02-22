@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3471698117157167388}
   - component: {fileID: 8024340640519790007}
   - component: {fileID: 2067280699779360028}
-  - component: {fileID: 6954030851434312360}
+  - component: {fileID: -1239010672126107122}
   m_Layer: 0
   m_Name: FIreBall
   m_TagString: FireBall
@@ -167,7 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   lifeTime: 3
---- !u!95 &6954030851434312360
+  damage: 20
+--- !u!95 &-1239010672126107122
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0

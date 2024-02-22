@@ -1,20 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
 
-    [SerializeField] public int maxHealth = 5;
-    [SerializeField] public int health;
+    [SerializeField] public float maxHealth = 5f;
+    [SerializeField] public float health;
 
     public HealthBar healthBar;
 
-    /*[SerializeField] public Image[] hearts;
-    public Sprite fullHeart;
-    public Sprite emptyHeart;*/
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,9 +28,9 @@ public class PlayerLife : MonoBehaviour
     }
 
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float enemyDamage)
     {
-        health -= damage;
+        health -= enemyDamage;
         healthBar.SetHealth(health);
         anim.SetTrigger("PlayerTakeDamge");
         /*DamageSoundEffect.Play();*/
@@ -80,6 +78,6 @@ public class PlayerLife : MonoBehaviour
 
     private void RestartLevel()
     {
- 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

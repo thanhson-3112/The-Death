@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     private float moveX, moveY;
     private Vector2 moveDir;
-    private Vector2 mousePos;
 
     [Header("Dash setting")]
     [SerializeField] private float dashSpeed = 20f;
@@ -24,15 +23,6 @@ public class PlayerMovement : MonoBehaviour
     private enum MovementState { idle, move }
     private MovementState state = MovementState.idle;
 
-    // Fire
-    [Header("FireBall")]
-    [SerializeField] private GameObject firePrefab;
-    [SerializeField] private GameObject firePoint;
-    [SerializeField] private Transform firingPoint;
-    [Range(0.1f, 2f)]
-    [SerializeField] private float fireRate = 0.5f;
-    private float fireTimer;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -44,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         UpdateAnimationState();
-        Shoot();
     }
 
     private void Move()
@@ -87,26 +76,6 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
-    }
-
-    private void Shoot()
-    {
-        if (Input.GetMouseButtonDown(0) && fireTimer <= 0f)
-        {
-            anim.SetTrigger("attack");
-            Instantiate(firePrefab, firingPoint.position, firingPoint.rotation);
-            fireTimer = fireRate;
-        }
-        else
-        {
-            fireTimer -= Time.deltaTime;
-        }
-
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-      
-        float angle = Mathf.Atan2(mousePos.y - transform.position.y,
-            mousePos.x - transform.position.x) * Mathf.Rad2Deg - 90f;
-        firePoint.transform.localRotation = Quaternion.Euler(0, 0, angle);
     }
 
     protected virtual void UpdateAnimationState()

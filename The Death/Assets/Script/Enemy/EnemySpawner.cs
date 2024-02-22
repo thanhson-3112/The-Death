@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private float spawnRate = 1f;
-
-    [SerializeField] private GameObject[] enemyPreFab;
+    [SerializeField] private float spawnRate = 2f;
+    [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private SpawnPoint spawnPoint;
 
     private bool canSpawn = true;
+
     void Start()
     {
         StartCoroutine(Spawner());
@@ -21,14 +22,17 @@ public class EnemySpawner : MonoBehaviour
         while (canSpawn)
         {
             yield return wait;
-            int rand = Random.Range(0, enemyPreFab.Length);
-            GameObject enemyToSpawn = enemyPreFab[rand];
-            Instantiate(enemyToSpawn, transform.position, Quaternion.identity); 
+
+            Transform spawnTransform = spawnPoint.GetRandomPoint();
+            if (spawnTransform != null)
+            {
+                GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+                Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
+            }
+            else
+            {
+                Debug.LogWarning("Failed to spawn enemy. No valid spawn point.");
+            }
         }
-    }
-    
-    void Update()
-    {
-        
     }
 }

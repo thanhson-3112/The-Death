@@ -10,11 +10,15 @@ public class FireBall : MonoBehaviour
     [Range(1, 10)]
     [SerializeField] private float lifeTime = 3f;
 
+    [SerializeField] public float damage = 20f;
     private Rigidbody2D rb;
+
+    private Animator anim;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         Destroy(gameObject, lifeTime);
     }
 
@@ -27,7 +31,14 @@ public class FireBall : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject);
+            speed = 9;
+            Skeleton enemy = collision.GetComponent<Skeleton>();
+            if (enemy != null)
+            {
+                enemy.SkeletonTakeDamage(damage);
+            }
+            anim.SetTrigger("FireBallAttack");
+            Destroy(gameObject,0.4f);
         }
     }
 }
