@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-public class Skeleton : MonoBehaviour
+public class Skeleton : EnemyMovement
 {
     private Rigidbody2D rb;
     private Animator anim;
 
     [SerializeField] protected float skeletonMaxHealth = 100f;
     [SerializeField] protected float skeletonHealth;
-    public float enemyDamage = 1f;
+    public float skeletonDamage = 1f;
 
     public PlayerLife playerLife;
     public HealthBar skeletonHealthBar;
+    private bool isHealthBarVisible = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,17 +23,22 @@ public class Skeleton : MonoBehaviour
         playerLife = playerObject.GetComponent<PlayerLife>();
 
         skeletonHealth = skeletonMaxHealth;
-        skeletonHealthBar.SetMaxHealth(skeletonMaxHealth);
+        skeletonHealthBar.SetHealthBar();
     }
 
     void Update()
     {
-      
     }
 
     public virtual void SkeletonTakeDamage(float damage)
     {
         skeletonHealth -= damage;
+        
+        if (!isHealthBarVisible)
+        {
+            skeletonHealthBar.SetMaxHealth(skeletonMaxHealth);
+            isHealthBarVisible = true;
+        }
         skeletonHealthBar.SetHealth(skeletonHealth);
         if (skeletonHealth <= 0)
         {
@@ -42,16 +48,17 @@ public class Skeleton : MonoBehaviour
 
     void SkeletonDie()
     {
+        speed = 0;
         rb.bodyType = RigidbodyType2D.Static;
-        anim.SetTrigger("EnemyDeath");
-        Destroy(gameObject, 1.25f);
+        anim.SetBool("SkeletonDeath", true);
+        Destroy(gameObject, 1f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerLife.TakeDamage(enemyDamage);
+            playerLife.TakeDamage(skeletonDamage);
         }
     }
 }

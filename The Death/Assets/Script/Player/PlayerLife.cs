@@ -28,9 +28,19 @@ public class PlayerLife : MonoBehaviour
     }
 
 
-    public void TakeDamage(float enemyDamage)
+    public void TakeDamage(float skeletonDamage)
     {
-        health -= enemyDamage;
+        
+        if(skeletonDamage < 2f)
+        {
+            health -= skeletonDamage;
+            Debug.Log("dame be hon 2");
+        }
+        else
+        {
+            Debug.Log("dame lon hon 2");
+
+        }
         healthBar.SetHealth(health);
         anim.SetTrigger("PlayerTakeDamge");
         /*DamageSoundEffect.Play();*/

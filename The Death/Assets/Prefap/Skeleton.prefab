@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &80916110441610557
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28,17 +28,17 @@ RectTransform:
   m_GameObject: {fileID: 1302630029408842076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 984391777521889878}
   m_Father: {fileID: 7850897301458525899}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2242136695385475231
 Canvas:
   m_ObjectHideFlags: 0
@@ -48,7 +48,7 @@ Canvas:
   m_GameObject: {fileID: 1302630029408842076}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4221346932057710166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skeletonMaxHealth: 100
   skeletonHealth: 100
-  enemyDamage: 1
+  skeletonDamage: 1
   playerLife: {fileID: 0}
   skeletonHealthBar: {fileID: 1070607561590066984}
 --- !u!1 &6642318299894535197
@@ -348,7 +348,7 @@ RectTransform:
   m_GameObject: {fileID: 6642318299894535197}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.08572496, y: 0.010235694, z: 1}
+  m_LocalScale: {x: 0.0063031535, y: 0.00047329484, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 500477894476105479}
@@ -356,9 +356,9 @@ RectTransform:
   m_Father: {fileID: 80916110441610557}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1095.08, y: -510.31}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMax: {x: 0.6747267, y: 0.5}
+  m_AnchoredPosition: {x: -8.645, y: 0.327}
+  m_SizeDelta: {x: 82.52145, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &363659426263837778
 MonoBehaviour:
@@ -424,6 +424,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 363659426263837778}
+  fillArea: {fileID: 8137979640880038958}
+  borderArea: {fileID: 8774032856505300858}
 --- !u!1 &8137979640880038958
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +459,7 @@ RectTransform:
   m_Father: {fileID: 984391777521889878}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.00061035156, y: 0.002811432}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
