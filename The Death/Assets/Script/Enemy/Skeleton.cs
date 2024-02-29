@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Skeleton : EnemyMovement
@@ -11,6 +12,8 @@ public class Skeleton : EnemyMovement
     public PlayerLife playerLife;
     public HealthBar skeletonHealthBar;
     private bool isHealthBarVisible = false;
+
+    int expAmount = 100;
 
     void Start()
     {
@@ -49,6 +52,8 @@ public class Skeleton : EnemyMovement
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetBool("SkeletonDeath", true);
         Destroy(gameObject, 1f);
+
+        ExperienceManager.Instance.AddExperience(expAmount);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
