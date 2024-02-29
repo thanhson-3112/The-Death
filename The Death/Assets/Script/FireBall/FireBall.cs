@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-    [Range(1,100)]
+    [Range(1, 100)]
     [SerializeField] private float speed = 20f;
 
     [Range(1, 10)]
     [SerializeField] private float lifeTime = 3f;
 
-    [SerializeField] public float damage = 20f;
+    private float damage;
     private Rigidbody2D rb;
+
+    public GameObject explosionPrefab; 
 
     private Animator anim;
 
@@ -31,14 +33,17 @@ public class FireBall : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            speed = 9;
+            damage = Random.Range(30f, 50f);
             Skeleton enemy = collision.GetComponent<Skeleton>();
             if (enemy != null)
             {
                 enemy.SkeletonTakeDamage(damage);
             }
             anim.SetTrigger("FireBallAttack");
-            Destroy(gameObject,0.4f);
+
+            // Hieu ung no
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
         }
     }
 }

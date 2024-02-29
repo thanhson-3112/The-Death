@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Skeleton : EnemyMovement
 {
-    private Rigidbody2D rb;
-    private Animator anim;
-
     [SerializeField] protected float skeletonMaxHealth = 100f;
     [SerializeField] protected float skeletonHealth;
     public float skeletonDamage = 1f;

@@ -7,10 +7,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sprite;
+    private TrailRenderer tr;
 
-    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 10f;
     private float moveX, moveY;
     private Vector2 moveDir;
+    private float originalMoveSpeed;
 
     [Header("Dash setting")]
     [SerializeField] private float dashSpeed = 20f;
@@ -23,17 +25,21 @@ public class PlayerMovement : MonoBehaviour
     private enum MovementState { idle, move }
     private MovementState state = MovementState.idle;
 
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        tr = GetComponent<TrailRenderer>();
+        originalMoveSpeed = moveSpeed;
     }
 
     private void Update()
     {
         Move();
         UpdateAnimationState();
+        
     }
 
     private void Move()
@@ -51,6 +57,16 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
+    }
+
+    public void SlowDown(float slowAmount)
+    {
+        moveSpeed = slowAmount; 
+    }
+
+    public void RestoreSpeed()
+    {
+        moveSpeed = originalMoveSpeed;
     }
 
     private void FixedUpdate()
@@ -71,12 +87,15 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x + (sprite.flipX ? -dashSpeed : dashSpeed), rb.velocity.y);
         }
+        tr.emitting = true;
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
+        tr.emitting = false;
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
+
 
     protected virtual void UpdateAnimationState()
     {

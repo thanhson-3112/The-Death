@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4656047178401284139}
   - component: {fileID: 3360262744932345247}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: FiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5750136733189211551}
   m_Layer: 0
-  m_Name: Fire
+  m_Name: Firing
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -127,9 +127,10 @@ GameObject:
   - component: {fileID: 3944083250934799752}
   - component: {fileID: 183680983119956277}
   - component: {fileID: 5882133794449713956}
-  - component: {fileID: 978254405627301908}
   - component: {fileID: 3913629573701167993}
   - component: {fileID: 4379506491641439887}
+  - component: {fileID: 978254405627301908}
+  - component: {fileID: 8709476822715307181}
   - component: {fileID: 7143438582595131573}
   m_Layer: 0
   m_Name: Player
@@ -229,27 +230,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &978254405627301908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8669786473454509400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59b9bb23ca5d8974ca54924bb6fe0f33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  dashSpeed: 20
-  dashDuration: 0.5
-  dashCooldown: 1
-  firePrefab: {fileID: 3405396387186517688, guid: f1650f8f16555694a85fbce2d1c1813d,
-    type: 3}
-  firePoint: {fileID: 1381034105616260487}
-  firingPoint: {fileID: 5750136733189211551}
-  fireRate: 0.25
 --- !u!50 &3913629573701167993
 Rigidbody2D:
   serializedVersion: 4
@@ -323,6 +303,39 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.7509971, y: 2.8823788}
   m_EdgeRadius: 0
+--- !u!114 &978254405627301908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8669786473454509400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b9bb23ca5d8974ca54924bb6fe0f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  dashSpeed: 20
+  dashDuration: 0.5
+  dashCooldown: 1
+--- !u!114 &8709476822715307181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8669786473454509400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3cd01f9d44bbc4ba119e0326f2052b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePrefab: {fileID: 3405396387186517688, guid: f1650f8f16555694a85fbce2d1c1813d,
+    type: 3}
+  firingPoint: {fileID: 1381034105616260487}
+  firing: {fileID: 5750136733189211551}
+  fireRate: 0.25
 --- !u!114 &7143438582595131573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,3 +350,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   health: 0
+  healthBar: {fileID: 0}
