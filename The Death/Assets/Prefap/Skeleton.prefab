@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 1263227079927676029}
   - component: {fileID: 1870665014209901110}
   - component: {fileID: 867059522089554147}
+  - component: {fileID: -117270996628912026}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Enemy
@@ -316,11 +317,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0b19aea20348f47828fba434141834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  speed: 3
+  rotateSpeed: 0.25
   skeletonMaxHealth: 100
   skeletonHealth: 100
   skeletonDamage: 1
   playerLife: {fileID: 0}
   skeletonHealthBar: {fileID: 1070607561590066984}
+--- !u!114 &-117270996628912026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486859194045145805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a5050700ad5b641830a763af5bf83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItemPrefab: {fileID: 4036242108824061714, guid: 5b40d4eec57f41e42a0b7b9102880b6f,
+    type: 3}
+  lootList:
+  - {fileID: 11400000, guid: aefdca5b841c8244a8c5a858501a2d5f, type: 2}
+  - {fileID: 11400000, guid: e0c45b0fd18f54d44bcab1bd7f64b0a1, type: 2}
+  - {fileID: 11400000, guid: edf9d703701310348b056da10847314f, type: 2}
 --- !u!1 &6642318299894535197
 GameObject:
   m_ObjectHideFlags: 0

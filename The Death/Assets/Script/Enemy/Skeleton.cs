@@ -53,6 +53,7 @@ public class Skeleton : EnemyMovement
         anim.SetBool("SkeletonDeath", true);
         Destroy(gameObject, 1f);
 
+        GetComponent<LootExperience>().InstantiateLoot(transform.position);
         ExperienceManager.Instance.AddExperience(expAmount);
     }
 
