@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu]
 
-public class LootManager : ScriptableObject
+public class LootItemManager : ScriptableObject
 {
     public Sprite lootSprite;
     public string lootName;

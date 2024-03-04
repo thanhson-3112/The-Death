@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Dash setting")]
     [SerializeField] private float dashSpeed = 20f;
     [SerializeField] private float dashDuration = 0.5f;
-    [SerializeField] private float dashCooldown = 1f;
+    [SerializeField] private float dashCooldown = 0.5f;
     private bool isDashing;
     private bool canDash = true;
 
@@ -82,15 +82,21 @@ public class PlayerMovement : MonoBehaviour
     {
         isDashing = true;
         canDash = false;
+
         rb.velocity = new Vector2(moveDir.x * dashSpeed, moveDir.y * dashSpeed);
         if (moveDir == Vector2.zero)
         {
             rb.velocity = new Vector2(rb.velocity.x + (sprite.flipX ? -dashSpeed : dashSpeed), rb.velocity.y);
         }
         tr.emitting = true;
+        rb.GetComponent<Collider2D>().enabled = false;
+
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
         tr.emitting = false;
+
+        // B?t l?i Collider sau khi k?t thúc l??t
+        rb.GetComponent<Collider2D>().enabled = true;
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;

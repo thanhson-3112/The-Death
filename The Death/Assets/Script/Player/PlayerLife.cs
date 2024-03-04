@@ -8,7 +8,7 @@ public class PlayerLife : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    [SerializeField] public float maxHealth = 5f;
+    [SerializeField] public float maxHealth = 30f;
     [SerializeField] public float health;
 
     public HealthBar healthBar;

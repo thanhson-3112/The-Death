@@ -3034,7 +3034,7 @@ MonoBehaviour:
   moveSpeed: 10
   dashSpeed: 20
   dashDuration: 0.5
-  dashCooldown: 1
+  dashCooldown: 0.5
 --- !u!1 &1381034105763467474
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,6 +3076,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1186908925}
     m_Modifications:
+    - target: {fileID: 486944568780003639, guid: b266dd28a0b8f5f48af2751f897ed261,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1667078673046902764, guid: b266dd28a0b8f5f48af2751f897ed261,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3130,6 +3135,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 8025678567386303133, guid: b266dd28a0b8f5f48af2751f897ed261,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1899300493444512372, guid: b266dd28a0b8f5f48af2751f897ed261, type: 3}
@@ -3346,7 +3356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02988f132dfbfce42821d924ee3df298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 30
   health: 0
   healthBar: {fileID: 917860464}
 --- !u!1 &8669786471562072077
@@ -3362,11 +3372,12 @@ GameObject:
   - component: {fileID: 5882133793119217265}
   - component: {fileID: 3913629574552102444}
   - component: {fileID: 4379506490780806106}
+  - component: {fileID: 8669786471562072079}
   - component: {fileID: 978254404298710337}
   - component: {fileID: 8669786471562072078}
   - component: {fileID: 7143438583849342432}
-  - component: {fileID: 8669786471562072079}
   - component: {fileID: 8669786471562072080}
+  - component: {fileID: 8669786471562072081}
   m_Layer: 20
   m_Name: Player
   m_TagString: Player
@@ -3512,9 +3523,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8669786471562072077}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ba550993caee444ab8ca42e2948ac03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentExperience: 0
+  maxExperience: 300
+  currentLevel: 1
+--- !u!114 &8669786471562072081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8669786471562072077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb687dec51dd0a4da9976df9a08b215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentExperience: 0
@@ -3527,8 +3553,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 1186908925}
   - {fileID: 561482240}
   - {fileID: 1678042124}
   - {fileID: 3944083249177202909}
-  - {fileID: 1186908925}
   - {fileID: 1625678243}

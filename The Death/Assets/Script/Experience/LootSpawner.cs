@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LootExperience : MonoBehaviour
+public class LootSpawner : MonoBehaviour
 {
     public GameObject droppedItemPrefab;
-    public List<LootManager> lootList = new List<LootManager>();
+    public List<LootItemManager> lootList = new List<LootItemManager>();
 
-    LootManager GetDroppedItem()
+    LootItemManager GetDroppedItem()
     {
         int randomNumber = Random.Range(1, 101);
-        List<LootManager> PossibleItems = new List<LootManager>();
-        foreach(LootManager item in lootList)
+        List<LootItemManager> PossibleItems = new List<LootItemManager>();
+        foreach(LootItemManager item in lootList)
         {
             if(randomNumber <= item.dropChance)
             {
@@ -21,7 +21,7 @@ public class LootExperience : MonoBehaviour
         }
         if (PossibleItems.Count > 0)
             {
-                LootManager droppedItem = PossibleItems[Random.Range(0, PossibleItems.Count)];
+                LootItemManager droppedItem = PossibleItems[Random.Range(0, PossibleItems.Count)];
                 return droppedItem;
             }
         Debug.Log("No loot dropped");
@@ -30,7 +30,7 @@ public class LootExperience : MonoBehaviour
 
     public void InstantiateLoot(Vector3 spawnPosition)
     {
-        LootManager droppedItem = GetDroppedItem();
+        LootItemManager droppedItem = GetDroppedItem();
         if(droppedItem != null)
         {
             GameObject lootGameObject = Instantiate(droppedItemPrefab, spawnPosition, Quaternion.identity);

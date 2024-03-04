@@ -13,8 +13,6 @@ public class Skeleton : EnemyMovement
     public HealthBar skeletonHealthBar;
     private bool isHealthBarVisible = false;
 
-    int expAmount = 100;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -53,8 +51,7 @@ public class Skeleton : EnemyMovement
         anim.SetBool("SkeletonDeath", true);
         Destroy(gameObject, 1f);
 
-        GetComponent<LootExperience>().InstantiateLoot(transform.position);
-        ExperienceManager.Instance.AddExperience(expAmount);
+        GetComponent<LootSpawner>().InstantiateLoot(transform.position);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
