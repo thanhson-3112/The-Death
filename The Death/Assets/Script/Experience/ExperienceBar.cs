@@ -13,7 +13,7 @@ public class ExperienceBar : MonoBehaviour
         fillArea.SetActive(true);
         borderArea.SetActive(true);
         experienceBar.maxValue = experience;
-        experienceBar.value = 0; // ??t giá tr? v? 0 khi c?p nh?t kinh nghi?m t?i ?a.
+        experienceBar.value = 0; 
     }
 
     public void SetExperience(int experience)

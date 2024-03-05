@@ -28,7 +28,7 @@ public class Skeleton : EnemyMovement
     {
     }
 
-    public virtual void SkeletonTakeDamage(float damage)
+    public virtual void EnemyTakeDamage(float damage)
     {
         skeletonHealth -= damage;
         
@@ -46,7 +46,7 @@ public class Skeleton : EnemyMovement
 
     void SkeletonDie()
     {
-        speed = 0;
+        _enemySpeed = 0;
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetBool("SkeletonDeath", true);
         Destroy(gameObject, 1f);

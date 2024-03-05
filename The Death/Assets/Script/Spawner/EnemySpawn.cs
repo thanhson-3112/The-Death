@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class EnemySpawn : PlayerExperience
 {
-    [SerializeField] private float spawnRate = 2f;
+    [SerializeField] private float SkeletonSpawnRate = 2f;
+    [SerializeField] private float GoblinSpawnRate = 4f;
+
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private SpawnPoint spawnPoint;
 
@@ -13,11 +15,17 @@ public class EnemySpawn : MonoBehaviour
     void Start()
     {
         StartCoroutine(Spawner());
+        base.Update();
     }
+
+    /*protected override void Update()
+    {
+        base.Update();
+    }*/
 
     private IEnumerator Spawner()
     {
-        WaitForSeconds wait = new WaitForSeconds(spawnRate);
+        WaitForSeconds wait = new WaitForSeconds(SkeletonSpawnRate);
 
         while (canSpawn)
         {
@@ -25,9 +33,30 @@ public class EnemySpawn : MonoBehaviour
 
             Transform spawnTransform = spawnPoint.GetRandomPoint();
             if (spawnTransform != null)
-            {
-                GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-                Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
+            {   
+                if(_currentLevel < 10)
+                {
+                    GameObject enemyToSpawn = enemyPrefabs[0];
+                    Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
+                    Debug.Log("Level = " + _currentLevel.ToString());
+                }
+                if(_currentLevel >= 10)
+                {
+                    GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+                    Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
+                    Debug.Log("Level = " + _currentLevel.ToString());
+
+                   
+                    if (enemyToSpawn == enemyPrefabs[1])
+                    {
+                        wait = new WaitForSeconds(GoblinSpawnRate);
+                    }
+                    else
+                    {
+                        wait = new WaitForSeconds(SkeletonSpawnRate);
+                    }
+                }
+
             }
             else
             {

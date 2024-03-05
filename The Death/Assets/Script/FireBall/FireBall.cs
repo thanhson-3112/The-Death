@@ -34,10 +34,16 @@ public class FireBall : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             damage = Random.Range(30f, 50f);
-            Skeleton enemy = collision.GetComponent<Skeleton>();
-            if (enemy != null)
+            Skeleton skeletonEnemy = collision.GetComponent<Skeleton>();
+            if (skeletonEnemy != null)
             {
-                enemy.SkeletonTakeDamage(damage);
+                skeletonEnemy.EnemyTakeDamage(damage);
+            }
+
+            Goblin goblinEnemy = collision.GetComponent<Goblin>();
+            if (goblinEnemy != null)
+            {
+                goblinEnemy.EnemyTakeDamage(damage);
             }
             anim.SetTrigger("FireBallAttack");
 

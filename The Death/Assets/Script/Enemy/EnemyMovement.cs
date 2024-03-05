@@ -8,7 +8,10 @@ public class EnemyMovement : MonoBehaviour
     protected Animator anim;
 
     public Transform target;
-    public float speed = 3f;
+
+    [SerializeField] private float enemySpeed = 3f;
+    public float _enemySpeed { get => enemySpeed; set => enemySpeed = value; }
+
     public float rotateSpeed = 0.25f;
 
     private void Start()
@@ -25,9 +28,10 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            anim.SetTrigger("SkeletonRun");
+            anim.SetTrigger("enemyRun");
             RotateTowardsTarget();
         }
+        enemySpeed = _enemySpeed;
     }
 
     private void RotateTowardsTarget()
@@ -41,7 +45,7 @@ public class EnemyMovement : MonoBehaviour
         {
             transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
-        transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target.position, enemySpeed * Time.deltaTime);
     }
 
 

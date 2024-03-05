@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class PlayerExperience : MonoBehaviour
 {
-    [SerializeField] protected internal int currentExperience, maxExperience = 300, currentLevel = 1;
+    [SerializeField] private int currentExperience, maxExperience = 1000, currentLevel = 1;
 
-    
+    public int _currentExperience { get => currentExperience; }
+    public int _maxExperience { get => maxExperience; }
+    public int _currentLevel { get => currentLevel; }
+
     protected virtual void Update()
     {
         
     }
+
     protected virtual void OnEnable()
     {
         ExperienceManager.Instance.OnExperienceChange += HandleExperience;
@@ -34,6 +38,6 @@ public class PlayerExperience : MonoBehaviour
     {
         currentLevel++;
         currentExperience = 0;
-        maxExperience += 100;
+        maxExperience += 1000;
     }
 }

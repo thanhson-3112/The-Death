@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -10,12 +11,12 @@ public class PlayerExperienceUI : PlayerExperience
     {
         base.Update(); 
         UpdateLevelText();
-        experienceBar.SetMaxExperience(maxExperience);
-        experienceBar.SetExperience(currentExperience);
+        experienceBar.SetMaxExperience(_maxExperience);
+        experienceBar.SetExperience(_currentExperience);
     }
 
     private void UpdateLevelText()
     {
-        levelText.text = "Level: " + currentLevel.ToString();
+        levelText.text = "" + _currentLevel.ToString();
     }
 }
