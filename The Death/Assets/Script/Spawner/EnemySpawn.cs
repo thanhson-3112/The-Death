@@ -38,15 +38,12 @@ public class EnemySpawn : PlayerExperience
                 {
                     GameObject enemyToSpawn = enemyPrefabs[0];
                     Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
-                    Debug.Log("Level = " + _currentLevel.ToString());
                 }
                 if(_currentLevel >= 10)
                 {
                     GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
                     Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
-                    Debug.Log("Level = " + _currentLevel.ToString());
 
-                   
                     if (enemyToSpawn == enemyPrefabs[1])
                     {
                         wait = new WaitForSeconds(GoblinSpawnRate);

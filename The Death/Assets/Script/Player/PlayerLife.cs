@@ -55,7 +55,6 @@ public class PlayerLife : MonoBehaviour
         anim.SetTrigger("PlayerDeath");
 
         Destroy(gameObject, 1.5f);
-        /*Invoke("Respawn", 1.7f);*/
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -79,6 +78,10 @@ public class PlayerLife : MonoBehaviour
         }*/
     }
 
+    public void Heal()
+    {
+        health = health + 5;
+    }
 
     private void RestartLevel()
     {

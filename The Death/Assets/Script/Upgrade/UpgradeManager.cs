@@ -5,43 +5,35 @@ using UnityEngine.UI;
 using TMPro;
 
 
-public class UpgradeManager : MonoBehaviour
+public class UpgradeManager : PlayerExperience
 {
-    Upgrade[] Upgrades = new Upgrade[]
-    {
-        new Upgrade{Name = "Attack Speed", Description = "Attack Speed + 2", Ratity = "Common",  Increase = 10},
-        new Upgrade{Name = "Attack Damage", Description = "Attack Damage + 2", Ratity = "Common", Increase = 20},
-        new Upgrade{Name = "Attack Damage2", Description = "Attack Damage + 5", Ratity = "Rare",  Increase = 20},
-        new Upgrade{Name = "Dash Force", Description = "Dash Force +2", Ratity = "Rare",  Increase = 20},
-        new Upgrade{Name = "Dash Force2", Description = "Dash Force +5", Ratity = "Epic",  Increase = 20}
-
-    };
+    Upgrade[] Upgrades;
 
     private int upgradeCount = 3;
-    private int previousLevel;
 
     [SerializeField] GameObject upgrade_prefab;
     [SerializeField] GameObject upgradeHorizontalLayout;
-    /*[SerializeField] GameObject upgradeEneble;*/
 
-    private void Start()
+    public void Start()
     {
-        /*previousLevel = _currentLevel;*/
+        Upgrades = new Upgrade[]
+        {
+        new Upgrade{Name = "Attack Speed", Description = "Attack Speed + 2", Ratity = "Common",  Increase = 10, Sprite = (Sprite)Resources.Load("Upgrade_Card/Dash_Force")},
+        new Upgrade{Name = "Attack Damage", Description = "Attack Damage + 2", Ratity = "Common", Increase = 20, Sprite = (Sprite)Resources.Load("Upgrade_Card/Attack_Speed")},
+        new Upgrade{Name = "Attack Damage2", Description = "Attack Damage + 5", Ratity = "Rare",  Increase = 20, Sprite = (Sprite)Resources.Load("Upgrade_Card/Attack_Damage")},
+        new Upgrade{Name = "Dash Force", Description = "Dash Force +2", Ratity = "Rare",  Increase = 20, Sprite = (Sprite)Resources.Load("Upgrade_Card/Dash_Force")},
+        new Upgrade{Name = "Dash Force2", Description = "Dash Force +5", Ratity = "Epic",  Increase = 20, Sprite = (Sprite)Resources.Load("Upgrade_Card/Dash_Force")}
+
+        };
         ButtonsSet();
-/*        upgradeEneble.SetActive(false);*/
     }
 
 
-    /*protected override void Update()
-    {
-        if (_currentLevel > previousLevel)
-        {
-            transform.GetChild(0).gameObject.SetActive(true);
-            previousLevel = _currentLevel;
-        }
-    }*/
     public void ButtonsSet()
     {
+        transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(true);
+
         List<int> availableUpgrades = new List<int>();
         for (int i = 0; i < Upgrades.Length; i++)
         {
@@ -67,27 +59,28 @@ public class UpgradeManager : MonoBehaviour
             Button upgradeButton = upgradeObject.GetComponent<Button>();
             upgradeButton.onClick.AddListener(() => { UpgradeChosen(upgrade.Name); });
 
-            TextMeshProUGUI upgradeTextName = upgradeObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI upgradeTextName = upgradeObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
             upgradeTextName.text = upgrade.Name;
 
-            TextMeshProUGUI upgradeTextDescription = upgradeObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI upgradeTextDescription = upgradeObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
             upgradeTextDescription.text = upgrade.Description;
 
-            /*upgradeObject.transform.GetChild(1).GetComponent<Image>().color = rarityColors[upgrade.Ratity];
-            upgradeObject.transform.GetChild(2).GetComponent<Image>().sprite = upgrade.Sprite;*/
+            upgradeObject.transform.GetChild(0).GetComponent<Image>().color = rarityColors[upgrade.Ratity];
+            upgradeObject.transform.GetChild(1).GetComponent<Image>().sprite = upgrade.Sprite;
 
-            upgradeButton.GetComponent<Image>().color = rarityColors[upgrade.Ratity]; 
-            
+
+            Debug.Log("Sprite path: " + "Upgrade_Card/" + upgrade.Sprite);
         }
+    
         Time.timeScale = 0;
     }
 
     private void UpgradeChosen(string upgradeChosen)
     {
-        /*Time.timeScale = 1;*/
-        /*transform.GetChild(0).gameObject.SetActive(false);
-        transform.GetChild(1).gameObject.SetActive(false);*/
-        /*upgradeEneble.SetActive(false);*/
+        Time.timeScale = 1;
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+
 
         switch (upgradeChosen)
         {
@@ -126,6 +119,6 @@ public class UpgradeManager : MonoBehaviour
         public string Description { get; set;}
         public string Ratity { get; set;}
         public float Increase {get; set;}
-        /*public Sprite Sprite;*/
+        public Sprite Sprite { get; set; }
     } 
 }
