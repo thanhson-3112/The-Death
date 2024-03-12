@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemySpawn : PlayerExperience
 {
     [SerializeField] private float SkeletonSpawnRate = 2f;
-    [SerializeField] private float GoblinSpawnRate = 4f;
+    [SerializeField] private float GoblinSpawnRate = 8f;
+    [SerializeField] private float ArcherSpawnRate = 10f;
 
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private SpawnPoint spawnPoint;
@@ -33,13 +34,18 @@ public class EnemySpawn : PlayerExperience
 
             Transform spawnTransform = spawnPoint.GetRandomPoint();
             if (spawnTransform != null)
-            {   
-                if(_currentLevel < 10)
+            {
+                if (_currentLevel < 5)
                 {
                     GameObject enemyToSpawn = enemyPrefabs[0];
                     Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
                 }
-                if(_currentLevel >= 10)
+                else if (_currentLevel >= 5 && _currentLevel < 7)
+                {
+                    GameObject enemyToSpawn = enemyPrefabs[1];
+                    Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
+                }
+                else if (_currentLevel >= 7)
                 {
                     GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
                     Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
@@ -48,12 +54,15 @@ public class EnemySpawn : PlayerExperience
                     {
                         wait = new WaitForSeconds(GoblinSpawnRate);
                     }
-                    else
+                    else if (enemyToSpawn == enemyPrefabs[0])
                     {
                         wait = new WaitForSeconds(SkeletonSpawnRate);
                     }
+                    else
+                    {
+                        wait = new WaitForSeconds(ArcherSpawnRate);
+                    }
                 }
-
             }
             else
             {

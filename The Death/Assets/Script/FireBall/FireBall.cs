@@ -10,11 +10,11 @@ public class FireBall : MonoBehaviour
     [Range(1, 10)]
     [SerializeField] private float lifeTime = 3f;
 
-    private float damage;
+    [SerializeField] private float baseDamage = 40f; 
+    private float currentDamage; 
+
     private Rigidbody2D rb;
-
-    public GameObject explosionPrefab; 
-
+    public GameObject explosionPrefab;
     private Animator anim;
 
     private void Start()
@@ -22,6 +22,18 @@ public class FireBall : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         Destroy(gameObject, lifeTime);
+
+        currentDamage = baseDamage;
+    }
+
+    public void PlayerDamageUpgrade()
+    {
+        currentDamage += 2f;
+    }
+
+    public void PlayerDamageUpgrade2()
+    {
+        currentDamage += 5f;
     }
 
     private void FixedUpdate()
@@ -33,23 +45,27 @@ public class FireBall : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            damage = Random.Range(30f, 50f);
             Skeleton skeletonEnemy = collision.GetComponent<Skeleton>();
             if (skeletonEnemy != null)
             {
-                skeletonEnemy.EnemyTakeDamage(damage);
+                skeletonEnemy.EnemyTakeDamage(currentDamage);
             }
 
             Goblin goblinEnemy = collision.GetComponent<Goblin>();
             if (goblinEnemy != null)
             {
-                goblinEnemy.EnemyTakeDamage(damage);
+                goblinEnemy.EnemyTakeDamage(currentDamage);
+            }
+
+            Archer archerEnemy = collision.GetComponent<Archer>();
+            if (archerEnemy != null)
+            {
+                archerEnemy.EnemyTakeDamage(currentDamage);
             }
             anim.SetTrigger("FireBallAttack");
 
-            // Hieu ung no
+            // Spawn hi?u ?ng n? 
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-
         }
     }
 }

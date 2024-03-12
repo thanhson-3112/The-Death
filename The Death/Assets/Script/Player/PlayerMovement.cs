@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float originalMoveSpeed;
 
     [Header("Dash setting")]
-    [SerializeField] private float dashSpeed = 20f;
+    [SerializeField] public float dashSpeed = 10f;
     [SerializeField] private float dashDuration = 0.5f;
     [SerializeField] private float dashCooldown = 0.5f;
     private bool isDashing;
@@ -126,5 +126,15 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.idle;
         }
         anim.SetInteger("state", (int)state);
+    }
+
+    public void DashUpgrade()
+    {
+        dashSpeed += 1f;
+    }
+
+    public void DashUpgrade2()
+    {
+        dashSpeed += 1f;
     }
 }

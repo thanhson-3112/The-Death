@@ -9,20 +9,26 @@ public class UpgradeManager : PlayerExperience
 {
     Upgrade[] Upgrades;
 
-    private int upgradeCount = 3;
+    [SerializeField]private int upgradeCount = 3;
 
     [SerializeField] GameObject upgrade_prefab;
     [SerializeField] GameObject upgradeHorizontalLayout;
+
+    [Header("")]
+    [SerializeField] FireBall fireBallDamage;
+    [SerializeField] PlayerMovement playerMovement;
+    [SerializeField] PlayerAttack playerAttackSpeed;
+    
 
     public void Start()
     {
         Upgrades = new Upgrade[]
         {
-        new Upgrade{Name = "Attack Speed", Description = "Attack Speed + 2", Ratity = "Common",  Increase = 10, Sprite = (Sprite)Resources.Load("Upgrade_Card/Dash_Force")},
-        new Upgrade{Name = "Attack Damage", Description = "Attack Damage + 2", Ratity = "Common", Increase = 20, Sprite = (Sprite)Resources.Load("Upgrade_Card/Attack_Speed")},
-        new Upgrade{Name = "Attack Damage2", Description = "Attack Damage + 5", Ratity = "Rare",  Increase = 20, Sprite = (Sprite)Resources.Load("Upgrade_Card/Attack_Damage")},
-        new Upgrade{Name = "Dash Force", Description = "Dash Force +2", Ratity = "Rare",  Increase = 20, Sprite = (Sprite)Resources.Load("Upgrade_Card/Dash_Force")},
-        new Upgrade{Name = "Dash Force2", Description = "Dash Force +5", Ratity = "Epic",  Increase = 20, Sprite = (Sprite)Resources.Load("Upgrade_Card/Dash_Force")}
+        new Upgrade{Name = "Attack Speed", Description = "Attack Speed +0.1", Ratity = "Common",  Increase = 10, Sprite = Resources.Load<Sprite>("Upgrade_Card/Attack_Speed")},
+        new Upgrade{Name = "Attack Damage", Description = "Attack Damage +2", Ratity = "Common", Increase = 20, Sprite = Resources.Load<Sprite>("Upgrade_Card/Attack_Damage")},
+        new Upgrade{Name = "Attack Damage 2", Description = "Attack Damage +5", Ratity = "Rare",  Increase = 20, Sprite = Resources.Load<Sprite>("Upgrade_Card/Attack_Damage")},
+        new Upgrade{Name = "Dash Force", Description = "Dash Force +1", Ratity = "Rare",  Increase = 20, Sprite = Resources.Load<Sprite>("Upgrade_Card/Dash_Force")},
+        new Upgrade{Name = "Dash Force 2", Description = "Dash Force +3", Ratity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Upgrade_Card/Dash_Force")}
 
         };
         ButtonsSet();
@@ -59,14 +65,14 @@ public class UpgradeManager : PlayerExperience
             Button upgradeButton = upgradeObject.GetComponent<Button>();
             upgradeButton.onClick.AddListener(() => { UpgradeChosen(upgrade.Name); });
 
-            TextMeshProUGUI upgradeTextName = upgradeObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI upgradeTextName = upgradeObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
             upgradeTextName.text = upgrade.Name;
 
-            TextMeshProUGUI upgradeTextDescription = upgradeObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI upgradeTextDescription = upgradeObject.transform.GetChild(4).GetComponent<TextMeshProUGUI>();
             upgradeTextDescription.text = upgrade.Description;
 
-            upgradeObject.transform.GetChild(0).GetComponent<Image>().color = rarityColors[upgrade.Ratity];
-            upgradeObject.transform.GetChild(1).GetComponent<Image>().sprite = upgrade.Sprite;
+            upgradeObject.transform.GetChild(1).GetComponent<Image>().color = rarityColors[upgrade.Ratity];
+            upgradeObject.transform.GetChild(2).GetComponent<Image>().sprite = upgrade.Sprite;
 
 
             Debug.Log("Sprite path: " + "Upgrade_Card/" + upgrade.Sprite);
@@ -86,18 +92,23 @@ public class UpgradeManager : PlayerExperience
         {
             case "Attack Speed":
                 Debug.Log("Attack Speed");
+                playerAttackSpeed.UpgradeAttackSpeed();
                 break;
             case "Attack Damage":
                 Debug.Log("Attack Damage");
+                fireBallDamage.PlayerDamageUpgrade();
                 break;
-            case "Attack Damage2":
+            case "Attack Damage 2":
                 Debug.Log("Attack Damage 2");
+                fireBallDamage.PlayerDamageUpgrade2();
                 break;
             case "Dash Force":
                 Debug.Log("Dash Force");
+                playerMovement.DashUpgrade();
                 break;
-            case "Dash Force2":
-                Debug.Log("Dash Force");
+            case "Dash Force 2":
+                Debug.Log("Dash Force 2");
+                playerMovement.DashUpgrade2();
                 break;
         }
     }

@@ -17,7 +17,6 @@ public class PlayerUpgrade : PlayerExperience
     {
         if (_currentLevel > previousLevel)
         {
-            Debug.Log("233" + _currentLevel);
             upgradeManager.Start();
             PlayerLife.Heal();
             previousLevel = _currentLevel;

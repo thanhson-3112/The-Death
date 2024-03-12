@@ -17,9 +17,9 @@ public class PlayerLife : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
         health = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-        /*respawnPoint = startPoint.transform.position;*/
     }
 
     void Update()
@@ -28,13 +28,9 @@ public class PlayerLife : MonoBehaviour
     }
 
 
-    public void TakeDamage(float skeletonDamage)
+    public void TakeDamage(float enemyDamage)
     {
-        
-        if(skeletonDamage < 2f)
-        {
-            health -= skeletonDamage;
-        }
+        health -= enemyDamage;
         healthBar.SetHealth(health);
         anim.SetTrigger("PlayerTakeDamge");
         /*DamageSoundEffect.Play();*/
@@ -80,7 +76,7 @@ public class PlayerLife : MonoBehaviour
 
     public void Heal()
     {
-        health = health + 5;
+        health += 10;
     }
 
     private void RestartLevel()

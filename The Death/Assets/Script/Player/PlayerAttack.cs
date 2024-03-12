@@ -13,7 +13,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject firingPoint;
     [SerializeField] private Transform firing;
     [Range(0.1f, 2f)]
-    [SerializeField] private float fireRate = 0.5f;
+    [SerializeField] private float fireRate = 1f;
     private float fireTimer;
 
     private PlayerMovement playerMovement;
@@ -32,6 +32,15 @@ public class PlayerAttack : MonoBehaviour
             MouseAttack();
         }
         Shoot();
+    }
+
+    public void UpgradeAttackSpeed()
+    {
+        fireRate = fireRate - 0.1f;
+        if(fireRate < 0.3)
+        {
+            fireRate = 0.3f;
+        }
     }
 
     private void Shoot()
