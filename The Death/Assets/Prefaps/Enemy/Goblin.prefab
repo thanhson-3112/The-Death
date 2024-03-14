@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  enemySpeed: 7
+  enemySpeed: 5
   rotateSpeed: 0.25
 --- !u!114 &4897690183773865668
 MonoBehaviour:
