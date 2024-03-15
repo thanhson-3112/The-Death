@@ -35,39 +35,43 @@ public class EnemySpawn : PlayerExperience
             Transform spawnTransform = spawnPoint.GetRandomPoint();
             if (spawnTransform != null)
             {
+                GameObject enemyToSpawn = null;
+
                 if (_currentLevel < 5)
                 {
-                    GameObject enemyToSpawn = enemyPrefabs[0];
-                    Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
+                    enemyToSpawn = enemyPrefabs[0];
                 }
                 else if (_currentLevel >= 5 && _currentLevel < 7)
                 {
-                    GameObject enemyToSpawn = enemyPrefabs[1];
-                    Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
+                    enemyToSpawn = enemyPrefabs[Random.Range(0, 2)];
                 }
                 else if (_currentLevel >= 7)
                 {
-                    GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-                    Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
-
-                    if (enemyToSpawn == enemyPrefabs[1])
-                    {
-                        wait = new WaitForSeconds(GoblinSpawnRate);
-                    }
-                    else if (enemyToSpawn == enemyPrefabs[0])
-                    {
-                        wait = new WaitForSeconds(SkeletonSpawnRate);
-                    }
-                    else
-                    {
-                        wait = new WaitForSeconds(ArcherSpawnRate);
-                    }
+                    enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
                 }
+
+                // Instantiate enemyToSpawn
+                Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
+
+                // Ch?n th?i gian ch? sau m?i l?n spawn
+                wait = GetSpawnWaitTime(enemyToSpawn);
             }
-            else
-            {
-                Debug.LogWarning("Failed to spawn enemy. No valid spawn point.");
-            }
+        }
+    }
+
+    WaitForSeconds GetSpawnWaitTime(GameObject enemyToSpawn)
+    {
+        if (enemyToSpawn == enemyPrefabs[1])
+        {
+            return new WaitForSeconds(GoblinSpawnRate);
+        }
+        else if (enemyToSpawn == enemyPrefabs[0])
+        {
+            return new WaitForSeconds(SkeletonSpawnRate);
+        }
+        else
+        {
+            return new WaitForSeconds(ArcherSpawnRate);
         }
     }
 }

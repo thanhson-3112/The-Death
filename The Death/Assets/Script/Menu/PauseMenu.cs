@@ -14,8 +14,6 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         pauseMusicVolume.SetActive(false);
-        Time.timeScale = 1f;
-
     }
 
     private void Update()

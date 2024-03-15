@@ -62,6 +62,13 @@ public class FireBall : MonoBehaviour
             {
                 archerEnemy.EnemyTakeDamage(currentDamage);
             }
+
+            BoDLifeController BoDEnemy = collision.GetComponent<BoDLifeController>();
+            if (BoDEnemy != null)
+            {
+                BoDEnemy.EnemyTakeDamage(currentDamage);
+            }
+
             anim.SetTrigger("FireBallAttack");
 
             // Spawn hi?u ?ng n? 

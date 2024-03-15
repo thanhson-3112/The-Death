@@ -1,24 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class BoDMovingState : BaseState
+public class BoDSpellState : BaseState
 {
     private BoDStateMachine SM;
     public Transform target;
-    private Animator anim;
 
-    public BoDMovingState(BoDStateMachine stateMachine) : base("Move", stateMachine) 
+    public BoDSpellState(BoDStateMachine stateMachine) : base("Spell", stateMachine)
     {
         SM = stateMachine;
     }
-   
-    public BoDMovingState(BoDStateMachine stateMachine, Animator animator) : base("Move", stateMachine)
-    {
-        SM = stateMachine;
-        anim = animator;
-    }
-
 
     public override void Enter()
     {
@@ -27,7 +20,7 @@ public class BoDMovingState : BaseState
 
     }
 
-   public override void UpdateLogic()
+    public override void UpdateLogic()
     {
         base.UpdateLogic();
         SM.GetTarget();
@@ -35,6 +28,7 @@ public class BoDMovingState : BaseState
 
     public override void UpdatePhysics()
     {
+        /*anim.SetTrigger("enemyRun");*/
         Vector3 targetDirection = SM.target.position - SM.transform.position;
         if (targetDirection.x > 0)
         {
@@ -45,11 +39,13 @@ public class BoDMovingState : BaseState
             SM.transform.localScale = new Vector3(Mathf.Abs(SM.transform.localScale.x), SM.transform.localScale.y, SM.transform.localScale.z);
         }
         SM.transform.position = Vector2.MoveTowards(SM.transform.position, SM.target.position, SM.moveSpeed * Time.deltaTime);
-    }   
+
+
+    }
 
     public override void Exit()
     {
-        base .Exit();
+        base.Exit();
         SM.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
     }
 
@@ -58,5 +54,4 @@ public class BoDMovingState : BaseState
         yield return new WaitForSeconds(5f);
         SM.NextState();
     }
-
 }

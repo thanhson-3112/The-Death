@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 281013733938219314}
   - component: {fileID: 5323174932631491418}
   - component: {fileID: 3086024009772694407}
+  - component: {fileID: 284083316292535476}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Enemy
@@ -521,6 +522,24 @@ MonoBehaviour:
   archerDamage: 5
   playerLife: {fileID: 0}
   archerHealthBar: {fileID: 4018192868769719896}
+--- !u!114 &284083316292535476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6316923703535640667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a5050700ad5b641830a763af5bf83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItemPrefab: {fileID: 4036242108824061714, guid: 5b40d4eec57f41e42a0b7b9102880b6f,
+    type: 3}
+  lootList:
+  - {fileID: 11400000, guid: aefdca5b841c8244a8c5a858501a2d5f, type: 2}
+  - {fileID: 11400000, guid: e0c45b0fd18f54d44bcab1bd7f64b0a1, type: 2}
+  - {fileID: 11400000, guid: edf9d703701310348b056da10847314f, type: 2}
 --- !u!1 &7597808548754993115
 GameObject:
   m_ObjectHideFlags: 0

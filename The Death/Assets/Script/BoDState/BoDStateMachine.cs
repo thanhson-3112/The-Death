@@ -4,28 +4,27 @@ using UnityEngine;
 
 public class BoDStateMachine : StateMachine
 {
-    public BoDIdle idleState;
+    public BoDDashState dashState;
     public BoDMovingState movingState;
+    public BoDSpellState spellState;
 
     List<BaseState> randomStates;
     public Transform target;
     
-
-
-    public float BoDSpeed = 5f;
-    public float RushSpeed = 15f;
+    public float moveSpeed = 5f;
+    public float dashSpeed = 30f;
 
     private Animator anim;
     BaseState LastState;
     BaseState LastTwoState;
 
     private void Awake()
-    {
-        idleState = new BoDIdle(this);
+    {   
         movingState = new BoDMovingState(this);
-
-        randomStates = new List<BaseState>() { idleState, movingState};
-        /*target = GameObject.FindGameObjectWithTag("Player").transform;*/
+        dashState = new BoDDashState(this);
+        spellState = new BoDSpellState(this);
+        
+        randomStates = new List<BaseState>() { movingState, dashState , spellState};
     }
 
     new void Start()
@@ -50,7 +49,7 @@ public class BoDStateMachine : StateMachine
         int ran = Random.Range(0, randomStates.Count);
         while (randomStates[ran] == LastState || randomStates[ran] == LastTwoState)
         {
-            ran = Random.Range(0, randomStates.Count - 1);
+            ran = Random.Range(0, randomStates.Count);
         }
         LastTwoState = LastState;
         LastState = randomStates[ran];

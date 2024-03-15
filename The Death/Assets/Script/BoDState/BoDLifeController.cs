@@ -3,28 +3,31 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Goblin : MonoBehaviour
+public class BoDLifeController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
 
-    [SerializeField] protected float goblinMaxHealth = 200f;
-    [SerializeField] protected float goblinHealth;
-    public float goblinDamage = 5f;
+    [SerializeField] protected float BoDMaxHealth = 1000f;
+    [SerializeField] protected float BoDHealth;
+    public float BoDDamage = 5f;
 
     public PlayerLife playerLife;
-    public HealthBar goblinHealthBar;
+    public HealthBar BoDHealthBar;
     private bool isHealthBarVisible = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         playerLife = playerObject.GetComponent<PlayerLife>();
 
-        goblinHealth = goblinMaxHealth;
-        goblinHealthBar.SetHealthBar();
+        BoDHealthBar = GameObject.FindGameObjectWithTag("BossHealthBar").GetComponent<HealthBar>();
+
+        BoDHealth = BoDMaxHealth;
+        BoDHealthBar.SetHealthBar();
     }
 
     void Update()
@@ -33,34 +36,36 @@ public class Goblin : MonoBehaviour
 
     public virtual void EnemyTakeDamage(float damage)
     {
-        goblinHealth -= damage;
-
+        BoDHealth -= damage;
+        anim.SetTrigger("BoDTakeHit");
+        anim.SetTrigger("BoDRun");
         if (!isHealthBarVisible)
         {
-            goblinHealthBar.SetMaxHealth(goblinMaxHealth);
+            BoDHealthBar.SetMaxHealth(BoDMaxHealth);
             isHealthBarVisible = true;
         }
-        goblinHealthBar.SetHealth(goblinHealth);
-        if (goblinHealth <= 0)
+
+        BoDHealthBar.SetHealth(BoDHealth);
+        if (BoDHealth <= 0)
         {
-            GoblinDie();
+            BoDDie();
         }
     }
 
-    public void GoblinDie()
+    void BoDDie()
     {
         rb.bodyType = RigidbodyType2D.Static;
-        anim.SetBool("goblinDeath", true);
+        anim.SetBool("BoDDeath", true);
         Destroy(gameObject, 1f);
 
-        GetComponent<LootSpawner>().InstantiateLoot(transform.position);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerLife.TakeDamage(goblinDamage);
+            
+            playerLife.TakeDamage(BoDDamage);
         }
     }
 }
