@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BoDMovingState : BaseState
 {
     private BoDStateMachine SM;
     public Transform target;
     private Animator anim;
+
+    public float activationDistance = 10f;
+    private bool isAttacking = false;
 
     public BoDMovingState(BoDStateMachine stateMachine) : base("Move", stateMachine) 
     {
@@ -27,7 +31,7 @@ public class BoDMovingState : BaseState
 
     }
 
-   public override void UpdateLogic()
+    public override void UpdateLogic()
     {
         base.UpdateLogic();
         SM.GetTarget();
@@ -45,7 +49,19 @@ public class BoDMovingState : BaseState
             SM.transform.localScale = new Vector3(Mathf.Abs(SM.transform.localScale.x), SM.transform.localScale.y, SM.transform.localScale.z);
         }
         SM.transform.position = Vector2.MoveTowards(SM.transform.position, SM.target.position, SM.moveSpeed * Time.deltaTime);
-    }   
+
+        // Tan cong khi gan player
+        float distanceToPlayer = Vector2.Distance(SM.transform.position, SM.target.position);
+        if (distanceToPlayer <= activationDistance && !isAttacking)
+        {
+            SM.ChangeState(SM.attackState);
+            isAttacking = true;
+        }
+        else
+        {
+            isAttacking = false;
+        }
+    }
 
     public override void Exit()
     {

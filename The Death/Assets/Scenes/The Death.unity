@@ -3285,6 +3285,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 504657456980359775, guid: 0a0571ed52ff15547836ed8e17310245,
         type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 5402881963446325492}
+    - target: {fileID: 504657456980359775, guid: 0a0571ed52ff15547836ed8e17310245,
+        type: 3}
       propertyPath: BoDMaxHealth
       value: 100
       objectReference: {fileID: 0}

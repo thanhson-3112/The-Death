@@ -7,6 +7,7 @@ public class BoDStateMachine : StateMachine
     public BoDDashState dashState;
     public BoDMovingState movingState;
     public BoDSpellState spellState;
+    public BoDAttackState attackState;
 
     List<BaseState> randomStates;
     public Transform target;
@@ -19,18 +20,19 @@ public class BoDStateMachine : StateMachine
     BaseState LastTwoState;
 
     private void Awake()
-    {   
-        movingState = new BoDMovingState(this);
-        dashState = new BoDDashState(this);
+    {
+        anim = GetComponent<Animator>();
+        movingState = new BoDMovingState(this, anim);
+        dashState = new BoDDashState(this, anim);
         spellState = new BoDSpellState(this);
-        
-        randomStates = new List<BaseState>() { movingState, dashState , spellState};
+        attackState = new BoDAttackState(this, anim);
+
+        randomStates = new List<BaseState>() { movingState, dashState, spellState};
     }
 
     new void Start()
     {
         base.Start();
-        anim = GetComponent<Animator>();
     }
 
     new public void Update()

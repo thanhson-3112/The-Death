@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class BoDLifeController : MonoBehaviour
 {
@@ -64,7 +65,6 @@ public class BoDLifeController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            
             playerLife.TakeDamage(BoDDamage);
         }
     }

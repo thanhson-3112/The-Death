@@ -45,7 +45,6 @@ public class BoDDashState : BaseState
             SM.gameObject.GetComponent<Rigidbody2D>().velocity = targetDirection * SM.dashSpeed;
 
             yield return new WaitForSeconds(2f);
-            /*anim.SetTrigger("BoDRun");*/
         }
 
         SM.NextState();
