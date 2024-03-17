@@ -63,6 +63,12 @@ public class FireBall : MonoBehaviour
                 archerEnemy.EnemyTakeDamage(currentDamage);
             }
 
+            Flying flyingEnemy = collision.GetComponent<Flying>();
+            if (flyingEnemy != null)
+            {
+                flyingEnemy.EnemyTakeDamage(currentDamage);
+            }
+
             BoDLifeController BoDEnemy = collision.GetComponent<BoDLifeController>();
             if (BoDEnemy != null)
             {

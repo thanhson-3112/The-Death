@@ -12,21 +12,16 @@ public class BoDMovingState : BaseState
     public float activationDistance = 10f;
     private bool isAttacking = false;
 
-    public BoDMovingState(BoDStateMachine stateMachine) : base("Move", stateMachine) 
-    {
-        SM = stateMachine;
-    }
-   
     public BoDMovingState(BoDStateMachine stateMachine, Animator animator) : base("Move", stateMachine)
     {
         SM = stateMachine;
         anim = animator;
     }
 
-
     public override void Enter()
     {
         base.Enter();
+        anim.SetTrigger("BoDRun");
         SM.StartCoroutine(EndState());
 
     }

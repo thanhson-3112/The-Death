@@ -15,6 +15,10 @@ public class BoDStateMachine : StateMachine
     public float moveSpeed = 5f;
     public float dashSpeed = 30f;
 
+    public float bossSpawnRate = 5f; // T?n su?t spawn c?a boss
+    public float spawnRadius = 5f; 
+    public GameObject[] enemyPrefabs;
+
     private Animator anim;
     BaseState LastState;
     BaseState LastTwoState;
@@ -24,7 +28,7 @@ public class BoDStateMachine : StateMachine
         anim = GetComponent<Animator>();
         movingState = new BoDMovingState(this, anim);
         dashState = new BoDDashState(this, anim);
-        spellState = new BoDSpellState(this);
+        spellState = new BoDSpellState(this, anim);
         attackState = new BoDAttackState(this, anim);
 
         randomStates = new List<BaseState>() { movingState, dashState, spellState};

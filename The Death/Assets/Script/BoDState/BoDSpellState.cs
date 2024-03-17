@@ -1,57 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class BoDSpellState : BaseState
 {
     private BoDStateMachine SM;
-    public Transform target;
+    private Animator anim;
+    private bool spawning = true;
 
-    public BoDSpellState(BoDStateMachine stateMachine) : base("Spell", stateMachine)
+    public BoDSpellState(BoDStateMachine stateMachine, Animator animator) : base("Spell", stateMachine)
     {
         SM = stateMachine;
+        anim = animator;
     }
 
     public override void Enter()
     {
         base.Enter();
-        SM.StartCoroutine(EndState());
-
+        spawning = true;
+        anim.SetTrigger("BoDCastSpell");
+        SM.StartCoroutine(Spawner());
     }
 
     public override void UpdateLogic()
     {
         base.UpdateLogic();
-        SM.GetTarget();
     }
 
     public override void UpdatePhysics()
     {
-        /*anim.SetTrigger("enemyRun");*/
-        Vector3 targetDirection = SM.target.position - SM.transform.position;
-        if (targetDirection.x > 0)
+        base.UpdatePhysics();
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("BoDTakeHit"))
         {
-            SM.transform.localScale = new Vector3(-Mathf.Abs(SM.transform.localScale.x), SM.transform.localScale.y, SM.transform.localScale.z);
+            anim.SetTrigger("BoDRun");
+            SM.NextState();
+            spawning = false; 
         }
-        else
+    }
+
+    private IEnumerator Spawner()
+    {
+        WaitForSeconds wait = new WaitForSeconds(SM.bossSpawnRate);
+
+        while (spawning)
         {
-            SM.transform.localScale = new Vector3(Mathf.Abs(SM.transform.localScale.x), SM.transform.localScale.y, SM.transform.localScale.z);
+            yield return wait;
+            SpawnEnemy();
         }
-        SM.transform.position = Vector2.MoveTowards(SM.transform.position, SM.target.position, SM.moveSpeed * Time.deltaTime);
+    }
 
+    private void SpawnEnemy()
+    {
+        int rand = Random.Range(0, SM.enemyPrefabs.Length);
+        GameObject enemyToSpawn = SM.enemyPrefabs[rand];
 
+        // V? trí ng?u nhiên quanh boss
+        Vector3 spawnPosition = SM.transform.position + Random.insideUnitSphere * SM.spawnRadius;
+        spawnPosition.z = 0f;
+
+        GameObject spawnedEnemy = GameObject.Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
     }
 
     public override void Exit()
     {
         base.Exit();
         SM.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-    }
-
-    IEnumerator EndState()
-    {
-        yield return new WaitForSeconds(5f);
-        SM.NextState();
+        spawning = false;
     }
 }

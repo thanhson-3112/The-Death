@@ -9,11 +9,6 @@ public class BoDDashState : BaseState
     public int DashNumber = 3;
     private Animator anim;
 
-    public BoDDashState(BoDStateMachine stateMachine) : base("Dash", stateMachine)
-    {
-        SM = stateMachine;
-    }
-
     public BoDDashState(BoDStateMachine stateMachine, Animator animator, int dashNumber = 3) : base("Dash", stateMachine)
     {
         DashNumber = dashNumber;
