@@ -18,8 +18,8 @@ public class BoDSpellState : BaseState
     {
         base.Enter();
         spawning = true;
-        anim.SetTrigger("BoDCastSpell");
         SM.StartCoroutine(Spawner());
+        anim.SetTrigger("BoDCastSpell");
     }
 
     public override void UpdateLogic()

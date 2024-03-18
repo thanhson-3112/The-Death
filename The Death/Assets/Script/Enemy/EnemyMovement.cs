@@ -28,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            anim.SetTrigger("enemyRun");
+            /*anim.SetTrigger("enemyRun");*/
             RotateTowardsTarget();
         }
         enemySpeed = _enemySpeed;

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class BoDLifeController : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class BoDLifeController : MonoBehaviour
     public float BoDDamage = 5f;
 
     public PlayerLife playerLife;
-    public HealthBar BoDHealthBar;
+    public BossHealthBar BoDHealthBar;
     private bool isHealthBarVisible = false;
 
     void Start()
@@ -25,7 +24,7 @@ public class BoDLifeController : MonoBehaviour
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         playerLife = playerObject.GetComponent<PlayerLife>();
 
-        BoDHealthBar = GameObject.FindGameObjectWithTag("BossHealthBar").GetComponent<HealthBar>();
+        BoDHealthBar = GameObject.FindGameObjectWithTag("BossHealthBar").GetComponent<BossHealthBar>();
 
         BoDHealth = BoDMaxHealth;
         BoDHealthBar.SetHealthBar();

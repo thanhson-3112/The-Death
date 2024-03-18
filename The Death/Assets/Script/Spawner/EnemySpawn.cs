@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemySpawn : PlayerExperience
 {
-    [SerializeField] private float SkeletonSpawnRate = 2f;
+    [SerializeField] private float SkeletonSpawnRate = 3f;
     [SerializeField] private float GoblinSpawnRate = 8f;
-    [SerializeField] private float ArcherSpawnRate = 10f;
+    [SerializeField] private float ArcherSpawnRate = 20f;
 
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private SpawnPoint spawnPoint;
@@ -18,11 +18,6 @@ public class EnemySpawn : PlayerExperience
         StartCoroutine(Spawner());
         base.Update();
     }
-
-    /*protected override void Update()
-    {
-        base.Update();
-    }*/
 
     private IEnumerator Spawner()
     {

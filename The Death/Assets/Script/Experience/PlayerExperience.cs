@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerExperience : MonoBehaviour
 {
-    [SerializeField] private int currentExperience, maxExperience = 1000, currentLevel = 1;
+    [SerializeField]private int currentExperience, maxExperience = 1000, currentLevel = 1;
 
     public int _currentExperience { get => currentExperience; }
     public int _maxExperience { get => maxExperience; }
