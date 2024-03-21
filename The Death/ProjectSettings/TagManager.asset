@@ -7,6 +7,7 @@ TagManager:
   - FireBall
   - Enemy
   - BossHealthBar
+  - Item
   layers:
   - Default
   - TransparentFX

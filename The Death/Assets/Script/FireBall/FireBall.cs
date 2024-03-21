@@ -10,7 +10,7 @@ public class FireBall : MonoBehaviour
     [Range(1, 10)]
     [SerializeField] private float lifeTime = 3f;
 
-    [SerializeField] private float baseDamage = 40f; 
+    private float baseDamage = 70f; 
     private float currentDamage; 
 
     private Rigidbody2D rb;

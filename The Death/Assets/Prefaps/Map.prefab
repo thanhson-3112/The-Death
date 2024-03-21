@@ -14820,6 +14820,11 @@ Transform:
   - {fileID: 2351447226410769988}
   - {fileID: 5609298126452726724}
   - {fileID: 3660686572462223733}
+  - {fileID: 6216419873407075204}
+  - {fileID: 4634623324866492632}
+  - {fileID: 2159336101213959475}
+  - {fileID: 225654590629251565}
+  - {fileID: 3191623465002138030}
   m_Father: {fileID: 1667078673046902764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4553350056038805485
@@ -14839,6 +14844,66 @@ MonoBehaviour:
   - {fileID: 2351447226410769988}
   - {fileID: 5609298126452726724}
   - {fileID: 3660686572462223733}
+  - {fileID: 6216419873407075204}
+  - {fileID: 4634623324866492632}
+  - {fileID: 2159336101213959475}
+  - {fileID: 225654590629251565}
+  - {fileID: 3191623465002138030}
+--- !u!1 &685142357556812360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2159336101213959475}
+  - component: {fileID: 6231092129657267418}
+  m_Layer: 0
+  m_Name: EnemySpawner (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2159336101213959475
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685142357556812360}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 84.4, y: -14, z: 0.10715516}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5172565337618379691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6231092129657267418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685142357556812360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentExperience: 0
+  maxExperience: 1000
+  currentLevel: 1
+  SkeletonSpawnRate: 3
+  GoblinSpawnRate: 8
+  ArcherSpawnRate: 20
+  enemyPrefabs:
+  - {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844, type: 3}
+  - {fileID: 2679627627104380165, guid: 0ab635480da3d2249a3b4ebc55478caf, type: 3}
+  - {fileID: 6316923703535640667, guid: a4e7a52e0775bf1459bba34bfdaa92bf, type: 3}
+  spawnPoint: {fileID: 4553350056038805485}
 --- !u!1 &725830133372719960
 GameObject:
   m_ObjectHideFlags: 0
@@ -14884,11 +14949,121 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentExperience: 0
-  maxExperience: 300
+  maxExperience: 1000
   currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
-  ArcherSpawnRate: 7
+  ArcherSpawnRate: 20
+  enemyPrefabs:
+  - {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844, type: 3}
+  - {fileID: 2679627627104380165, guid: 0ab635480da3d2249a3b4ebc55478caf, type: 3}
+  - {fileID: 6316923703535640667, guid: a4e7a52e0775bf1459bba34bfdaa92bf, type: 3}
+  spawnPoint: {fileID: 4553350056038805485}
+--- !u!1 &1668478976928968304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 225654590629251565}
+  - component: {fileID: 4498896311067233928}
+  m_Layer: 0
+  m_Name: EnemySpawner (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &225654590629251565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668478976928968304}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 72.5, y: -16.9, z: 0.10715516}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5172565337618379691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4498896311067233928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668478976928968304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentExperience: 0
+  maxExperience: 1000
+  currentLevel: 1
+  SkeletonSpawnRate: 3
+  GoblinSpawnRate: 8
+  ArcherSpawnRate: 20
+  enemyPrefabs:
+  - {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844, type: 3}
+  - {fileID: 2679627627104380165, guid: 0ab635480da3d2249a3b4ebc55478caf, type: 3}
+  - {fileID: 6316923703535640667, guid: a4e7a52e0775bf1459bba34bfdaa92bf, type: 3}
+  spawnPoint: {fileID: 4553350056038805485}
+--- !u!1 &1675443846660781120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6216419873407075204}
+  - component: {fileID: 5491020293866036847}
+  m_Layer: 0
+  m_Name: EnemySpawner (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6216419873407075204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675443846660781120}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 74, y: 8.3, z: 0.10715516}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5172565337618379691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5491020293866036847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675443846660781120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentExperience: 0
+  maxExperience: 1000
+  currentLevel: 1
+  SkeletonSpawnRate: 3
+  GoblinSpawnRate: 8
+  ArcherSpawnRate: 20
   enemyPrefabs:
   - {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844, type: 3}
   - {fileID: 2679627627104380165, guid: 0ab635480da3d2249a3b4ebc55478caf, type: 3}
@@ -14939,11 +15114,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentExperience: 0
-  maxExperience: 300
+  maxExperience: 1000
   currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
-  ArcherSpawnRate: 7
+  ArcherSpawnRate: 20
   enemyPrefabs:
   - {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844, type: 3}
   - {fileID: 2679627627104380165, guid: 0ab635480da3d2249a3b4ebc55478caf, type: 3}
@@ -14997,6 +15172,61 @@ MonoBehaviour:
   currentMap: {fileID: 0}
   newMapInfinity: {fileID: 0}
   spawnPosOffset: {x: 0, y: 0, z: 0}
+--- !u!1 &3000873979505774575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4634623324866492632}
+  - component: {fileID: 5961269158903679992}
+  m_Layer: 0
+  m_Name: EnemySpawner (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4634623324866492632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3000873979505774575}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 84.1, y: -3.9, z: 0.10715516}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5172565337618379691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5961269158903679992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3000873979505774575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentExperience: 0
+  maxExperience: 1000
+  currentLevel: 1
+  SkeletonSpawnRate: 3
+  GoblinSpawnRate: 8
+  ArcherSpawnRate: 20
+  enemyPrefabs:
+  - {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844, type: 3}
+  - {fileID: 2679627627104380165, guid: 0ab635480da3d2249a3b4ebc55478caf, type: 3}
+  - {fileID: 6316923703535640667, guid: a4e7a52e0775bf1459bba34bfdaa92bf, type: 3}
+  spawnPoint: {fileID: 4553350056038805485}
 --- !u!1 &3004394169403750638
 GameObject:
   m_ObjectHideFlags: 0
@@ -15046,7 +15276,7 @@ MonoBehaviour:
   currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
-  ArcherSpawnRate: 7
+  ArcherSpawnRate: 20
   enemyPrefabs:
   - {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844, type: 3}
   - {fileID: 2679627627104380165, guid: 0ab635480da3d2249a3b4ebc55478caf, type: 3}
@@ -15097,11 +15327,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentExperience: 0
-  maxExperience: 300
+  maxExperience: 1000
   currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
-  ArcherSpawnRate: 7
+  ArcherSpawnRate: 20
+  enemyPrefabs:
+  - {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844, type: 3}
+  - {fileID: 2679627627104380165, guid: 0ab635480da3d2249a3b4ebc55478caf, type: 3}
+  - {fileID: 6316923703535640667, guid: a4e7a52e0775bf1459bba34bfdaa92bf, type: 3}
+  spawnPoint: {fileID: 4553350056038805485}
+--- !u!1 &6352502609612590718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3191623465002138030}
+  - component: {fileID: 3751244462789845175}
+  m_Layer: 0
+  m_Name: EnemySpawner (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3191623465002138030
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6352502609612590718}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 56.1, y: -30.4, z: 0.10715516}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5172565337618379691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3751244462789845175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6352502609612590718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentExperience: 0
+  maxExperience: 1000
+  currentLevel: 1
+  SkeletonSpawnRate: 3
+  GoblinSpawnRate: 8
+  ArcherSpawnRate: 20
   enemyPrefabs:
   - {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844, type: 3}
   - {fileID: 2679627627104380165, guid: 0ab635480da3d2249a3b4ebc55478caf, type: 3}

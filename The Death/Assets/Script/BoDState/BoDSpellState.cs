@@ -18,8 +18,8 @@ public class BoDSpellState : BaseState
     {
         base.Enter();
         spawning = true;
-        SM.StartCoroutine(Spawner());
         anim.SetTrigger("BoDCastSpell");
+        SM.StartCoroutine(Spawner());
     }
 
     public override void UpdateLogic()
@@ -32,7 +32,7 @@ public class BoDSpellState : BaseState
         base.UpdatePhysics();
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("BoDTakeHit"))
         {
-            anim.SetTrigger("BoDRun");
+            /*anim.SetTrigger("BoDRun");*/
             SM.NextState();
             spawning = false; 
         }
