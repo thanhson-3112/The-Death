@@ -38,5 +38,6 @@ public class BossHealthBar : MonoBehaviour
     {
         fillArea.SetActive(false);
         borderArea.SetActive(false);
+        textName.text = "";
     }
 }

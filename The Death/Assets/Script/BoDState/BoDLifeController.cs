@@ -58,24 +58,51 @@ public class BoDLifeController : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetBool("BoDDeath", true);
 
-        for (int i = 0; i < 3; i++)
+        int weaponsSpawned = 0;
+
+        // mang de luu chi so cua vu khi da chon
+        List<int> indices = new List<int>();
+
+        // Spawn 3 v? khí t? danh sách
+        while (weaponsSpawned < 3 && weapons.Count > 0)
         {
-            if (weapons.Count > 0)
+            int randomIndex = Random.Range(0, weapons.Count);
+
+            // kiem tra xem chi so cua vu khi da duoc chon chua
+            while (indices.Contains(randomIndex))
             {
-                int randomIndex = Random.Range(0, weapons.Count);
-                GameObject weaponToSpawn = weapons[randomIndex];
+                randomIndex = Random.Range(0, weapons.Count);
+            }
 
-                // T?o m?t v? trí spawn ng?u nhiên trong bán kính 1 ??n v? t? v? trí c?a boss
-                Vector2 randomSpawnOffset = Random.insideUnitCircle.normalized * 3;
-                Vector3 spawnPosition = transform.position + (Vector3)randomSpawnOffset;
+            // lay vu khi tu chi so da chon
+            GameObject weaponToSpawn = weapons[randomIndex];
 
+            // SPawn vu khi ngau nhien quanh boss
+            Vector2 randomSpawnOffset = Random.insideUnitCircle.normalized * 3f;
+            Vector3 spawnPosition = transform.position + (Vector3)randomSpawnOffset;
+
+            // Ki?m tra xem v? trí spawn có b? va ch?m không
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPosition, 0.5f);
+            bool positionClear = true;
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.gameObject.CompareTag("Item"))
+                {
+                    positionClear = false;
+                    break;
+                }
+            }
+            // Neu khong bi va tram thi spawn vu khi tiep theo
+            if (positionClear)
+            {
                 Instantiate(weaponToSpawn, spawnPosition, Quaternion.identity);
+                weaponsSpawned++;
+                indices.Add(randomIndex); // them chi so da chon vao mang
             }
         }
 
-
+        BoDHealthBar.SetHealthBar();
         Destroy(gameObject, 1f);
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
