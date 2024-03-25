@@ -17,7 +17,7 @@ public class PlayerAttack : MonoBehaviour
     private float fireTimer;
 
     private PlayerMovement playerMovement;
-    [SerializeField] private float slowdownAmount = 5f;
+    [SerializeField] private float slowdownAmount = 10f;
 
     private bool autoAttacking = false; // Kiểm soát tấn công tự động
 

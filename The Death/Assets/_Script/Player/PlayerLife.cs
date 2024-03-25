@@ -55,23 +55,7 @@ public class PlayerLife : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*if (collision.gameObject.CompareTag("Blood"))
-        {
-            if (health != maxHealth)
-            {
-                *//*HeathSoundEffect.Play();*//*
-                Destroy(collision.gameObject);
-                health++;
-            }
-        }
-
-        if (collision.gameObject.CompareTag("Heart"))
-        {
-            *//*HeathSoundEffect.Play();*//*
-            Destroy(collision.gameObject);
-            maxHealth++;
-            health = maxHealth;
-        }*/
+        
     }
 
     public void Heal()

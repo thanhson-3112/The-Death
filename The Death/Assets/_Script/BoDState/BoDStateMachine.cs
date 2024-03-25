@@ -8,6 +8,7 @@ public class BoDStateMachine : StateMachine
     public BoDMovingState movingState;
     public BoDSpellState spellState;
     public BoDAttackState attackState;
+    public BoDWaveattackState waveAttack;
 
     List<BaseState> randomStates;
     public Transform target;
@@ -15,9 +16,17 @@ public class BoDStateMachine : StateMachine
     public float moveSpeed = 5f;
     public float dashSpeed = 30f;
 
-    public float bossSpawnRate = 5f; // T?n su?t spawn c?a boss
+    public float bossSpawnRate = 5f; 
     public float spawnRadius = 5f; 
     public GameObject[] enemyPrefabs;
+
+    [Header("Wave Attack")]
+    public GameObject firePrefab;
+    public GameObject firingPoint;
+    public Transform firing;
+    [Range(0.1f, 2f)]
+    public float fireRate = 0.8f;
+    public bool canShoot = true;
 
     private Animator anim;
     BaseState LastState;
@@ -30,8 +39,9 @@ public class BoDStateMachine : StateMachine
         dashState = new BoDDashState(this, anim);
         spellState = new BoDSpellState(this, anim);
         attackState = new BoDAttackState(this, anim);
+        waveAttack = new BoDWaveattackState(this, anim);
 
-        randomStates = new List<BaseState>() { movingState, dashState, spellState};
+        randomStates = new List<BaseState>() { movingState, dashState, spellState, waveAttack};
     }
 
     new void Start()

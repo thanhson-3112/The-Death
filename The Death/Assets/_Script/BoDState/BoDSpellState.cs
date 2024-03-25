@@ -44,6 +44,7 @@ public class BoDSpellState : BaseState
 
         while (spawning)
         {
+            anim.SetTrigger("BoDCastSpell");
             yield return wait;
             SpawnEnemy();
         }

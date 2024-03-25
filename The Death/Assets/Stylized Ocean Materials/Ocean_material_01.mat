@@ -116,7 +116,7 @@ Material:
     - _FoamLevel: 1.2
     - _FoamLevelDestination: 2.25
     - _FoamLevel_copy: 4.84
-    - _FoamOpacity: 0.94
+    - _FoamOpacity: 0
     - _FoamPower: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -134,7 +134,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _WaterDepth: 2.09
-    - _WaterOpacity: 0.281
+    - _WaterOpacity: 0
     - _WaterOrientation: 2.27
     - _Whites_opacity: 0.898
     - _Whole_opacity: 0.803

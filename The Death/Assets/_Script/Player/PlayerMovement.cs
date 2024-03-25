@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private TrailRenderer tr;
 
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 20f;
     private float moveX, moveY;
     private Vector2 moveDir;
     private float originalMoveSpeed;
