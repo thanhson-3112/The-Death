@@ -26,7 +26,6 @@ public class BoDStateMachine : StateMachine
     public Transform firing;
     [Range(0.1f, 2f)]
     public float fireRate = 0.8f;
-    public bool canShoot = true;
 
     private Animator anim;
     BaseState LastState;

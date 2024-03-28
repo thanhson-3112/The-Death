@@ -15,12 +15,16 @@ public class PlayerMovement : MonoBehaviour
     private float originalMoveSpeed;
 
     [Header("Dash setting")]
-    [SerializeField] public float dashSpeed = 10f;
-    [SerializeField] private float dashDuration = 0.5f;
+    [SerializeField] public float dashSpeed = 50f;
+    [SerializeField] private float dashDuration = 0.2f;// khoang cach dash
     [SerializeField] private float dashCooldown = 0.5f;
+    [SerializeField] public float dashMaxStamina = 2f;
+    [SerializeField] public float dashStamina;
+    [SerializeField] public float dashStaminaRecoveryRate = 0.2f; // thoi gian hoi stamina
     private bool isDashing;
     private bool canDash = true;
-
+    public DashBar dashBar;
+    
     // Animation
     private enum MovementState { idle, move }
     private MovementState state = MovementState.idle;
@@ -33,13 +37,19 @@ public class PlayerMovement : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         tr = GetComponent<TrailRenderer>();
         originalMoveSpeed = moveSpeed;
+
+        dashStamina = dashMaxStamina;
+        dashBar.SetMaxDash(dashMaxStamina);
     }
 
     private void Update()
     {
         Move();
         UpdateAnimationState();
-        
+        // H?i ph?c stamina theo th?i gian
+        dashStamina += dashStaminaRecoveryRate * Time.deltaTime;
+        dashStamina = Mathf.Clamp(dashStamina, 0f, dashMaxStamina);
+        dashBar.SetDash(dashStamina);
     }
 
     private void Move()
@@ -53,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         moveY = Input.GetAxisRaw("Vertical");
         moveDir = new Vector2(moveX, moveY).normalized;
 
-        if (Input.GetKeyDown(KeyCode.Space) && canDash)
+        if (Input.GetKeyDown(KeyCode.Space) && canDash && dashStamina >= 1)
         {
             StartCoroutine(Dash());
         }
@@ -82,6 +92,10 @@ public class PlayerMovement : MonoBehaviour
     {
         isDashing = true;
         canDash = false;
+
+        dashStamina -= 1f;
+        if (dashStamina < 0) dashStamina = 0;
+        dashBar.SetDash(dashStamina);
 
         rb.velocity = new Vector2(moveDir.x * dashSpeed, moveDir.y * dashSpeed);
         if (moveDir == Vector2.zero)
@@ -130,11 +144,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void DashUpgrade()
     {
-        dashSpeed += 1f;
+        dashStaminaRecoveryRate += 0.1f;
     }
 
     public void DashUpgrade2()
     {
-        dashSpeed += 1f;
+        dashStaminaRecoveryRate += 0.1f;
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BoDLifeController : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class BoDLifeController : MonoBehaviour
     public BossHealthBar BoDHealthBar;
     private bool isHealthBarVisible = false;
 
-    public List<GameObject> weapons; // Danh sách các v? khí
+    public List<GameObject> weapons; 
+    public GameObject finishLevelObject;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -55,7 +57,9 @@ public class BoDLifeController : MonoBehaviour
 
     void BoDDie()
     {
+        rb.GetComponent<Collider2D>().enabled = false;
         rb.bodyType = RigidbodyType2D.Static;
+
         anim.SetBool("BoDDeath", true);
 
         int weaponsSpawned = 0;
@@ -78,7 +82,7 @@ public class BoDLifeController : MonoBehaviour
             GameObject weaponToSpawn = weapons[randomIndex];
 
             // SPawn vu khi ngau nhien quanh boss
-            Vector2 randomSpawnOffset = Random.insideUnitCircle.normalized * 3f;
+            Vector2 randomSpawnOffset = Random.insideUnitCircle.normalized * 7f;
             Vector3 spawnPosition = transform.position + (Vector3)randomSpawnOffset;
 
             // Ki?m tra xem v? trí spawn có b? va ch?m không
@@ -100,7 +104,8 @@ public class BoDLifeController : MonoBehaviour
                 indices.Add(randomIndex); // them chi so da chon vao mang
             }
         }
-
+        // spawn cong dich chuyen khi boss chet
+        Instantiate(finishLevelObject, transform.position, Quaternion.identity);
         BoDHealthBar.SetHealthBar();
         Destroy(gameObject, 1f);
     }
@@ -112,4 +117,5 @@ public class BoDLifeController : MonoBehaviour
             playerLife.TakeDamage(BoDDamage);
         }
     }
+
 }

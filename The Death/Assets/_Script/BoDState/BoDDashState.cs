@@ -53,8 +53,11 @@ public class BoDDashState : BaseState
 
     public override void UpdatePhysics()
     {
-        /*anim.SetTrigger("enemyRun");*/
         base.UpdatePhysics();
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("BoDTakeHit"))
+        {
+            anim.SetTrigger("BoDRun");
+        }
     }
 
     public override void Exit()
