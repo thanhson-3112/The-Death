@@ -9,8 +9,8 @@ public class LootManager : MonoBehaviour
     public delegate void ExperienceChangeHandler(int amount);
     public event ExperienceChangeHandler OnExperienceChange;
 
-    public delegate void GoldChangeHandler(int amount);
-    public event ExperienceChangeHandler OnGoldChange;
+    public delegate void GoldChangeHandler(int goldamount);
+    public event GoldChangeHandler OnGoldChange;
 
     private void Awake()
     {
@@ -29,8 +29,8 @@ public class LootManager : MonoBehaviour
         OnExperienceChange?.Invoke(amount);
     }
 
-    public void AddGold(int amount)
+    public void AddGold(int goldamount)
     {
-        OnGoldChange?.Invoke(amount);
+        OnGoldChange?.Invoke(goldamount);
     }
 }

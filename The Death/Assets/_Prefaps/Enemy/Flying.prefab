@@ -373,6 +373,7 @@ GameObject:
   - component: {fileID: 1823043961697999688}
   - component: {fileID: 6340059878581417233}
   - component: {fileID: 3078260009507637103}
+  - component: {fileID: -2316289198709378300}
   m_Layer: 0
   m_Name: Flying
   m_TagString: Enemy
@@ -594,3 +595,21 @@ MonoBehaviour:
   target: {fileID: 0}
   enemySpeed: 8
   rotateSpeed: 0.25
+--- !u!114 &-2316289198709378300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8298595932592208452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399fc09b55bdbb24fabce457d895b028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItemPrefab: {fileID: 7284148602581043253, guid: deafefdea5214814dbad9a9acb0e9a4e,
+    type: 3}
+  lootList:
+  - {fileID: 11400000, guid: 3f867f88df2207847bd37d6d14f25e52, type: 2}
+  - {fileID: 11400000, guid: 5dcb4ce3e12bcae4d9252ad11455dc94, type: 2}
+  - {fileID: 11400000, guid: 788003d69a305094e9ac99c9ad7802fd, type: 2}

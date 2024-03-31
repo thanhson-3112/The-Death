@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerGold : MonoBehaviour
 {
-    [SerializeField] private int goldTotal;
+    [SerializeField] public int goldTotal ;
 
 
     protected virtual void Update()
@@ -14,21 +14,17 @@ public class PlayerGold : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        LootManager.Instance.OnExperienceChange += HandleExperience;
+        LootManager.Instance.OnGoldChange += HandleGold;
     }
 
     protected virtual void OnDisable()
     {
-        LootManager.Instance.OnExperienceChange -= HandleExperience;
+        LootManager.Instance.OnGoldChange -= HandleGold;
     }
 
-    protected virtual void HandleExperience(int newExperience)
+    protected virtual void HandleGold(int newGold)
     {
-        GoldUp();
-    }
-
-    protected virtual void GoldUp()
-    {
-        goldTotal++;
+        goldTotal += newGold;
+        Debug.Log("Vang duoc cong" + goldTotal);
     }
 }

@@ -49,11 +49,15 @@ public class Archer : MonoBehaviour
 
     public void ArcherDie()
     {
+        rb.GetComponent<Collider2D>().enabled = false;
         rb.bodyType = RigidbodyType2D.Static;
+
         anim.SetBool("ArcherDeath", true);
         Destroy(gameObject, 1f);
 
         GetComponent<ExperienceSpawner>().InstantiateLoot(transform.position);
+        GetComponent<GoldSpawner>().InstantiateLoot(transform.position);
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

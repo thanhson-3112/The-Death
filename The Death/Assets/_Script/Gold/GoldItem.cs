@@ -38,8 +38,8 @@ public class GoldItem : MonoBehaviour
 
         if (Vector3.Distance(transform.position, playerTransform.position) < 0.1f)
         {
-            LootManager.Instance.AddExperience(goldAmount);
-            Debug.Log(goldAmount);
+            LootManager.Instance.AddGold(goldAmount);
+            Debug.Log("Gold Amount = " + goldAmount);
             Destroy(gameObject);
         }
     }

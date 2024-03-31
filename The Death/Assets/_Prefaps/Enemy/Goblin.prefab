@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 1822835883197553913}
   - component: {fileID: 4897690183773865668}
   - component: {fileID: 4412105070022317541}
+  - component: {fileID: 7153235783733821162}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Enemy
@@ -490,6 +491,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aefdca5b841c8244a8c5a858501a2d5f, type: 2}
   - {fileID: 11400000, guid: e0c45b0fd18f54d44bcab1bd7f64b0a1, type: 2}
   - {fileID: 11400000, guid: edf9d703701310348b056da10847314f, type: 2}
+--- !u!114 &7153235783733821162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2679627627104380165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399fc09b55bdbb24fabce457d895b028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItemPrefab: {fileID: 7284148602581043253, guid: deafefdea5214814dbad9a9acb0e9a4e,
+    type: 3}
+  lootList:
+  - {fileID: 11400000, guid: 3f867f88df2207847bd37d6d14f25e52, type: 2}
+  - {fileID: 11400000, guid: 5dcb4ce3e12bcae4d9252ad11455dc94, type: 2}
+  - {fileID: 11400000, guid: 788003d69a305094e9ac99c9ad7802fd, type: 2}
 --- !u!1 &5496786212953492814
 GameObject:
   m_ObjectHideFlags: 0
