@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e900de3c73097a42994bd705907c7c8, type: 3}
-  m_Name: RedExperience 2
+  m_Name: RedExperience
   m_EditorClassIdentifier: 
-  lootSprite: {fileID: 4460609705183488933, guid: c2beb20e2850609499accae63a2ac4a7,
-    type: 3}
-  lootName: Red
-  dropChance: 1
+  exSprite: {fileID: 21300000, guid: c2beb20e2850609499accae63a2ac4a7, type: 3}
+  exName: RedEXP
+  exChance: 5
+  exAmount: 300

@@ -41,6 +41,7 @@ namespace Inventory.UI
                 uiItem.OnItemDroppedOn += HandleSwap;
                 uiItem.OnItemEndDrag += HandleEndDrag;
                 uiItem.OnRightMouseBtnClick += HandleShowItemActions;
+
             }
         }
 
@@ -132,6 +133,7 @@ namespace Inventory.UI
                 return;
             OnDescriptionRequested?.Invoke(index);
         }
+
 
         public void Show()
         {

@@ -52,7 +52,7 @@ public class Flying : MonoBehaviour
         anim.SetBool("FlyingDeath", true);
         Destroy(gameObject, 1f);
 
-        GetComponent<LootSpawner>().InstantiateLoot(transform.position);
+        GetComponent<ExperienceSpawner>().InstantiateLoot(transform.position);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

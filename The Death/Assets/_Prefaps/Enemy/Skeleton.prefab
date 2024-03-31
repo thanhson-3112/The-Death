@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 2
+  enemySpeed: 3
   rotateSpeed: 0.25
 --- !u!114 &867059522089554147
 MonoBehaviour:
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 3
+  enemySpeed: 3
   rotateSpeed: 0.25
   skeletonMaxHealth: 100
   skeletonHealth: 100
@@ -656,9 +656,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3737897332693287829, guid: 7503432de86cb6048926a3eb98484cef,
-    type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 7503432de86cb6048926a3eb98484cef, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

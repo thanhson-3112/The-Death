@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e900de3c73097a42994bd705907c7c8, type: 3}
   m_Name: GreenExperience
   m_EditorClassIdentifier: 
-  lootSprite: {fileID: 5710330462932289707, guid: 8fc779dfff694b34bac2f713b70f0749,
-    type: 3}
-  lootName: Green
-  dropChance: 100
+  exSprite: {fileID: 21300000, guid: 8fc779dfff694b34bac2f713b70f0749, type: 3}
+  exName: GreenEXP
+  exChance: 100
+  exAmount: 100

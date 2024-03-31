@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         UpdateAnimationState();
-        // H?i ph?c stamina theo th?i gian
+        // Hoi lai stamina theo thoi gian
         dashStamina += dashStaminaRecoveryRate * Time.deltaTime;
         dashStamina = Mathf.Clamp(dashStamina, 0f, dashMaxStamina);
         dashBar.SetDash(dashStamina);

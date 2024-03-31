@@ -30,15 +30,18 @@ namespace Inventory.UI
             ResetData();
             Deselect();
         }
+
         public void ResetData()
         {
             itemImage.gameObject.SetActive(false);
             empty = true;
         }
+
         public void Deselect()
         {
             borderImage.enabled = false;
         }
+
         public void SetData(Sprite sprite, int quantity)
         {
             itemImage.gameObject.SetActive(true);

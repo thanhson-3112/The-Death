@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IsStackable>k__BackingField: 1
   <MaxStackSize>k__BackingField: 1
-  <Name>k__BackingField: 
-  <Description>k__BackingField: 'necklace
+  <Name>k__BackingField: Necklace
+  <Description>k__BackingField: 'Necklace
 
 '
   <ItemImage>k__BackingField: {fileID: 21300000, guid: 982891f0e235d3a48a1f922d29e65e2c,

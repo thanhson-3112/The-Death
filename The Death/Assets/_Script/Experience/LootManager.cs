@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExperienceManager : MonoBehaviour
+public class LootManager : MonoBehaviour
 {
-    public static ExperienceManager Instance;
+    public static LootManager Instance;
 
     public delegate void ExperienceChangeHandler(int amount);
     public event ExperienceChangeHandler OnExperienceChange;
-    
-    
+
+    public delegate void GoldChangeHandler(int amount);
+    public event ExperienceChangeHandler OnGoldChange;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -25,5 +27,10 @@ public class ExperienceManager : MonoBehaviour
     public void AddExperience(int amount)
     {
         OnExperienceChange?.Invoke(amount);
+    }
+
+    public void AddGold(int amount)
+    {
+        OnGoldChange?.Invoke(amount);
     }
 }

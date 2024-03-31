@@ -22,9 +22,4 @@ public class DashBar : MonoBehaviour
         dashBar.value = dash;
     }
 
-/*    public void SetHealthBar()
-    {
-        fillArea.SetActive(false);
-        borderArea.SetActive(false);
-    }*/
 }

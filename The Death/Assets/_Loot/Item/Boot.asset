@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <IsStackable>k__BackingField: 1
   <MaxStackSize>k__BackingField: 1
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Boot
   <Description>k__BackingField: boot
   <ItemImage>k__BackingField: {fileID: 21300000, guid: 7d99a1b04132a7c469a1c960bf90f53a,
     type: 3}
