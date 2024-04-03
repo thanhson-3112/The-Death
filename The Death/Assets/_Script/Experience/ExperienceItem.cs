@@ -40,7 +40,6 @@ public class ExperienceItem : MonoBehaviour
         if (Vector3.Distance(transform.position, playerTransform.position) < 0.1f)
         {
             LootManager.Instance.AddExperience(expAmount);
-            Debug.Log(expAmount);
             Destroy(gameObject);
         }
     }

@@ -62,10 +62,7 @@ public class RangeEnemyMovement : MonoBehaviour
                 // Di chuyển nếu khoảng cách lớn hơn distanceToStop và lớn hơn 20f
                 transform.position = Vector2.MoveTowards(transform.position, target.position, enemySpeed * Time.deltaTime);
             }
-            else
-            {
-                rb.velocity = Vector2.zero;
-            }
+          
         }
     }
 
