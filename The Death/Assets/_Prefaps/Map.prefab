@@ -14893,9 +14893,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentExperience: 0
-  maxExperience: 1000
-  currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
@@ -14948,9 +14945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentExperience: 0
-  maxExperience: 1000
-  currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
@@ -15003,9 +14997,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentExperience: 0
-  maxExperience: 1000
-  currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
@@ -15058,9 +15049,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentExperience: 0
-  maxExperience: 1000
-  currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
@@ -15113,9 +15101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentExperience: 0
-  maxExperience: 1000
-  currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
@@ -15216,9 +15201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentExperience: 0
-  maxExperience: 1000
-  currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
@@ -15271,9 +15253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentExperience: 0
-  maxExperience: 1000
-  currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
@@ -15326,9 +15305,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentExperience: 0
-  maxExperience: 1000
-  currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
@@ -15381,9 +15357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentExperience: 0
-  maxExperience: 1000
-  currentLevel: 1
   SkeletonSpawnRate: 3
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20

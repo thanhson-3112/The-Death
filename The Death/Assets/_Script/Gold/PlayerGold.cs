@@ -38,6 +38,7 @@ public class PlayerGold : MonoBehaviour
         goldText.text = "Gold: " + goldTotal.ToString();
     }
 
+    // save game
     public virtual void FromJson(string jsonString)
     {
         GoldData obj = JsonUtility.FromJson<GoldData>(jsonString);

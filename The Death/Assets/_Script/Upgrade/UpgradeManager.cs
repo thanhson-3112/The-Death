@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 
-public class UpgradeManager : PlayerExperience
+public class UpgradeManager : MonoBehaviour
 {
     Upgrade[] Upgrades;
 
