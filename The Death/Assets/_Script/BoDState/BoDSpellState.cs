@@ -20,6 +20,8 @@ public class BoDSpellState : BaseState
         spawning = true;
         anim.SetTrigger("BoDCastSpell");
         SM.StartCoroutine(Spawner());
+        SpawnSpell();
+        SM.StartCoroutine(EndState());
     }
 
     public override void UpdateLogic()
@@ -30,36 +32,27 @@ public class BoDSpellState : BaseState
     public override void UpdatePhysics()
     {
         base.UpdatePhysics();
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("BoDTakeHit"))
-        {
-            anim.SetTrigger("BoDRun");
-            SM.NextState();
-            spawning = false; 
-        }
-    }
 
+    }
     private IEnumerator Spawner()
     {
-        WaitForSeconds wait = new WaitForSeconds(SM.bossSpawnRate);
+        WaitForSeconds wait = new WaitForSeconds(0);
 
         while (spawning)
         {
             anim.SetTrigger("BoDCastSpell");
             yield return wait;
-            SpawnEnemy();
         }
     }
 
-    private void SpawnEnemy()
+    private void SpawnSpell()
     {
-        int rand = Random.Range(0, SM.enemyPrefabs.Length);
-        GameObject enemyToSpawn = SM.enemyPrefabs[rand];
+        GameObject spellToSpawn = SM.spellPrefabs;
 
-        // V? trí ng?u nhiên quanh boss
         Vector3 spawnPosition = SM.transform.position + Random.insideUnitSphere * SM.spawnRadius;
         spawnPosition.z = 0f;
 
-        GameObject spawnedEnemy = GameObject.Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
+        GameObject spawnedSpell = GameObject.Instantiate(spellToSpawn, spawnPosition, Quaternion.identity);
     }
 
     public override void Exit()
@@ -67,5 +60,11 @@ public class BoDSpellState : BaseState
         base.Exit();
         SM.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         spawning = false;
+    }
+
+    IEnumerator EndState()
+    {
+        yield return new WaitForSeconds(15f);
+        SM.NextState();
     }
 }

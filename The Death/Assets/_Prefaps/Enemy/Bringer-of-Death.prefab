@@ -321,12 +321,13 @@ MonoBehaviour:
   spawnRadius: 8
   enemyPrefabs:
   - {fileID: 8298595932592208452, guid: dcb13d2480f8b1f428b14ddd80d9f1e8, type: 3}
+  spellPrefabs: {fileID: 903247472251057663, guid: 07e287af8398bc5458e1e57049f30b06,
+    type: 3}
   firePrefab: {fileID: 537310980404299418, guid: 0ee934d2f655ea64ca8565d1d1868372,
     type: 3}
   firingPoint: {fileID: 6336166122023061365}
   firing: {fileID: 1052334985768833454}
   fireRate: 0.8
-  canShoot: 1
 --- !u!114 &504657456980359775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad512fcc394b1c9439375e0b63b5ff08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoDMaxHealth: 1
+  BoDMaxHealth: 1000
   BoDHealth: 0
   BoDDamage: 5
   playerLife: {fileID: 0}

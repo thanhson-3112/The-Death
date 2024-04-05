@@ -24,7 +24,7 @@ public class BossSpawner : PlayerExperience
         if (!bossSpawned)
         {
             GameObject enemyToSpawn = null;
-            if (_currentLevel >= 20)
+            if (_currentLevel >= 5)
             {
                 Debug.Log("Da spawnboss");
                 enemyToSpawn = enemyPrefabs[0];
