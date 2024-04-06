@@ -15,12 +15,12 @@ public class FireBall : MonoBehaviour
 
     private Rigidbody2D rb;
     public GameObject explosionPrefab;
-    private Animator anim;
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+
         Destroy(gameObject, lifeTime);
 
         currentDamage = baseDamage;
@@ -75,7 +75,6 @@ public class FireBall : MonoBehaviour
                 BoDEnemy.EnemyTakeDamage(currentDamage);
             }
 
-            anim.SetTrigger("FireBallAttack");
 
             // Spawn hi?u ?ng n? 
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
