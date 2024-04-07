@@ -9,7 +9,7 @@ public class Meteo : MonoBehaviour
     [Range(1, 10)]
     [SerializeField] private float lifeTime = 3f;
 
-    private float baseDamage = 70f;
+    private float baseDamage = 40f;
     private float currentDamage;
 
     private Rigidbody2D rb;
