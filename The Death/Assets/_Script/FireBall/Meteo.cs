@@ -9,7 +9,7 @@ public class Meteo : MonoBehaviour
     [Range(1, 10)]
     [SerializeField] private float lifeTime = 3f;
 
-    private float baseDamage = 40f;
+    private float baseDamage = 20f;
     private float currentDamage;
 
     private Rigidbody2D rb;
@@ -46,7 +46,7 @@ public class Meteo : MonoBehaviour
         {
             Vector2 moveDirection = (targetPosition - (Vector2)transform.position).normalized;
 
-            // Flip ??i t??ng theo tr?c X n?u c?n
+            // Flip theo huong enemy
             if (moveDirection.x < 0f)
             {
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);

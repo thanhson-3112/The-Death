@@ -6,7 +6,6 @@ public class UnlockMeteo : MonoBehaviour
 {
     void Start()
     {
-        gameObject.SetActive(false);
     }
 
     public void UnlockSkillMeteo()

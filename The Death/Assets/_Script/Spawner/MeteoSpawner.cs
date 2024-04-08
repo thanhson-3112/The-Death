@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeteoSpawner : MonoBehaviour
 {
-    [SerializeField] private float meteoSpawnRate = 3f;
+    [SerializeField] private float meteoSpawnRate = 4f;
 
     [SerializeField] private GameObject meteoPrefabs;
     [SerializeField] private SpawnPoint spawnPoint;
@@ -27,13 +27,8 @@ public class MeteoSpawner : MonoBehaviour
             Transform spawnTransform = spawnPoint.GetRandomPoint();
             if (spawnTransform != null)
             {
-                GameObject enemyToSpawn = null;
-
-                enemyToSpawn = meteoPrefabs;
-
-                // Instantiate enemyToSpawn
+                GameObject enemyToSpawn = meteoPrefabs;
                 Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
-
             }
         }
     }

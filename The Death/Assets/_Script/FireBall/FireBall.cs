@@ -10,8 +10,8 @@ public class FireBall : MonoBehaviour
     [Range(1, 10)]
     [SerializeField] private float lifeTime = 3f;
 
-    private float baseDamage = 70f; 
-    private float currentDamage; 
+    [SerializeField] private float baseDamage = 70f; 
+    [SerializeField] private float currentDamage; 
 
     private Rigidbody2D rb;
     public GameObject explosionPrefab;
@@ -22,18 +22,17 @@ public class FireBall : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         Destroy(gameObject, lifeTime);
-
-        currentDamage = baseDamage;
     }
 
     public void PlayerDamageUpgrade()
     {
-        currentDamage += 2f;
+        currentDamage = baseDamage + 2;
+
     }
 
     public void PlayerDamageUpgrade2()
     {
-        currentDamage += 5f;
+        currentDamage = baseDamage + 5;
     }
 
     private void FixedUpdate()

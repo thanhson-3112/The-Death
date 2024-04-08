@@ -186,5 +186,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb17801dc430af94ca9e7f38b72cc2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meteoExplosionDamage: 20
+  meteoExplosionDamage: 5
   damageInterval: 1

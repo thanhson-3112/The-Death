@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeteoExplosion : MonoBehaviour
 {
-    public float meteoExplosionDamage = 20f;
+    public float meteoExplosionDamage = 5f;
     public float damageInterval = 1f;
 
     private bool isDamaging = false;
@@ -42,7 +42,7 @@ public class MeteoExplosion : MonoBehaviour
         }
     }
 
-    // Start dealing damage continuously
+    // Gay damage cho enemy
     private void StartDamage()
     {
         if (!isDamaging)
@@ -56,7 +56,8 @@ public class MeteoExplosion : MonoBehaviour
     {
         while (isDamaging)
         {
-            foreach (Collider2D enemyCollider in enemiesInRange)
+            List<Collider2D> enemiesToDamage = new List<Collider2D>(enemiesInRange);
+            foreach (Collider2D enemyCollider in enemiesToDamage)
             {
                 Skeleton skeletonEnemy = enemyCollider.GetComponent<Skeleton>();
                 if (skeletonEnemy != null)
@@ -87,6 +88,7 @@ public class MeteoExplosion : MonoBehaviour
                 {
                     BoDEnemy.EnemyTakeDamage(meteoExplosionDamage);
                 }
+                yield return new WaitForSeconds(0);
             }
 
             yield return new WaitForSeconds(damageInterval);

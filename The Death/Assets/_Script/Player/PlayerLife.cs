@@ -51,6 +51,7 @@ public class PlayerLife : MonoBehaviour
         anim.SetTrigger("PlayerDeath");
 
         Destroy(gameObject, 1.5f);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -65,6 +66,6 @@ public class PlayerLife : MonoBehaviour
 
     private void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(3);
     }
 }

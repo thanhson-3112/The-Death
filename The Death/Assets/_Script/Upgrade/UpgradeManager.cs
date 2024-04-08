@@ -29,7 +29,7 @@ public class UpgradeManager : MonoBehaviour
         new Upgrade{Name = "Attack Damage 2", Description = "Attack Damage +5", Ratity = "Rare",  Increase = 20, Sprite = Resources.Load<Sprite>("Upgrade_Card/Attack_Damage")},
         new Upgrade{Name = "Dash Force", Description = "Dash Force +1", Ratity = "Rare",  Increase = 20, Sprite = Resources.Load<Sprite>("Upgrade_Card/Dash_Force")},
         new Upgrade{Name = "Dash Force 2", Description = "Dash Force +3", Ratity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Upgrade_Card/Dash_Force")},
-        new Upgrade{Name = "Meteo", Description = "Meteo +3", Ratity = "Epic",  Increase = 1, Sprite = Resources.Load<Sprite>("Upgrade_Card/Dash_Force")}
+        new Upgrade{Name = "Meteo", Description = "Meteo +3", Ratity = "Epic",  Increase = 1, Sprite = Resources.Load<Sprite>("Upgrade_Card/Meteo")}
 
 
         };
@@ -113,7 +113,7 @@ public class UpgradeManager : MonoBehaviour
                 playerMovement.DashUpgrade2();
                 break;
             case "Meteo":
-                Debug.Log("Dash Force 2");
+                Debug.Log("Meteo");
                 unlockMeteo.UnlockSkillMeteo();
                 break;
         }
@@ -129,6 +129,8 @@ public class UpgradeManager : MonoBehaviour
             list[randomIndex] = temp;
         }
     }
+
+
 
     public class Upgrade
     {
