@@ -17,13 +17,16 @@ public class Meteo : MonoBehaviour
     private Animator anim;
 
     private GameObject targetEnemy; 
-    private Vector2 targetPosition; 
+    private Vector2 targetPosition;
+
+    public PlayerPower playerPower;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         Destroy(gameObject, lifeTime);
+        playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
 
         currentDamage = baseDamage;
 
@@ -65,28 +68,10 @@ public class Meteo : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Skeleton skeletonEnemy = collision.GetComponent<Skeleton>();
-            if (skeletonEnemy != null)
+            IDamageAble enemyTakeDamage = collision.GetComponent<IDamageAble>();
+            if (enemyTakeDamage != null)
             {
-                skeletonEnemy.EnemyTakeDamage(currentDamage);
-            }
-
-            Goblin goblinEnemy = collision.GetComponent<Goblin>();
-            if (goblinEnemy != null)
-            {
-                goblinEnemy.EnemyTakeDamage(currentDamage);
-            }
-
-            Archer archerEnemy = collision.GetComponent<Archer>();
-            if (archerEnemy != null)
-            {
-                archerEnemy.EnemyTakeDamage(currentDamage);
-            }
-
-            Flying flyingEnemy = collision.GetComponent<Flying>();
-            if (flyingEnemy != null)
-            {
-                flyingEnemy.EnemyTakeDamage(currentDamage);
+                enemyTakeDamage.TakePlayerDamage(currentDamage);
             }
 
             BoDLifeController BoDEnemy = collision.GetComponent<BoDLifeController>();

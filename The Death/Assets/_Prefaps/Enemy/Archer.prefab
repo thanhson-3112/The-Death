@@ -518,11 +518,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46af7da38c5896e4381dffb075c2e063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  anim: {fileID: 0}
+  enemyMaxHealth: 0
+  enemyHealth: 0
+  enemyDamage: 5
+  playerLife: {fileID: 0}
+  enemyHealthBar: {fileID: 4018192868769719896}
   archerMaxHealth: 300
   archerHealth: 0
   archerDamage: 5
-  playerLife: {fileID: 0}
-  archerHealthBar: {fileID: 4018192868769719896}
 --- !u!114 &284083316292535476
 MonoBehaviour:
   m_ObjectHideFlags: 0

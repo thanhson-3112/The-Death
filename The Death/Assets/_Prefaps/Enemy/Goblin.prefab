@@ -468,11 +468,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbbc1d8870d121a44a3ae19a2edec7a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  anim: {fileID: 0}
+  enemyMaxHealth: 0
+  enemyHealth: 0
+  enemyDamage: 5
+  playerLife: {fileID: 0}
+  enemyHealthBar: {fileID: 8168878161915345559}
   goblinMaxHealth: 300
   goblinHealth: 0
   goblinDamage: 5
-  playerLife: {fileID: 0}
-  goblinHealthBar: {fileID: 8168878161915345559}
 --- !u!114 &4412105070022317541
 MonoBehaviour:
   m_ObjectHideFlags: 0

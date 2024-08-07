@@ -575,11 +575,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7ebfb3db1a84644ca72a5c68fa1095b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  anim: {fileID: 0}
+  enemyMaxHealth: 0
+  enemyHealth: 0
+  enemyDamage: 5
+  playerLife: {fileID: 0}
+  enemyHealthBar: {fileID: 2309006884369166388}
   flyingMaxHealth: 200
   flyingHealth: 0
   flyingDamage: 5
-  playerLife: {fileID: 0}
-  flyingHealthBar: {fileID: 2309006884369166388}
 --- !u!114 &3078260009507637103
 MonoBehaviour:
   m_ObjectHideFlags: 0

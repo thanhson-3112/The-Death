@@ -318,11 +318,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0b19aea20348f47828fba434141834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonMaxHealth: 100
-  skeletonHealth: -16900
-  skeletonDamage: 1
+  rb: {fileID: 0}
+  anim: {fileID: 0}
+  enemyMaxHealth: 0
+  enemyHealth: 0
+  enemyDamage: 5
   playerLife: {fileID: 0}
-  skeletonHealthBar: {fileID: 1070607561590066984}
+  enemyHealthBar: {fileID: 1070607561590066984}
+  skeletonMaxHealth: 100
+  skeletonHealth: 100
+  skeletonDamage: 1
 --- !u!114 &-117270996628912026
 MonoBehaviour:
   m_ObjectHideFlags: 0

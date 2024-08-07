@@ -10,29 +10,16 @@ public class FireBall : MonoBehaviour
     [Range(1, 10)]
     [SerializeField] private float lifeTime = 3f;
 
-    [SerializeField] private float baseDamage = 70f; 
-    [SerializeField] private float currentDamage; 
-
     private Rigidbody2D rb;
     public GameObject explosionPrefab;
 
+    public PlayerPower playerPower;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
         Destroy(gameObject, lifeTime);
-    }
-
-    public void PlayerDamageUpgrade()
-    {
-        currentDamage = baseDamage + 2;
-
-    }
-
-    public void PlayerDamageUpgrade2()
-    {
-        currentDamage = baseDamage + 5;
     }
 
     private void FixedUpdate()
@@ -44,38 +31,12 @@ public class FireBall : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Skeleton skeletonEnemy = collision.GetComponent<Skeleton>();
-            if (skeletonEnemy != null)
+            IDamageAble enemyTakeDamage = collision.GetComponent<IDamageAble>();
+            if (enemyTakeDamage != null)
             {
-                skeletonEnemy.EnemyTakeDamage(currentDamage);
+                enemyTakeDamage.TakePlayerDamage(playerPower.currentDamage);
             }
 
-            Goblin goblinEnemy = collision.GetComponent<Goblin>();
-            if (goblinEnemy != null)
-            {
-                goblinEnemy.EnemyTakeDamage(currentDamage);
-            }
-
-            Archer archerEnemy = collision.GetComponent<Archer>();
-            if (archerEnemy != null)
-            {
-                archerEnemy.EnemyTakeDamage(currentDamage);
-            }
-
-            Flying flyingEnemy = collision.GetComponent<Flying>();
-            if (flyingEnemy != null)
-            {
-                flyingEnemy.EnemyTakeDamage(currentDamage);
-            }
-
-            BoDLifeController BoDEnemy = collision.GetComponent<BoDLifeController>();
-            if (BoDEnemy != null)
-            {
-                BoDEnemy.EnemyTakeDamage(currentDamage);
-            }
-
-
-            // Spawn hi?u ?ng n? 
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         }
     }

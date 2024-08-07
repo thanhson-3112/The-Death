@@ -1,58 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Skeleton : MonoBehaviour
+public class EnemyLifeBase : MonoBehaviour, IDamageAble
 {
-    private Rigidbody2D rb;
-    private Animator anim;
+    public Rigidbody2D rb;
+    public Animator anim;
 
-    [SerializeField] protected float skeletonMaxHealth = 100f;
-    [SerializeField] protected float skeletonHealth;
-    public float skeletonDamage = 1f;
+    [SerializeField] protected float enemyMaxHealth;
+    [SerializeField] protected float enemyHealth;
+    public float enemyDamage = 5f;
 
     public PlayerLife playerLife;
-    public HealthBar skeletonHealthBar;
+    public HealthBar enemyHealthBar;
     private bool isHealthBarVisible = false;
 
-    void Start()
+    public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         playerLife = playerObject.GetComponent<PlayerLife>();
 
-        skeletonHealth = skeletonMaxHealth;
-        skeletonHealthBar.SetHealthBar();
+        enemyHealth = enemyMaxHealth;
+        enemyHealthBar.SetHealthBar();
     }
 
     void Update()
     {
     }
 
-    public virtual void EnemyTakeDamage(float damage)
+    public virtual void TakePlayerDamage(float damage)
     {
-        skeletonHealth -= damage;
-        
+        enemyHealth -= damage;
+
         if (!isHealthBarVisible)
         {
-            skeletonHealthBar.SetMaxHealth(skeletonMaxHealth);
+            enemyHealthBar.SetMaxHealth(enemyMaxHealth);
             isHealthBarVisible = true;
         }
-        skeletonHealthBar.SetHealth(skeletonHealth);
-        if (skeletonHealth <= 0)
+
+        enemyHealthBar.SetHealth(enemyHealth);
+        if (enemyHealth <= 0)
         {
-            SkeletonDie();
+            EnemyDie();
         }
     }
 
-    void SkeletonDie()
+    public virtual void EnemyDie()
     {
         rb.GetComponent<Collider2D>().enabled = false;
         rb.bodyType = RigidbodyType2D.Static;
 
-        anim.SetBool("SkeletonDeath", true);
         Destroy(gameObject, 1f);
 
         GetComponent<ExperienceSpawner>().InstantiateLoot(transform.position);
@@ -64,7 +63,7 @@ public class Skeleton : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerLife.TakeDamage(skeletonDamage);
+            playerLife.TakeDamage(enemyDamage);
         }
     }
 }

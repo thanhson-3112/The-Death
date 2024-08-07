@@ -10,6 +10,13 @@ public class MeteoExplosion : MonoBehaviour
     private bool isDamaging = false;
     private List<Collider2D> enemiesInRange = new List<Collider2D>();
 
+    public PlayerPower playerPower;
+
+    public void Start()
+    {
+        playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -59,28 +66,10 @@ public class MeteoExplosion : MonoBehaviour
             List<Collider2D> enemiesToDamage = new List<Collider2D>(enemiesInRange);
             foreach (Collider2D enemyCollider in enemiesToDamage)
             {
-                Skeleton skeletonEnemy = enemyCollider.GetComponent<Skeleton>();
-                if (skeletonEnemy != null)
+                IDamageAble enemyTakeDamage = enemyCollider.GetComponent<IDamageAble>();
+                if (enemyTakeDamage != null)
                 {
-                    skeletonEnemy.EnemyTakeDamage(meteoExplosionDamage);
-                }
-
-                Goblin goblinEnemy = enemyCollider.GetComponent<Goblin>();
-                if (goblinEnemy != null)
-                {
-                    goblinEnemy.EnemyTakeDamage(meteoExplosionDamage);
-                }
-
-                Archer archerEnemy = enemyCollider.GetComponent<Archer>();
-                if (archerEnemy != null)
-                {
-                    archerEnemy.EnemyTakeDamage(meteoExplosionDamage);
-                }
-
-                Flying flyingEnemy = enemyCollider.GetComponent<Flying>();
-                if (flyingEnemy != null)
-                {
-                    flyingEnemy.EnemyTakeDamage(meteoExplosionDamage);
+                    enemyTakeDamage.TakePlayerDamage(meteoExplosionDamage);
                 }
 
                 BoDLifeController BoDEnemy = enemyCollider.GetComponent<BoDLifeController>();

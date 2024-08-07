@@ -7,10 +7,7 @@ public class ExperienceSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject droppedItemPrefab;
     [SerializeField] private List<ExperienceSO> lootList = new List<ExperienceSO>();
-    /*[SerializeField] */private int expAmount;
 
-    public int _expAmount { get => expAmount; }
-    
     protected virtual void Update()
     {
     }

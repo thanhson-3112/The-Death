@@ -15,7 +15,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] GameObject upgradeHorizontalLayout;
 
     [Header("")]
-    [SerializeField] FireBall fireBallDamage;
+    [SerializeField] PlayerPower fireBallDamage;
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerAttack playerAttackSpeed;
     [SerializeField] UnlockMeteo unlockMeteo;
