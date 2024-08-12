@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private TrailRenderer tr;
 
-    [SerializeField] private float moveSpeed = 20f;
     private float moveX, moveY;
     private Vector2 moveDir;
     private float originalMoveSpeed;
@@ -20,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashCooldown = 0.5f;
     [SerializeField] public float dashMaxStamina = 2f;
     [SerializeField] public float dashStamina;
-    [SerializeField] public float dashStaminaRecoveryRate = 0.2f; // thoi gian hoi stamina
+
     private bool isDashing;
     private bool canDash = true;
     public DashBar dashBar;
@@ -30,13 +29,18 @@ public class PlayerMovement : MonoBehaviour
     private MovementState state = MovementState.idle;
 
 
+    private PlayerPower playerPower;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         tr = GetComponent<TrailRenderer>();
-        originalMoveSpeed = moveSpeed;
+
+        playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
+
+        originalMoveSpeed = playerPower.playerCurrentSpeed;
 
         dashStamina = dashMaxStamina;
         dashBar.SetMaxDash(dashMaxStamina);
@@ -47,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
         UpdateAnimationState();
         // Hoi lai stamina theo thoi gian
-        dashStamina += dashStaminaRecoveryRate * Time.deltaTime;
+        dashStamina += playerPower.playerCurrentAbilityHaste * Time.deltaTime;
         dashStamina = Mathf.Clamp(dashStamina, 0f, dashMaxStamina);
         dashBar.SetDash(dashStamina);
     }
@@ -71,12 +75,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void SlowDown(float slowAmount)
     {
-        moveSpeed = slowAmount; 
+        playerPower.playerCurrentSpeed = slowAmount; 
     }
 
     public void RestoreSpeed()
     {
-        moveSpeed = originalMoveSpeed;
+        playerPower.playerCurrentSpeed = originalMoveSpeed;
     }
 
     private void FixedUpdate()
@@ -85,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        rb.velocity = new Vector2(moveDir.x * moveSpeed, moveDir.y * moveSpeed);
+        rb.velocity = new Vector2(moveDir.x * playerPower.playerCurrentSpeed, moveDir.y * playerPower.playerCurrentSpeed);
     }
 
     IEnumerator Dash()
@@ -103,14 +107,13 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x + (sprite.flipX ? -dashSpeed : dashSpeed), rb.velocity.y);
         }
         tr.emitting = true;
-        rb.GetComponent<Collider2D>().enabled = false;
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
 
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
         tr.emitting = false;
 
-        // B?t l?i Collider sau khi k?t thúc l??t
-        rb.GetComponent<Collider2D>().enabled = true;
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
@@ -142,13 +145,4 @@ public class PlayerMovement : MonoBehaviour
         anim.SetInteger("state", (int)state);
     }
 
-    public void DashUpgrade()
-    {
-        dashStaminaRecoveryRate += 0.1f;
-    }
-
-    public void DashUpgrade2()
-    {
-        dashStaminaRecoveryRate += 0.1f;
-    }
 }

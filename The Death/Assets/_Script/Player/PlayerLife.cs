@@ -8,18 +8,21 @@ public class PlayerLife : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    [SerializeField] public float maxHealth = 30f;
     [SerializeField] public float health;
 
     public HealthBar healthBar;
+
+    private PlayerPower playerPower;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
 
-        health = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+
+        health = playerPower.playerBaseMaxHealth;
+        healthBar.SetMaxHealth(playerPower.playerBaseMaxHealth);
     }
 
     void Update()
@@ -47,6 +50,7 @@ public class PlayerLife : MonoBehaviour
             DeathSoundEffect.Play();
         }*/
 
+        SceneManager.LoadScene(3);
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("PlayerDeath");
 

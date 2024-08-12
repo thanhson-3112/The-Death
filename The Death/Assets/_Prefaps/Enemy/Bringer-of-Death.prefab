@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 5466637929680513781}
   - component: {fileID: 4321549328143130916}
   - component: {fileID: 504657456980359775}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bringer-of-Death
   m_TagString: Enemy
   m_Icon: {fileID: 0}

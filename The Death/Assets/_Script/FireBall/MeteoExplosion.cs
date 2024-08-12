@@ -72,11 +72,6 @@ public class MeteoExplosion : MonoBehaviour
                     enemyTakeDamage.TakePlayerDamage(meteoExplosionDamage);
                 }
 
-                BoDLifeController BoDEnemy = enemyCollider.GetComponent<BoDLifeController>();
-                if (BoDEnemy != null)
-                {
-                    BoDEnemy.EnemyTakeDamage(meteoExplosionDamage);
-                }
                 yield return new WaitForSeconds(0);
             }
 

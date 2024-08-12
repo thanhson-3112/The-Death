@@ -34,7 +34,7 @@ public class FireBall : MonoBehaviour
             IDamageAble enemyTakeDamage = collision.GetComponent<IDamageAble>();
             if (enemyTakeDamage != null)
             {
-                enemyTakeDamage.TakePlayerDamage(playerPower.currentDamage);
+                enemyTakeDamage.TakePlayerDamage(playerPower.playerCurrentDamage);
             }
 
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);

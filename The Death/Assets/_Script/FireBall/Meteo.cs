@@ -74,12 +74,6 @@ public class Meteo : MonoBehaviour
                 enemyTakeDamage.TakePlayerDamage(currentDamage);
             }
 
-            BoDLifeController BoDEnemy = collision.GetComponent<BoDLifeController>();
-            if (BoDEnemy != null)
-            {
-                BoDEnemy.EnemyTakeDamage(currentDamage);
-            }
-
             Destroy(gameObject);
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         }

@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BoDLifeController : MonoBehaviour
+public class BoDLifeController : MonoBehaviour, IDamageAble
 {
     private Rigidbody2D rb;
     private Animator anim;
@@ -37,7 +37,7 @@ public class BoDLifeController : MonoBehaviour
     {
     }
 
-    public virtual void EnemyTakeDamage(float damage)
+    public virtual void TakePlayerDamage(float damage)
     {
         BoDHealth -= damage;
         anim.SetTrigger("BoDTakeHit");

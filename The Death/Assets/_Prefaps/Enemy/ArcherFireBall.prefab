@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8024340640519790007}
   - component: {fileID: -1239010672126107122}
   - component: {fileID: -7546936889690973488}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ArcherFireBall
-  m_TagString: FireBall
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

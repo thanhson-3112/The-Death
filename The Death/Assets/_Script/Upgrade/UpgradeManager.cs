@@ -16,12 +16,16 @@ public class UpgradeManager : MonoBehaviour
 
     [Header("")]
     [SerializeField] PlayerPower fireBallDamage;
-    [SerializeField] PlayerMovement playerMovement;
     [SerializeField] PlayerAttack playerAttackSpeed;
     [SerializeField] UnlockMeteo unlockMeteo;
 
+    private PlayerPower playerPower;
+
     public void Start()
     {
+        playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
+
+
         Upgrades = new Upgrade[]
         {
         new Upgrade{Name = "Attack Speed", Description = "Attack Speed +0.1", Ratity = "Common",  Increase = 10, Sprite = Resources.Load<Sprite>("Upgrade_Card/Attack_Speed")},
@@ -106,11 +110,11 @@ public class UpgradeManager : MonoBehaviour
                 break;
             case "Dash Force":
                 Debug.Log("Dash Force");
-                playerMovement.DashUpgrade();
+                playerPower.DashUpgrade();
                 break;
             case "Dash Force 2":
                 Debug.Log("Dash Force 2");
-                playerMovement.DashUpgrade2();
+                playerPower.DashUpgrade2();
                 break;
             case "Meteo":
                 Debug.Log("Meteo");
