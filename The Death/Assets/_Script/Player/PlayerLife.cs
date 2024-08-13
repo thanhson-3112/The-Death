@@ -21,26 +21,42 @@ public class PlayerLife : MonoBehaviour
         playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
 
 
-        health = playerPower.playerBaseMaxHealth;
-        healthBar.SetMaxHealth(playerPower.playerBaseMaxHealth);
+        health = playerPower.playerCurrentMaxHealth;
+        healthBar.SetMaxHealth(playerPower.playerCurrentMaxHealth);
     }
 
     void Update()
     {
-      
+        if(health < playerPower.playerCurrentMaxHealth)
+        {
+            health += playerPower.playerCurrentHealthRegen;
+        }
     }
 
 
     public void TakeDamage(float enemyDamage)
     {
-        health -= enemyDamage;
+        // Tinh sat thuong sau khi tru giap
+        float actualDamage = CalculateDamageAfterArmor(enemyDamage, playerPower.playerCurrentArmor);
+
+        health -= actualDamage;
         healthBar.SetHealth(health);
-        anim.SetTrigger("PlayerTakeDamge");
-        /*DamageSoundEffect.Play();*/
+
+        anim.SetTrigger("PlayerTakeDamage");
+
         if (health <= 0)
         {
             Die();
         }
+    }
+
+    private float CalculateDamageAfterArmor(float damage, float armor)
+    {
+        // Giap player
+        float damageReduction = armor / (armor + 100); 
+        float actualDamage = damage * (1 - damageReduction);
+
+        return Mathf.Max(actualDamage, 0); 
     }
 
     private void Die()

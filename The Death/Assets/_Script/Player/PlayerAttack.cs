@@ -21,23 +21,23 @@ public class PlayerAttack : MonoBehaviour
 
     private bool autoAttacking = false; // Kiểm soát tấn công tự động
 
+    private PlayerPower playerPower;
+
     private void Update()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
 
-        if (!autoAttacking)
-        {
-            MouseAttack();
-        }
+
         Shoot();
     }
 
     public void UpgradeAttackSpeed()
     {
         fireRate = fireRate - 0.1f;
-        if(fireRate < 0.3)
+        if (fireRate < 0.3)
         {
             fireRate = 0.3f;
         }
@@ -59,7 +59,6 @@ public class PlayerAttack : MonoBehaviour
 
             if (!autoAttacking)
             {
-                Instantiate(firePrefab, firing.position, firing.rotation);
                 MouseAttack();
             }
             else
@@ -103,16 +102,75 @@ public class PlayerAttack : MonoBehaviour
             Vector2 direction = nearestEnemy.transform.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            // Bắn viên đạn
-            Instantiate(firePrefab, firing.position, Quaternion.Euler(0, 0, angle));
+            int projectileCount = playerPower.playerCurrentProjectiles;
+            float angleOffset = 30f; // khoảng cách góc giữa các tia đạn
+
+            if (projectileCount == 1)
+            {
+                // Nếu chỉ có một tia đạn, bắn thẳng tới kẻ địch gần nhất
+                GameObject spawnedBullet = Instantiate(firePrefab, firing.position, Quaternion.Euler(0, 0, angle));
+                spawnedBullet.transform.right = direction;
+            }
+            else
+            {
+                int halfProjectiles = projectileCount / 2;
+
+                for (int i = -halfProjectiles; i <= halfProjectiles; i++)
+                {
+                    // Bỏ qua giá trị i = 0 nếu số đạn là chẵn để tránh bắn thêm một tia ở giữa
+                    if (projectileCount % 2 == 0 && i == 0)
+                        continue;
+
+                    float currentAngle = angle + i * angleOffset;
+                    Vector2 bulletDirection = new Vector2(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad));
+
+                    // Instantiate the bullet and set its direction
+                    GameObject spawnedBullet = Instantiate(firePrefab, firing.position, Quaternion.Euler(0, 0, currentAngle));
+                    spawnedBullet.transform.right = bulletDirection;
+                }
+            }
         }
     }
 
     private void MouseAttack()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float angle = Mathf.Atan2(mousePos.y - transform.position.y,
-                        mousePos.x - transform.position.x) * Mathf.Rad2Deg - 90f;
-        firingPoint.transform.localRotation = Quaternion.Euler(0, 0, angle);
+        Vector2 direction = mousePos - (Vector2)transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        firingPoint.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        int projectileCount = playerPower.playerCurrentProjectiles;
+
+        // Tính toán khoảng cách góc giữa các tia đạn
+        float angleOffset = 30f; // khoảng cách góc giữa các tia đạn
+
+        if (projectileCount == 1)
+        {
+            // Nếu chỉ có một tia đạn, bắn thẳng theo hướng trỏ chuột
+            GameObject spawnedBullet = Instantiate(firePrefab, firing.position, Quaternion.Euler(0, 0, angle));
+            spawnedBullet.transform.right = direction;
+        }
+        else
+        {
+            // Tính toán số lượng đạn bắn ra mỗi bên của tia trung tâm
+            int halfProjectiles = projectileCount / 2;
+
+            for (int i = -halfProjectiles; i <= halfProjectiles; i++)
+            {
+                // Bỏ qua giá trị i = 0 nếu số đạn là chẵn để tránh bắn thêm một tia ở giữa
+                if (projectileCount % 2 == 0 && i == 0)
+                    continue;
+
+                float currentAngle = angle + i * angleOffset;
+
+                Vector2 bulletDirection = new Vector2(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad));
+
+                // Instantiate the bullet and set its direction
+                GameObject spawnedBullet = Instantiate(firePrefab, firing.position, Quaternion.Euler(0, 0, currentAngle));
+                spawnedBullet.transform.right = bulletDirection;
+            }
+        }
     }
+
 }

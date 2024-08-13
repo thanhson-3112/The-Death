@@ -27,6 +27,11 @@ public class FireBall : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
+    public bool IsCriticalHit()
+    {
+        return Random.Range(0f, 100f) < playerPower.playerCurrentCritChance;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -34,7 +39,15 @@ public class FireBall : MonoBehaviour
             IDamageAble enemyTakeDamage = collision.GetComponent<IDamageAble>();
             if (enemyTakeDamage != null)
             {
-                enemyTakeDamage.TakePlayerDamage(playerPower.playerCurrentDamage);
+                float damage = playerPower.playerCurrentDamage;
+
+                // Ki?m tra chí m?ng và áp d?ng sát th??ng chí m?ng n?u c?n
+                if (IsCriticalHit())
+                {
+                    damage *= 2; // Nhân ?ôi sát th??ng n?u chí m?ng
+                }
+
+                enemyTakeDamage.TakePlayerDamage(damage);
             }
 
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);

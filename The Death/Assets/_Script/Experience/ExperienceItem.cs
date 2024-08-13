@@ -9,17 +9,20 @@ public class ExperienceItem : MonoBehaviour
     private Transform playerTransform;
     private bool isMoving = false;
     public int expAmount;
-    public float autoMoveDistance = 5f;
+
+    public PlayerPower playerPower;
 
     private void Start()
     {
         Destroy(gameObject, 40f);
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
+
     }
 
     protected void Update()
     {
-        if (!isMoving && Vector3.Distance(transform.position, playerTransform.position) < autoMoveDistance)
+        if (!isMoving && Vector3.Distance(transform.position, playerTransform.position) < playerPower.playerCurrentPickRadius)
         {
             isMoving = true;
         }
