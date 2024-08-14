@@ -12,8 +12,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject firePrefab;
     [SerializeField] private GameObject firingPoint;
     [SerializeField] private Transform firing;
-    [Range(0.1f, 2f)]
-    [SerializeField] private float fireRate = 1f;
+
     private float fireTimer;
 
     private PlayerMovement playerMovement;
@@ -36,10 +35,10 @@ public class PlayerAttack : MonoBehaviour
 
     public void UpgradeAttackSpeed()
     {
-        fireRate = fireRate - 0.1f;
-        if (fireRate < 0.3)
+        playerPower.playerCurrentAbilityHaste = playerPower.playerCurrentAbilityHaste - 0.1f;
+        if (playerPower.playerCurrentAbilityHaste < 0.3)
         {
-            fireRate = 0.3f;
+            playerPower.playerCurrentAbilityHaste = 0.3f;
         }
     }
 
@@ -54,7 +53,7 @@ public class PlayerAttack : MonoBehaviour
         if ((autoAttacking || Input.GetMouseButtonDown(0)) && fireTimer <= 0f)
         {
             anim.SetTrigger("attack");
-            fireTimer = fireRate;
+            fireTimer = playerPower.playerCurrentAbilityHaste;
             playerMovement.SlowDown(slowdownAmount);
 
             if (!autoAttacking)

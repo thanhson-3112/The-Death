@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goldSprite: {fileID: 21300000, guid: 8a7e002f3a74a5e45811cd0bc041d3ac, type: 3}
   goldName: SmallGold
-  goldChance: 70
-  goldAmount: 100
+  goldChance: 40
+  goldAmount: 1

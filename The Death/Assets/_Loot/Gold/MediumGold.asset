@@ -15,4 +15,4 @@ MonoBehaviour:
   goldSprite: {fileID: 21300000, guid: 118cd13a630e9e645971dd0295e4d15d, type: 3}
   goldName: MediumGold
   goldChance: 20
-  goldAmount: 200
+  goldAmount: 2

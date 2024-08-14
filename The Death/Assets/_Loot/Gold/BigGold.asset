@@ -15,4 +15,4 @@ MonoBehaviour:
   goldSprite: {fileID: 21300000, guid: 7ec36d0067971684693d8b85b519016e, type: 3}
   goldName: BigGold
   goldChance: 10
-  goldAmount: 300
+  goldAmount: 3

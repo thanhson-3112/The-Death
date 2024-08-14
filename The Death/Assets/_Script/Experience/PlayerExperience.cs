@@ -10,24 +10,32 @@ public class PlayerExperience : MonoBehaviour
     public int _maxExperience { get => maxExperience; }
     public int _currentLevel { get => currentLevel; }
 
+    private PlayerPower playerPower;
+
+    private void Awake()
+    {
+        playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
+
+    }
+
     protected virtual void Update()
     {
         
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         LootManager.Instance.OnExperienceChange += HandleExperience;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         LootManager.Instance.OnExperienceChange -= HandleExperience;
     }
 
     protected virtual void HandleExperience(int newExperience)
     {
-        currentExperience += newExperience;
+        currentExperience += newExperience + playerPower.playerCurrentExperience;
         if (currentExperience >= maxExperience)
         {
             LevelUp();

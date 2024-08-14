@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerLife : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] public float health;
 
     public HealthBar healthBar;
+    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI healthRegenText;
+
 
     private PlayerPower playerPower;
 
@@ -20,27 +24,50 @@ public class PlayerLife : MonoBehaviour
         anim = GetComponent<Animator>();
         playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
 
-
         health = playerPower.playerCurrentMaxHealth;
         healthBar.SetMaxHealth(playerPower.playerCurrentMaxHealth);
+        healthBar.SetHealth(health);
+
+        // Start the health regeneration coroutine
+        StartCoroutine(HealthRegen());
     }
 
     void Update()
     {
-        if(health < playerPower.playerCurrentMaxHealth)
+        healthBar.SetMaxHealth(playerPower.playerCurrentMaxHealth);
+        healthBar.SetHealth(health);
+
+        UpdateHealthText();
+    }
+
+    private void UpdateHealthText()
+    {
+        int currentHealth = Mathf.FloorToInt(health); // Convert health to an integer
+        int maxHealth = Mathf.FloorToInt(playerPower.playerCurrentMaxHealth); // Convert max health to an integer
+
+        healthText.text = $"{currentHealth} / {maxHealth}";
+        healthRegenText.text = $"+ {playerPower.playerCurrentHealthRegen}";
+    }
+
+    private IEnumerator HealthRegen()
+    {
+        while (true)
         {
-            health += playerPower.playerCurrentHealthRegen;
+            if (health < playerPower.playerCurrentMaxHealth)
+            {
+                health += playerPower.playerCurrentHealthRegen;
+                health = Mathf.Min(health, playerPower.playerCurrentMaxHealth); // Cap health to max health
+            }
+            yield return new WaitForSeconds(1f); // Regenerate health every 1 second
         }
     }
 
-
     public void TakeDamage(float enemyDamage)
     {
-        // Tinh sat thuong sau khi tru giap
+        // Calculate damage after armor reduction
         float actualDamage = CalculateDamageAfterArmor(enemyDamage, playerPower.playerCurrentArmor);
 
         health -= actualDamage;
-        healthBar.SetHealth(health);
 
         anim.SetTrigger("PlayerTakeDamage");
 
@@ -52,40 +79,31 @@ public class PlayerLife : MonoBehaviour
 
     private float CalculateDamageAfterArmor(float damage, float armor)
     {
-        // Giap player
-        float damageReduction = armor / (armor + 100); 
+        // Armor damage reduction formula
+        float damageReduction = armor / (armor + 100);
         float actualDamage = damage * (1 - damageReduction);
 
-        return Mathf.Max(actualDamage, 0); 
+        return Mathf.Max(actualDamage, 0);
     }
 
     private void Die()
     {
-        /*if (DeathSoundEffect != null)
-        {
-            DeathSoundEffect.Play();
-        }*/
-
-        SceneManager.LoadScene(3);
+        StartCoroutine(WaitAndLoadScene(2.0f));
         rb.bodyType = RigidbodyType2D.Static;
         anim.SetTrigger("PlayerDeath");
 
         Destroy(gameObject, 1.5f);
-
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private IEnumerator WaitAndLoadScene(float waitTime)
     {
-        
+        yield return new WaitForSeconds(waitTime);
+        SceneManager.LoadScene(3);
     }
 
     public void Heal()
     {
         health += 10;
-    }
-
-    private void RestartLevel()
-    {
-        SceneManager.LoadScene(3);
+        health = Mathf.Min(health, playerPower.playerCurrentMaxHealth); // Cap health to max health
     }
 }

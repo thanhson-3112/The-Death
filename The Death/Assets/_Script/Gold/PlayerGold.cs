@@ -11,6 +11,9 @@ public class PlayerGold : MonoBehaviour
     [SerializeField] public int goldTotal;
     public TextMeshProUGUI goldText;
 
+    private PlayerPower playerPower;
+
+
     private void Awake()
     {
         if (PlayerGold.instance != null) Debug.LogError("Only 1 ScoreManager allow");
@@ -20,6 +23,8 @@ public class PlayerGold : MonoBehaviour
     protected virtual void Start()
     {
         goldText.text = "Gold: " + goldTotal.ToString();
+        playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
+
     }
 
     protected virtual void OnEnable()
@@ -34,7 +39,7 @@ public class PlayerGold : MonoBehaviour
 
     protected virtual void HandleGold(int newGold)
     {
-        goldTotal += newGold;
+        goldTotal += newGold + playerPower.playerCurrentGold;
         goldText.text = "Gold: " + goldTotal.ToString();
     }
 

@@ -33,20 +33,20 @@ public class PlayerPower : MonoBehaviour
     public float playerCurrentCritChance;
 
     // thoi gian hoi chieu
-    public float playerBaseAbilityHaste = 0.2f;
+    public float playerBaseAbilityHaste = 1f;
     public float playerCurrentAbilityHaste;
 
     // kinh nghiem
-    public float playerBaseExperience = 1;
-    public float playerCurrentExperience;
+    public int playerBaseExperience = 10;
+    public int playerCurrentExperience;
 
     // tia dan
     public int playerBaseProjectiles = 1;
     public int playerCurrentProjectiles;
 
     // tang vang nhat duoc
-    public float playerBaseGold = 1;
-    public float playerCurrentGold;
+    public int playerBaseGold = 1;
+    public int playerCurrentGold;
 
 
     public void Start()
@@ -58,10 +58,10 @@ public class PlayerPower : MonoBehaviour
         playerCurrentSpeed = playerBaseSpeed; // toc do xong
         playerCurrentPickRadius = playerBasePickRadius; // ban kinh nhat do xong
         playerCurrentCritChance = playerBaseCritChance; // ti le chi mang xong
-        playerCurrentAbilityHaste = playerBaseAbilityHaste;
-        playerCurrentExperience = playerBaseExperience;
+        playerCurrentAbilityHaste = playerBaseAbilityHaste; // thoi gian tac dung xong
+        playerCurrentExperience = playerBaseExperience; // kinh nghiem xong
         playerCurrentProjectiles = playerBaseProjectiles; // tia dan xong
-        playerCurrentGold = playerBaseGold;
+        playerCurrentGold = playerBaseGold; // vang xong
     }
 
     void Update()
