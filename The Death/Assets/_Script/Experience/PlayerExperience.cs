@@ -35,7 +35,7 @@ public class PlayerExperience : MonoBehaviour
 
     protected virtual void HandleExperience(int newExperience)
     {
-        currentExperience += newExperience + playerPower.playerCurrentExperience;
+        currentExperience += newExperience + playerPower.playerCurrentExperienceBonus;
         if (currentExperience >= maxExperience)
         {
             LevelUp();

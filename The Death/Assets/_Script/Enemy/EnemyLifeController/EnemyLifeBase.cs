@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyLifeBase : MonoBehaviour, IDamageAble
 {
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
     public Animator anim;
 
     [SerializeField] protected float enemyMaxHealth;
@@ -58,14 +58,30 @@ public class EnemyLifeBase : MonoBehaviour, IDamageAble
         GetComponent<ExperienceSpawner>().InstantiateLoot(transform.position);
         GetComponent<GoldSpawner>().InstantiateLoot(transform.position);
 
-        // Return the enemy to the pool after a delay
+        // Xoa ke dich 
         StartCoroutine(ReturnToPoolAfterDelay());
     }
 
     private IEnumerator ReturnToPoolAfterDelay()
     {
-        yield return new WaitForSeconds(1f); // Wait for 1 second before returning to the pool
+        yield return new WaitForSeconds(1f); 
         EnemyPool.Instance.ReturnEnemy(gameObject);
+    }
+
+    public void ResetHealth()
+    {
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
+
+        enemyHealth = enemyMaxHealth;
+        isHealthBarVisible = false; // Reset tr?ng thái thanh máu hi?n th?
+        if (enemyHealthBar != null)
+        {
+            enemyHealthBar.SetHealthBar();
+        }
+        rb.GetComponent<Collider2D>().enabled = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -74,16 +90,5 @@ public class EnemyLifeBase : MonoBehaviour, IDamageAble
         {
             playerLife.TakeDamage(enemyDamage);
         }
-    }
-
-    public void ResetHealth()
-    {
-        enemyHealth = enemyMaxHealth;
-        if (isHealthBarVisible)
-        {
-            enemyHealthBar.SetHealth(enemyHealth);
-        }
-        rb.GetComponent<Collider2D>().enabled = true;
-        rb.bodyType = RigidbodyType2D.Kinematic;
     }
 }

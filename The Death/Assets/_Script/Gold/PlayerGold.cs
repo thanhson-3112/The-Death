@@ -39,20 +39,15 @@ public class PlayerGold : MonoBehaviour
 
     protected virtual void HandleGold(int newGold)
     {
-        goldTotal += newGold + playerPower.playerCurrentGold;
+        goldTotal += newGold + playerPower.playerCurrentGoldBonus;
         goldText.text = "Gold: " + goldTotal.ToString();
     }
 
     // save game
     public virtual void FromJson(string jsonString)
     {
-        GoldData obj = JsonUtility.FromJson<GoldData>(jsonString);
+        GameData obj = JsonUtility.FromJson<GameData>(jsonString);
         if (obj == null) return;
         this.goldTotal = obj.goldTotal;
     }
-}
-
-public class GoldData
-{
-    public int goldTotal;
 }

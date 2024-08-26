@@ -26,22 +26,37 @@ public class SaveManager : MonoBehaviour
         this.SaveGame();
     }
 
-    protected virtual string GetSaveName()
+    protected virtual string GetSaveName1()
     {
         return SaveManager.SAVE_1;
     }
 
+    protected virtual string GetSaveName2()
+    {
+        return SaveManager.SAVE_2;
+    }
+
     public virtual void LoadSaveGame()
     {
-        string jsonString = SaveSystem.GetString(this.GetSaveName());
-        PlayerGold.instance.FromJson(jsonString);
-        Debug.Log("loadSaveGame" + jsonString);
+        string jsonString1 = SaveSystem.GetString(this.GetSaveName1());
+        string jsonString2 = SaveSystem.GetString(this.GetSaveName2());
+
+        PlayerGold.instance.FromJson(jsonString1);
+        PlayerPower.instance.FromJson(jsonString2);
+
+        Debug.Log("loadSaveGame" + jsonString1);
+        Debug.Log("loadSaveGame" + jsonString2);
+
     }
 
     public virtual void SaveGame()
     {
         Debug.Log("SaveGame");
-        string jsonString = JsonUtility.ToJson(PlayerGold.instance);
-        SaveSystem.SetString(this.GetSaveName(), jsonString);
+        string jsonString1 = JsonUtility.ToJson(PlayerGold.instance);
+        string jsonString2 = JsonUtility.ToJson(PlayerPower.instance);
+
+        SaveSystem.SetString(this.GetSaveName1(), jsonString1);
+        SaveSystem.SetString(this.GetSaveName2(), jsonString2);
+
     }
 }

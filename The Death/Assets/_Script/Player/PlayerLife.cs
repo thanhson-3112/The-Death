@@ -67,7 +67,10 @@ public class PlayerLife : MonoBehaviour
         // Calculate damage after armor reduction
         float actualDamage = CalculateDamageAfterArmor(enemyDamage, playerPower.playerCurrentArmor);
 
-        health -= actualDamage;
+        if(health >= 0)
+        {
+            health -= actualDamage;
+        }
 
         anim.SetTrigger("PlayerTakeDamage");
 
