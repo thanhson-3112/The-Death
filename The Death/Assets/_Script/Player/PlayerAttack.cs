@@ -79,7 +79,6 @@ public class PlayerAttack : MonoBehaviour
 
     private void AutoAttackNearestEnemy()
     {
-        // Lấy tất cả các đối tượng Enemy trong phạm vi cố định
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         float nearestDistance = Mathf.Infinity;
@@ -97,17 +96,17 @@ public class PlayerAttack : MonoBehaviour
 
         if (nearestEnemy != null)
         {
-            // Tính toán góc bắn viên đạn tới kẻ địch gần nhất
             Vector2 direction = nearestEnemy.transform.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
             int projectileCount = playerPower.playerCurrentProjectiles;
-            float angleOffset = 30f; // khoảng cách góc giữa các tia đạn
+            float angleOffset = 30f;
 
             if (projectileCount == 1)
             {
-                // Nếu chỉ có một tia đạn, bắn thẳng tới kẻ địch gần nhất
-                GameObject spawnedBullet = Instantiate(firePrefab, firing.position, Quaternion.Euler(0, 0, angle));
+                GameObject spawnedBullet = BulletPool.Instance.GetBullet();
+                spawnedBullet.transform.position = firing.position;
+                spawnedBullet.transform.rotation = Quaternion.Euler(0, 0, angle);
                 spawnedBullet.transform.right = direction;
             }
             else
@@ -116,15 +115,15 @@ public class PlayerAttack : MonoBehaviour
 
                 for (int i = -halfProjectiles; i <= halfProjectiles; i++)
                 {
-                    // Bỏ qua giá trị i = 0 nếu số đạn là chẵn để tránh bắn thêm một tia ở giữa
                     if (projectileCount % 2 == 0 && i == 0)
                         continue;
 
                     float currentAngle = angle + i * angleOffset;
                     Vector2 bulletDirection = new Vector2(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad));
 
-                    // Instantiate the bullet and set its direction
-                    GameObject spawnedBullet = Instantiate(firePrefab, firing.position, Quaternion.Euler(0, 0, currentAngle));
+                    GameObject spawnedBullet = BulletPool.Instance.GetBullet();
+                    spawnedBullet.transform.position = firing.position;
+                    spawnedBullet.transform.rotation = Quaternion.Euler(0, 0, currentAngle);
                     spawnedBullet.transform.right = bulletDirection;
                 }
             }
@@ -140,33 +139,30 @@ public class PlayerAttack : MonoBehaviour
         firingPoint.transform.rotation = Quaternion.Euler(0, 0, angle);
 
         int projectileCount = playerPower.playerCurrentProjectiles;
-
-        // Tính toán khoảng cách góc giữa các tia đạn
-        float angleOffset = 30f; // khoảng cách góc giữa các tia đạn
+        float angleOffset = 30f;
 
         if (projectileCount == 1)
         {
-            // Nếu chỉ có một tia đạn, bắn thẳng theo hướng trỏ chuột
-            GameObject spawnedBullet = Instantiate(firePrefab, firing.position, Quaternion.Euler(0, 0, angle));
+            GameObject spawnedBullet = BulletPool.Instance.GetBullet();
+            spawnedBullet.transform.position = firing.position;
+            spawnedBullet.transform.rotation = Quaternion.Euler(0, 0, angle);
             spawnedBullet.transform.right = direction;
         }
         else
         {
-            // Tính toán số lượng đạn bắn ra mỗi bên của tia trung tâm
             int halfProjectiles = projectileCount / 2;
 
             for (int i = -halfProjectiles; i <= halfProjectiles; i++)
             {
-                // Bỏ qua giá trị i = 0 nếu số đạn là chẵn để tránh bắn thêm một tia ở giữa
                 if (projectileCount % 2 == 0 && i == 0)
                     continue;
 
                 float currentAngle = angle + i * angleOffset;
-
                 Vector2 bulletDirection = new Vector2(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad));
 
-                // Instantiate the bullet and set its direction
-                GameObject spawnedBullet = Instantiate(firePrefab, firing.position, Quaternion.Euler(0, 0, currentAngle));
+                GameObject spawnedBullet = BulletPool.Instance.GetBullet();
+                spawnedBullet.transform.position = firing.position;
+                spawnedBullet.transform.rotation = Quaternion.Euler(0, 0, currentAngle);
                 spawnedBullet.transform.right = bulletDirection;
             }
         }

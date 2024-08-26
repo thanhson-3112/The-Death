@@ -8,15 +8,32 @@ public class EnemySpawn : PlayerExperience
     [SerializeField] private float GoblinSpawnRate = 8f;
     [SerializeField] private float ArcherSpawnRate = 20f;
 
-    [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private GameObject skeletonPrefab;
+    [SerializeField] private GameObject goblinPrefab;
+    [SerializeField] private GameObject archerPrefab;
     [SerializeField] private SpawnPoint spawnPoint;
 
     private bool canSpawn = true;
 
-    void Start()
+    private void Start()
     {
+        InitializePools();
         StartCoroutine(Spawner());
         base.Update();
+    }
+
+    private void InitializePools()
+    {
+        // Kh?i t?o pool cho t?ng lo?i quái v?t
+        EnemyPool.Instance.CreatePool(EnemyPool.Instance.skeletonPool, skeletonPrefab, 10);
+        EnemyPool.Instance.CreatePool(EnemyPool.Instance.goblinPool, goblinPrefab, 5);
+        EnemyPool.Instance.CreatePool(EnemyPool.Instance.archerPool, archerPrefab, 3);
+    }
+
+
+    private GameObject GetEnemyFromPool(EnemyType type)
+    {
+        return EnemyPool.Instance.GetEnemy(type);
     }
 
     private IEnumerator Spawner()
@@ -31,42 +48,67 @@ public class EnemySpawn : PlayerExperience
             if (spawnTransform != null)
             {
                 GameObject enemyToSpawn = null;
+                EnemyType enemyType = EnemyType.Skeleton; // Default enemy type
 
                 if (_currentLevel < 5)
                 {
-                    enemyToSpawn = enemyPrefabs[0];
+                    enemyType = EnemyType.Skeleton;
                 }
                 else if (_currentLevel >= 5 && _currentLevel < 7)
                 {
-                    enemyToSpawn = enemyPrefabs[Random.Range(0, 2)];
+                    int randomChoice = Random.Range(0, 2);
+                    enemyType = randomChoice == 0 ? EnemyType.Skeleton : EnemyType.Goblin;
                 }
                 else if (_currentLevel >= 7)
                 {
-                    enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+                    int randomChoice = Random.Range(0, 3);
+                    if (randomChoice == 0)
+                    {
+                        enemyType = EnemyType.Skeleton;
+                    }
+                    else if (randomChoice == 1)
+                    {
+                        enemyType = EnemyType.Goblin;
+                    }
+                    else
+                    {
+                        enemyType = EnemyType.Archer;
+                    }
                 }
 
-                // Instantiate enemyToSpawn
-                Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
+                enemyToSpawn = GetEnemyFromPool(enemyType);
 
-                // Ch?n th?i gian ch? sau m?i l?n spawn
-                wait = GetSpawnWaitTime(enemyToSpawn);
+                if (enemyToSpawn != null)
+                {
+                    enemyToSpawn.transform.position = spawnTransform.position;
+                    enemyToSpawn.transform.rotation = Quaternion.identity;
+                    enemyToSpawn.SetActive(true);
+
+                    // ??t l?i máu cho quái v?t khi ???c kích ho?t
+                    EnemyLifeBase enemyLifeBase = enemyToSpawn.GetComponent<EnemyLifeBase>();
+                    if (enemyLifeBase != null)
+                    {
+                        enemyLifeBase.ResetHealth();
+                    }
+                }
+
+                wait = GetSpawnWaitTime(enemyType);
             }
         }
     }
 
-    WaitForSeconds GetSpawnWaitTime(GameObject enemyToSpawn)
+    private WaitForSeconds GetSpawnWaitTime(EnemyType type)
     {
-        if (enemyToSpawn == enemyPrefabs[1])
+        switch (type)
         {
-            return new WaitForSeconds(GoblinSpawnRate);
-        }
-        else if (enemyToSpawn == enemyPrefabs[0])
-        {
-            return new WaitForSeconds(SkeletonSpawnRate);
-        }
-        else
-        {
-            return new WaitForSeconds(ArcherSpawnRate);
+            case EnemyType.Skeleton:
+                return new WaitForSeconds(SkeletonSpawnRate);
+            case EnemyType.Goblin:
+                return new WaitForSeconds(GoblinSpawnRate);
+            case EnemyType.Archer:
+                return new WaitForSeconds(ArcherSpawnRate);
+            default:
+                return new WaitForSeconds(SkeletonSpawnRate); // Default
         }
     }
 }

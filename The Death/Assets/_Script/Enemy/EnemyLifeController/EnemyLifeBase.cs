@@ -32,7 +32,10 @@ public class EnemyLifeBase : MonoBehaviour, IDamageAble
 
     public virtual void TakePlayerDamage(float damage)
     {
-        enemyHealth -= damage;
+        if(enemyHealth > 0)
+        {
+            enemyHealth -= damage;
+        }
 
         if (!isHealthBarVisible)
         {
@@ -52,11 +55,17 @@ public class EnemyLifeBase : MonoBehaviour, IDamageAble
         rb.GetComponent<Collider2D>().enabled = false;
         rb.bodyType = RigidbodyType2D.Static;
 
-        Destroy(gameObject, 1f);
-
         GetComponent<ExperienceSpawner>().InstantiateLoot(transform.position);
         GetComponent<GoldSpawner>().InstantiateLoot(transform.position);
 
+        // Return the enemy to the pool after a delay
+        StartCoroutine(ReturnToPoolAfterDelay());
+    }
+
+    private IEnumerator ReturnToPoolAfterDelay()
+    {
+        yield return new WaitForSeconds(1f); // Wait for 1 second before returning to the pool
+        EnemyPool.Instance.ReturnEnemy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -65,5 +74,16 @@ public class EnemyLifeBase : MonoBehaviour, IDamageAble
         {
             playerLife.TakeDamage(enemyDamage);
         }
+    }
+
+    public void ResetHealth()
+    {
+        enemyHealth = enemyMaxHealth;
+        if (isHealthBarVisible)
+        {
+            enemyHealthBar.SetHealth(enemyHealth);
+        }
+        rb.GetComponent<Collider2D>().enabled = true;
+        rb.bodyType = RigidbodyType2D.Kinematic;
     }
 }

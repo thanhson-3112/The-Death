@@ -15,11 +15,11 @@ public class FireBall : MonoBehaviour
 
     public PlayerPower playerPower;
 
-    private void Start()
+    private void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
         playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
-        Destroy(gameObject, lifeTime);
+        Invoke("ReturnToPool", lifeTime);
     }
 
     private void FixedUpdate()
@@ -41,16 +41,27 @@ public class FireBall : MonoBehaviour
             {
                 float damage = playerPower.playerCurrentDamage;
 
-                // Ki?m tra chí m?ng và áp d?ng sát th??ng chí m?ng n?u c?n
                 if (IsCriticalHit())
                 {
-                    damage *= 2; // Nhân ?ôi sát th??ng n?u chí m?ng
+                    damage *= 2;
                 }
 
                 enemyTakeDamage.TakePlayerDamage(damage);
             }
 
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+/*            ReturnToPool();*/
         }
+    }
+
+    private void ReturnToPool()
+    {
+        CancelInvoke();
+        BulletPool.Instance.ReturnBullet(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
     }
 }
