@@ -7,7 +7,10 @@ TagManager:
   - FireBall
   - Enemy
   - BossHealthBar
-  - Item
+  - ShopManager
+  - AudioManager
+  - UpArrow
+  - ShopNPC
   layers:
   - Default
   - TransparentFX

@@ -80,9 +80,15 @@ public class PlayerPower : MonoBehaviour
 
     public void Start()
     {
+        StartCoroutine(SetupPower());
+    }
+
+    public IEnumerator SetupPower()
+    {
+        yield return new WaitForSeconds(0.1f);
         playerCurrentDamage = playerBaseDamage; // sat thuong xong
         playerCurrentArmor = playerBaseArmor; // giap xong
-        playerCurrentMaxHealth = playerBaseMaxHealth; 
+        playerCurrentMaxHealth = playerBaseMaxHealth;
         playerCurrentHealthRegen = playerBaseHealthRegen; // hoi mau xong
         playerCurrentSpeed = playerBaseSpeed; // toc do xong
         playerCurrentPickRadius = playerBasePickRadius; // ban kinh nhat do xong
