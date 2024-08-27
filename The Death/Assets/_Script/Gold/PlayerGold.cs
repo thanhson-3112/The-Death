@@ -29,12 +29,18 @@ public class PlayerGold : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        LootManager.Instance.OnGoldChange += HandleGold;
+        if (LootManager.Instance != null)
+        {
+            LootManager.Instance.OnGoldChange += HandleGold;
+        }
     }
 
     protected virtual void OnDisable()
     {
-        LootManager.Instance.OnGoldChange -= HandleGold;
+        if (LootManager.Instance != null)
+        {
+            LootManager.Instance.OnGoldChange -= HandleGold;
+        }
     }
 
     protected virtual void HandleGold(int newGold)
