@@ -18,4 +18,16 @@ public class GameData
     public int playerBaseProjectiles;
     public int playerBaseGoldBonus;
 
+    public int currentDamageLevel;
+    public int currentArmorLevel;
+    public int currentMaxHealthLevel;
+    public int currentHealthRegenLevel;
+    public int currentSpeedLevel;
+    public int currentPickRadiusLevel;
+    public int currentCritChanceLevel;
+    public int currentAbilityHasteLevel;
+    public int currentExperienceBonusLevel;
+    public int currentProjectilesLevel;
+    public int currentGoldBonusLevel;
+
 }

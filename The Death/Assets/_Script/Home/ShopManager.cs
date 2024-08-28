@@ -1,9 +1,14 @@
-using UnityEngine;
-using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
+    public static ShopManager instance;
+
+    [Header("Button")]
     [SerializeField] private Button upgradeDamageButton;
     [SerializeField] private Button upgradeArmorButton;
     [SerializeField] private Button upgradeMaxHealthButton;
@@ -16,9 +21,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Button upgradeProjectilesButton;
     [SerializeField] private Button upgradeGoldBonusButton;
 
-    [SerializeField] private TextMeshProUGUI goldText;
-    [SerializeField] private PlayerGold playerGold;
-
+    [Header("Cost")]
     [SerializeField] private TextMeshProUGUI damageCostText;
     [SerializeField] private TextMeshProUGUI armorCostText;
     [SerializeField] private TextMeshProUGUI maxHealthCostText;
@@ -31,6 +34,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI projectilesCostText;
     [SerializeField] private TextMeshProUGUI goldBonusCostText;
 
+    [Header("Slider")]
     [SerializeField] private Slider damageSlider;
     [SerializeField] private Slider armorSlider;
     [SerializeField] private Slider maxHealthSlider;
@@ -43,64 +47,65 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Slider projectilesSlider;
     [SerializeField] private Slider goldBonusSlider;
 
-    private int currentDamageUpgradeCost = 100;
-    private int currentArmorUpgradeCost = 200;
-    private int currentMaxHealthUpgradeCost = 300;
-    private int currentHealthRegenUpgradeCost = 150;
-    private int currentSpeedUpgradeCost = 120;
-    private int currentPickRadiusUpgradeCost = 180;
-    private int currentCritChanceUpgradeCost = 250;
-    private int currentAbilityHasteUpgradeCost = 140;
-    private int currentExperienceBonusUpgradeCost = 220;
-    private int currentProjectilesUpgradeCost = 160;
-    private int currentGoldBonusUpgradeCost = 200;
+    // M?ng ch?a giá nâng c?p cho t?ng c?p ??
+    private int[] damageUpgradeCosts = { 100, 110, 120, 130, 140 };
+    private int[] armorUpgradeCosts = { 120, 130, 140, 150, 160, 170 };
+    private int[] maxHealthUpgradeCosts = { 150, 160, 170, 180, 190 };
+    private int[] healthRegenUpgradeCosts = { 90, 100, 110, 120, 130 };
+    private int[] speedUpgradeCosts = { 80, 90, 100, 110 };
+    private int[] pickRadiusUpgradeCosts = { 70, 80, 90 };
+    private int[] critChanceUpgradeCosts = { 130, 140, 150, 160 };
+    private int[] abilityHasteUpgradeCosts = { 100, 110, 120, 130 };
+    private int[] experienceBonusUpgradeCosts = { 200, 220, 240, 260, 280 };
+    private int[] projectilesUpgradeCosts = { 300, 350 };
+    private int[] goldBonusUpgradeCosts = { 150, 160, 170 };
 
-    private float damageUpgradeMultiplier = 1.5f;
-    private float armorUpgradeMultiplier = 1.4f;
-    private float maxHealthUpgradeMultiplier = 1.6f;
-    private float healthRegenUpgradeMultiplier = 1.3f;
-    private float speedUpgradeMultiplier = 1.2f;
-    private float pickRadiusUpgradeMultiplier = 1.5f;
-    private float critChanceUpgradeMultiplier = 1.4f;
-    private float abilityHasteUpgradeMultiplier = 1.3f;
-    private float experienceBonusUpgradeMultiplier = 1.7f;
-    private float projectilesUpgradeMultiplier = 1.4f;
-    private float goldBonusUpgradeMultiplier = 1.5f;
-
-    private int maxDamageUpgradeLevel = 5;
-    private int maxArmorUpgradeLevel = 4;
-    private int maxMaxHealthUpgradeLevel = 6;
-    private int maxHealthRegenUpgradeLevel = 5;
-    private int maxSpeedUpgradeLevel = 4;
-    private int maxPickRadiusUpgradeLevel = 3;
-    private int maxCritChanceUpgradeLevel = 4;
-    private int maxAbilityHasteUpgradeLevel = 3;
-    private int maxExperienceBonusUpgradeLevel = 3;
-    private int maxProjectilesUpgradeLevel = 2;
-    private int maxGoldBonusUpgradeLevel = 4;
+    // Các bi?n ?? l?u tr? c?p ?? hi?n t?i c?a m?i ch? s?
+    public int currentDamageLevel;
+    public int currentArmorLevel;
+    public int currentMaxHealthLevel;
+    public int currentHealthRegenLevel;
+    public int currentSpeedLevel;
+    public int currentPickRadiusLevel;
+    public int currentCritChanceLevel;
+    public int currentAbilityHasteLevel;
+    public int currentExperienceBonusLevel;
+    public int currentProjectilesLevel;
+    public int currentGoldBonusLevel;
 
     private ShopNPC currentShopNPC;
+    [SerializeField] private TextMeshProUGUI goldText;
+    [SerializeField] private PlayerGold playerGold;
+
+    private void Awake()
+    {
+        if (ShopManager.instance != null) Debug.LogError("Only 1 ScoreManager allow");
+        ShopManager.instance = this;
+    }
 
     private void Start()
     {
-        // Assign button click events
-        upgradeDamageButton.onClick.AddListener(() => UpgradeStat("Damage", ref currentDamageUpgradeCost, ref damageUpgradeMultiplier, damageSlider, damageCostText, maxDamageUpgradeLevel));
-        upgradeArmorButton.onClick.AddListener(() => UpgradeStat("Armor", ref currentArmorUpgradeCost, ref armorUpgradeMultiplier, armorSlider, armorCostText, maxArmorUpgradeLevel));
-        upgradeMaxHealthButton.onClick.AddListener(() => UpgradeStat("MaxHealth", ref currentMaxHealthUpgradeCost, ref maxHealthUpgradeMultiplier, maxHealthSlider, maxHealthCostText, maxMaxHealthUpgradeLevel));
-        upgradeHealthRegenButton.onClick.AddListener(() => UpgradeStat("HealthRegen", ref currentHealthRegenUpgradeCost, ref healthRegenUpgradeMultiplier, healthRegenSlider, healthRegenCostText, maxHealthRegenUpgradeLevel));
-        upgradeSpeedButton.onClick.AddListener(() => UpgradeStat("Speed", ref currentSpeedUpgradeCost, ref speedUpgradeMultiplier, speedSlider, speedCostText, maxSpeedUpgradeLevel));
-        upgradePickRadiusButton.onClick.AddListener(() => UpgradeStat("PickRadius", ref currentPickRadiusUpgradeCost, ref pickRadiusUpgradeMultiplier, pickRadiusSlider, pickRadiusCostText, maxPickRadiusUpgradeLevel));
-        upgradeCritChanceButton.onClick.AddListener(() => UpgradeStat("CritChance", ref currentCritChanceUpgradeCost, ref critChanceUpgradeMultiplier, critChanceSlider, critChanceCostText, maxCritChanceUpgradeLevel));
-        upgradeAbilityHasteButton.onClick.AddListener(() => UpgradeStat("AbilityHaste", ref currentAbilityHasteUpgradeCost, ref abilityHasteUpgradeMultiplier, abilityHasteSlider, abilityHasteCostText, maxAbilityHasteUpgradeLevel));
-        upgradeExperienceBonusButton.onClick.AddListener(() => UpgradeStat("ExperienceBonus", ref currentExperienceBonusUpgradeCost, ref experienceBonusUpgradeMultiplier, experienceBonusSlider, experienceBonusCostText, maxExperienceBonusUpgradeLevel));
-        upgradeProjectilesButton.onClick.AddListener(() => UpgradeStat("Projectiles", ref currentProjectilesUpgradeCost, ref projectilesUpgradeMultiplier, projectilesSlider, projectilesCostText, maxProjectilesUpgradeLevel));
-        upgradeGoldBonusButton.onClick.AddListener(() => UpgradeStat("GoldBonus", ref currentGoldBonusUpgradeCost, ref goldBonusUpgradeMultiplier, goldBonusSlider, goldBonusCostText, maxGoldBonusUpgradeLevel));
+        playerGold = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGold>();
+        LoadUpgradeValues();
 
-        // Update UI with initial values
+        // Gán s? ki?n click cho các nút nâng c?p
+        upgradeDamageButton.onClick.AddListener(() => UpgradeStat("Damage", ref damageSlider, damageCostText, damageUpgradeCosts.Length));
+        upgradeArmorButton.onClick.AddListener(() => UpgradeStat("Armor", ref armorSlider, armorCostText, armorUpgradeCosts.Length));
+        upgradeMaxHealthButton.onClick.AddListener(() => UpgradeStat("MaxHealth", ref maxHealthSlider, maxHealthCostText, maxHealthUpgradeCosts.Length));
+        upgradeHealthRegenButton.onClick.AddListener(() => UpgradeStat("HealthRegen", ref healthRegenSlider, healthRegenCostText, healthRegenUpgradeCosts.Length));
+        upgradeSpeedButton.onClick.AddListener(() => UpgradeStat("Speed", ref speedSlider, speedCostText, speedUpgradeCosts.Length));
+        upgradePickRadiusButton.onClick.AddListener(() => UpgradeStat("PickRadius", ref pickRadiusSlider, pickRadiusCostText, pickRadiusUpgradeCosts.Length));
+        upgradeCritChanceButton.onClick.AddListener(() => UpgradeStat("CritChance", ref critChanceSlider, critChanceCostText, critChanceUpgradeCosts.Length));
+        upgradeAbilityHasteButton.onClick.AddListener(() => UpgradeStat("AbilityHaste", ref abilityHasteSlider, abilityHasteCostText, abilityHasteUpgradeCosts.Length));
+        upgradeExperienceBonusButton.onClick.AddListener(() => UpgradeStat("ExperienceBonus", ref experienceBonusSlider, experienceBonusCostText, experienceBonusUpgradeCosts.Length));
+        upgradeProjectilesButton.onClick.AddListener(() => UpgradeStat("Projectiles", ref projectilesSlider, projectilesCostText, projectilesUpgradeCosts.Length));
+        upgradeGoldBonusButton.onClick.AddListener(() => UpgradeStat("GoldBonus", ref goldBonusSlider, goldBonusCostText, goldBonusUpgradeCosts.Length));
+
+        // C?p nh?t UI v?i các giá tr? ban ??u
         UpdateGoldUI();
         UpdateCostTexts();
 
-        // Initially hide the shop UI
+        // Ban ??u ?n UI c?a shop
         gameObject.SetActive(false);
     }
 
@@ -120,89 +125,233 @@ public class ShopManager : MonoBehaviour
         currentShopNPC = null;
     }
 
-    private void UpgradeStat(string statName, ref int currentUpgradeCost, ref float upgradeMultiplier, Slider upgradeSlider, TextMeshProUGUI costText, int maxUpgradeLevel)
+    private void UpgradeStat(string statName, ref Slider upgradeSlider, TextMeshProUGUI costText, int maxUpgradeLevel)
     {
+        int currentLevel = (int)upgradeSlider.value;
+        int currentUpgradeCost = 0;
+
+        // L?y giá nâng c?p hi?n t?i d?a trên c?p ??
+        switch (statName)
+        {
+            case "Damage":
+                if (currentLevel < damageUpgradeCosts.Length)
+                    currentUpgradeCost = damageUpgradeCosts[currentLevel];
+                break;
+            case "Armor":
+                if (currentLevel < armorUpgradeCosts.Length)
+                    currentUpgradeCost = armorUpgradeCosts[currentLevel];
+                break;
+            case "MaxHealth":
+                if (currentLevel < maxHealthUpgradeCosts.Length)
+                    currentUpgradeCost = maxHealthUpgradeCosts[currentLevel];
+                break;
+            case "HealthRegen":
+                if (currentLevel < healthRegenUpgradeCosts.Length)
+                    currentUpgradeCost = healthRegenUpgradeCosts[currentLevel];
+                break;
+            case "Speed":
+                if (currentLevel < speedUpgradeCosts.Length)
+                    currentUpgradeCost = speedUpgradeCosts[currentLevel];
+                break;
+            case "PickRadius":
+                if (currentLevel < pickRadiusUpgradeCosts.Length)
+                    currentUpgradeCost = pickRadiusUpgradeCosts[currentLevel];
+                break;
+            case "CritChance":
+                if (currentLevel < critChanceUpgradeCosts.Length)
+                    currentUpgradeCost = critChanceUpgradeCosts[currentLevel];
+                break;
+            case "AbilityHaste":
+                if (currentLevel < abilityHasteUpgradeCosts.Length)
+                    currentUpgradeCost = abilityHasteUpgradeCosts[currentLevel];
+                break;
+            case "ExperienceBonus":
+                if (currentLevel < experienceBonusUpgradeCosts.Length)
+                    currentUpgradeCost = experienceBonusUpgradeCosts[currentLevel];
+                break;
+            case "Projectiles":
+                if (currentLevel < projectilesUpgradeCosts.Length)
+                    currentUpgradeCost = projectilesUpgradeCosts[currentLevel];
+                break;
+            case "GoldBonus":
+                if (currentLevel < goldBonusUpgradeCosts.Length)
+                    currentUpgradeCost = goldBonusUpgradeCosts[currentLevel];
+                break;
+        }
+
         if (playerGold.goldTotal < currentUpgradeCost)
         {
             Debug.Log("Không ?? vàng.");
             return;
         }
 
-        if (upgradeSlider.value >= maxUpgradeLevel)
+        if (currentLevel >= maxUpgradeLevel)
         {
             Debug.Log("?ã ??t c?p t?i ?a cho " + statName);
             return;
         }
 
-        // Deduct gold
+        // Tr? vàng
         playerGold.goldTotal -= currentUpgradeCost;
 
-        // Upgrade the corresponding stat
+        // Nâng c?p ch? s? t??ng ?ng
         switch (statName)
         {
             case "Damage":
                 PlayerPower.instance.playerBaseDamage += 1;
+                currentDamageLevel = currentLevel + 1;
                 break;
             case "Armor":
                 PlayerPower.instance.playerBaseArmor += 5;
+                currentArmorLevel = currentLevel + 1;
                 break;
             case "MaxHealth":
                 PlayerPower.instance.playerBaseMaxHealth += 10;
+                currentMaxHealthLevel = currentLevel + 1;
                 break;
             case "HealthRegen":
-                PlayerPower.instance.playerBaseHealthRegen += 0.1f;
+                PlayerPower.instance.playerBaseHealthRegen += 0.5f;
+                currentHealthRegenLevel = currentLevel + 1;
                 break;
             case "Speed":
-                PlayerPower.instance.playerBaseSpeed += 1;
+                PlayerPower.instance.playerBaseSpeed += 0.1f;
+                currentSpeedLevel = currentLevel + 1;
                 break;
             case "PickRadius":
-                PlayerPower.instance.playerBasePickRadius += 1;
+                PlayerPower.instance.playerBasePickRadius += 0.5f;
+                currentPickRadiusLevel = currentLevel + 1;
                 break;
             case "CritChance":
-                PlayerPower.instance.playerBaseCritChance += 2;
+                PlayerPower.instance.playerBaseCritChance += 0.02f;
+                currentCritChanceLevel = currentLevel + 1;
                 break;
             case "AbilityHaste":
-                PlayerPower.instance.playerBaseAbilityHaste += 0.1f;
+                PlayerPower.instance.playerBaseAbilityHaste += 0.05f;
+                currentAbilityHasteLevel = currentLevel + 1;
                 break;
             case "ExperienceBonus":
-                PlayerPower.instance.playerBaseExperienceBonus += 5;
+                PlayerPower.instance.playerBaseExperienceBonus += 1;
+                currentExperienceBonusLevel = currentLevel + 1;
                 break;
             case "Projectiles":
                 PlayerPower.instance.playerBaseProjectiles += 1;
+                currentProjectilesLevel = currentLevel + 1;
                 break;
             case "GoldBonus":
                 PlayerPower.instance.playerBaseGoldBonus += 1;
+                currentGoldBonusLevel = currentLevel + 1;
                 break;
         }
 
-        // Increase the slider value
+        // T?ng giá tr? slider
         upgradeSlider.value += 1;
 
-        // Update the upgrade cost for the next level
-        currentUpgradeCost = Mathf.RoundToInt(currentUpgradeCost * upgradeMultiplier);
-
-        // Update UI with new values
+        // C?p nh?t UI
         UpdateGoldUI();
         UpdateCostTexts();
     }
 
+    private void LoadUpgradeValues()
+    {
+        damageSlider.value = currentDamageLevel;
+        armorSlider.value = currentArmorLevel;
+        maxHealthSlider.value = currentMaxHealthLevel;
+        healthRegenSlider.value = currentHealthRegenLevel;
+        speedSlider.value = currentSpeedLevel;
+        pickRadiusSlider.value = currentPickRadiusLevel;
+        critChanceSlider.value = currentCritChanceLevel;
+        abilityHasteSlider.value = currentAbilityHasteLevel;
+        experienceBonusSlider.value = currentExperienceBonusLevel;
+        projectilesSlider.value = currentProjectilesLevel;
+        goldBonusSlider.value = currentGoldBonusLevel;
+    }
+
     private void UpdateGoldUI()
     {
-        goldText.text = "Gold: " + playerGold.goldTotal.ToString();
+        goldText.text = playerGold.goldTotal.ToString();
     }
 
     private void UpdateCostTexts()
     {
-        damageCostText.text = "Cost: " + currentDamageUpgradeCost.ToString();
-        armorCostText.text = "Cost: " + currentArmorUpgradeCost.ToString();
-        maxHealthCostText.text = "Cost: " + currentMaxHealthUpgradeCost.ToString();
-        healthRegenCostText.text = "Cost: " + currentHealthRegenUpgradeCost.ToString();
-        speedCostText.text = "Cost: " + currentSpeedUpgradeCost.ToString();
-        pickRadiusCostText.text = "Cost: " + currentPickRadiusUpgradeCost.ToString();
-        critChanceCostText.text = "Cost: " + currentCritChanceUpgradeCost.ToString();
-        abilityHasteCostText.text = "Cost: " + currentAbilityHasteUpgradeCost.ToString();
-        experienceBonusCostText.text = "Cost: " + currentExperienceBonusUpgradeCost.ToString();
-        projectilesCostText.text = "Cost: " + currentProjectilesUpgradeCost.ToString();
-        goldBonusCostText.text = "Cost: " + currentGoldBonusUpgradeCost.ToString();
+        // Ki?m tra n?u c?p ?? hi?n t?i không v??t quá gi?i h?n c?a m?ng giá nâng c?p
+        if (currentDamageLevel < damageUpgradeCosts.Length)
+            damageCostText.text = damageUpgradeCosts[currentDamageLevel].ToString();
+        else
+            damageCostText.text = "Max";
+
+        if (currentArmorLevel < armorUpgradeCosts.Length)
+            armorCostText.text = armorUpgradeCosts[currentArmorLevel].ToString();
+        else
+            armorCostText.text = "Max";
+
+        if (currentMaxHealthLevel < maxHealthUpgradeCosts.Length)
+            maxHealthCostText.text = maxHealthUpgradeCosts[currentMaxHealthLevel].ToString();
+        else
+            maxHealthCostText.text = "Max";
+
+        if (currentHealthRegenLevel < healthRegenUpgradeCosts.Length)
+            healthRegenCostText.text = healthRegenUpgradeCosts[currentHealthRegenLevel].ToString();
+        else
+            healthRegenCostText.text = "Max";
+
+        if (currentSpeedLevel < speedUpgradeCosts.Length)
+            speedCostText.text = speedUpgradeCosts[currentSpeedLevel].ToString();
+        else
+            speedCostText.text = "Max";
+
+        if (currentPickRadiusLevel < pickRadiusUpgradeCosts.Length)
+            pickRadiusCostText.text = pickRadiusUpgradeCosts[currentPickRadiusLevel].ToString();
+        else
+            pickRadiusCostText.text = "Max";
+
+        if (currentCritChanceLevel < critChanceUpgradeCosts.Length)
+            critChanceCostText.text = critChanceUpgradeCosts[currentCritChanceLevel].ToString();
+        else
+            critChanceCostText.text = "Max";
+
+        if (currentAbilityHasteLevel < abilityHasteUpgradeCosts.Length)
+            abilityHasteCostText.text = abilityHasteUpgradeCosts[currentAbilityHasteLevel].ToString();
+        else
+            abilityHasteCostText.text = "Max";
+
+        if (currentExperienceBonusLevel < experienceBonusUpgradeCosts.Length)
+            experienceBonusCostText.text = experienceBonusUpgradeCosts[currentExperienceBonusLevel].ToString();
+        else
+            experienceBonusCostText.text = "Max";
+
+        if (currentProjectilesLevel < projectilesUpgradeCosts.Length)
+            projectilesCostText.text = projectilesUpgradeCosts[currentProjectilesLevel].ToString();
+        else
+            projectilesCostText.text = "Max";
+
+        if (currentGoldBonusLevel < goldBonusUpgradeCosts.Length)
+            goldBonusCostText.text = goldBonusUpgradeCosts[currentGoldBonusLevel].ToString();
+        else
+            goldBonusCostText.text = "Max";
     }
+
+    //Save game
+    public virtual void FromJson(string jsonString)
+    {
+        GameData obj = JsonUtility.FromJson<GameData>(jsonString);
+        if (obj == null) return;
+        this.currentDamageLevel = obj.currentDamageLevel;
+        this.currentArmorLevel = obj.currentArmorLevel;
+        this.currentMaxHealthLevel = obj.currentMaxHealthLevel;
+        this.currentHealthRegenLevel = obj.currentHealthRegenLevel;
+        this.currentSpeedLevel = obj.currentSpeedLevel;
+        this.currentPickRadiusLevel = obj.currentPickRadiusLevel;
+        this.currentCritChanceLevel = obj.currentCritChanceLevel;
+        this.currentAbilityHasteLevel = obj.currentAbilityHasteLevel;
+        this.currentExperienceBonusLevel = obj.currentExperienceBonusLevel;
+        this.currentProjectilesLevel = obj.currentProjectilesLevel;
+        this.currentGoldBonusLevel = obj.currentGoldBonusLevel;
+
+        LoadUpgradeValues();
+
+        // C?p nh?t UI sau khi giá tr? ?ã ???c load
+        UpdateCostTexts();
+        UpdateGoldUI();
+    }
+
 }
