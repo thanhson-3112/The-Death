@@ -54,12 +54,6 @@ public class PauseMenu : MonoBehaviour
         isPaused = false;
     }
 
-    /*public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        ResumeGame();
-    }*/
-
     public void SettingGame()
     {
         pauseMusicVolume.SetActive(true);
@@ -68,6 +62,8 @@ public class PauseMenu : MonoBehaviour
 
     public void BackToMenu()
     {
+        SaveManager.instance.SaveGame();
+        SaveSystem.SaveToDisk();
         SceneManager.LoadScene(0);
     }
 }

@@ -77,6 +77,21 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private PlayerGold playerGold;
 
+    [SerializeField] private ShopDescription shopDescription;
+
+    [Header("Skill Parents")]
+    [SerializeField] private GameObject damageSkillParent;
+    [SerializeField] private GameObject armorSkillParent;
+    [SerializeField] private GameObject maxHealthSkillParent;
+    [SerializeField] private GameObject healthRegenSkillParent;
+    [SerializeField] private GameObject speedSkillParent;
+    [SerializeField] private GameObject pickRadiusSkillParent;
+    [SerializeField] private GameObject critChanceSkillParent;
+    [SerializeField] private GameObject abilityHasteSkillParent;
+    [SerializeField] private GameObject experienceBonusSkillParent;
+    [SerializeField] private GameObject projectilesSkillParent;
+    [SerializeField] private GameObject goldBonusSkillParent;
+
     private void Awake()
     {
         if (ShopManager.instance != null) Debug.LogError("Only 1 ScoreManager allow");
@@ -101,12 +116,48 @@ public class ShopManager : MonoBehaviour
         upgradeProjectilesButton.onClick.AddListener(() => UpgradeStat("Projectiles", ref projectilesSlider, projectilesCostText, projectilesUpgradeCosts.Length));
         upgradeGoldBonusButton.onClick.AddListener(() => UpgradeStat("GoldBonus", ref goldBonusSlider, goldBonusCostText, goldBonusUpgradeCosts.Length));
 
+        AssignUpgradeButtonListeners();
         // C?p nh?t UI v?i các giá tr? ban ??u
         UpdateGoldUI();
         UpdateCostTexts();
 
         // Ban ??u ?n UI c?a shop
         gameObject.SetActive(false);
+    }
+
+    private void AssignUpgradeButtonListeners()
+    {
+        AssignListener(upgradeDamageButton, "Damage", damageUpgradeCosts, damageSlider, damageCostText);
+        AssignListener(upgradeArmorButton, "Armor", armorUpgradeCosts, armorSlider, armorCostText);
+        AssignListener(upgradeMaxHealthButton, "MaxHealth", maxHealthUpgradeCosts, maxHealthSlider, maxHealthCostText);
+        AssignListener(upgradeHealthRegenButton, "HealthRegen", healthRegenUpgradeCosts, healthRegenSlider, healthRegenCostText);
+        AssignListener(upgradeSpeedButton, "Speed", speedUpgradeCosts, speedSlider, speedCostText);
+        AssignListener(upgradePickRadiusButton, "PickRadius", pickRadiusUpgradeCosts, pickRadiusSlider, pickRadiusCostText);
+        AssignListener(upgradeCritChanceButton, "CritChance", critChanceUpgradeCosts, critChanceSlider, critChanceCostText);
+        AssignListener(upgradeAbilityHasteButton, "AbilityHaste", abilityHasteUpgradeCosts, abilityHasteSlider, abilityHasteCostText);
+        AssignListener(upgradeExperienceBonusButton, "ExperienceBonus", experienceBonusUpgradeCosts, experienceBonusSlider, experienceBonusCostText);
+        AssignListener(upgradeProjectilesButton, "Projectiles", projectilesUpgradeCosts, projectilesSlider, projectilesCostText);
+        AssignListener(upgradeGoldBonusButton, "GoldBonus", goldBonusUpgradeCosts, goldBonusSlider, goldBonusCostText);
+    }
+
+    private void AssignListener(Button upgradeButton, string statName, int[] upgradeCosts, Slider upgradeSlider, TextMeshProUGUI costText)
+    {
+        upgradeButton.onClick.AddListener(() =>
+        {
+            SetShopDescription(statName, upgradeSlider, upgradeCosts, costText, upgradeButton);
+        });
+    }
+
+    private void SetShopDescription(string statName, Slider slider, int[] upgradeCosts, TextMeshProUGUI costText, Button upgradeButton)
+    {
+        int currentLevel = (int)slider.value;
+        Sprite skillSprite = upgradeButton.image.sprite;
+        string skillName = statName;
+        string skillCost = currentLevel < upgradeCosts.Length ? upgradeCosts[currentLevel].ToString() : "Max";
+        float sliderValue = slider.value;
+        UnityEngine.Events.UnityAction buttonAction = upgradeButton.onClick.Invoke;
+
+        shopDescription.SetDescription(skillSprite, skillName, skillCost, sliderValue, buttonAction);
     }
 
     public void SetCurrentShopNPC(ShopNPC shopNPC)
