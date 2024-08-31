@@ -116,7 +116,11 @@ public class ShopManager : MonoBehaviour
         upgradeProjectilesButton.onClick.AddListener(() => UpgradeStat("Projectiles", ref projectilesSlider, projectilesCostText, projectilesUpgradeCosts.Length));
         upgradeGoldBonusButton.onClick.AddListener(() => UpgradeStat("GoldBonus", ref goldBonusSlider, goldBonusCostText, goldBonusUpgradeCosts.Length));
 
+        // Gán s? ki?n cho các nút nâng c?p
         AssignUpgradeButtonListeners();
+
+        // Gán s? ki?n cho các Skill Parent
+        AssignSkillParentListeners();
         // C?p nh?t UI v?i các giá tr? ban ??u
         UpdateGoldUI();
         UpdateCostTexts();
@@ -148,14 +152,41 @@ public class ShopManager : MonoBehaviour
         });
     }
 
+    private void AssignSkillParentListeners()
+    {
+        AssignSkillParentListener(damageSkillParent, "Damage", damageSlider, damageUpgradeCosts, damageCostText, upgradeDamageButton);
+        AssignSkillParentListener(armorSkillParent, "Armor", armorSlider, armorUpgradeCosts, armorCostText, upgradeArmorButton);
+        AssignSkillParentListener(maxHealthSkillParent, "MaxHealth", maxHealthSlider, maxHealthUpgradeCosts, maxHealthCostText, upgradeMaxHealthButton);
+        AssignSkillParentListener(healthRegenSkillParent, "HealthRegen", healthRegenSlider, healthRegenUpgradeCosts, healthRegenCostText, upgradeHealthRegenButton);
+        AssignSkillParentListener(speedSkillParent, "Speed", speedSlider, speedUpgradeCosts, speedCostText, upgradeSpeedButton);
+        AssignSkillParentListener(pickRadiusSkillParent, "PickRadius", pickRadiusSlider, pickRadiusUpgradeCosts, pickRadiusCostText, upgradePickRadiusButton);
+        AssignSkillParentListener(critChanceSkillParent, "CritChance", critChanceSlider, critChanceUpgradeCosts, critChanceCostText, upgradeCritChanceButton);
+        AssignSkillParentListener(abilityHasteSkillParent, "AbilityHaste", abilityHasteSlider, abilityHasteUpgradeCosts, abilityHasteCostText, upgradeAbilityHasteButton);
+        AssignSkillParentListener(experienceBonusSkillParent, "ExperienceBonus", experienceBonusSlider, experienceBonusUpgradeCosts, experienceBonusCostText, upgradeExperienceBonusButton);
+        AssignSkillParentListener(projectilesSkillParent, "Projectiles", projectilesSlider, projectilesUpgradeCosts, projectilesCostText, upgradeProjectilesButton);
+        AssignSkillParentListener(goldBonusSkillParent, "GoldBonus", goldBonusSlider, goldBonusUpgradeCosts, goldBonusCostText, upgradeGoldBonusButton);
+    }
+
+    private void AssignSkillParentListener(GameObject skillParent, string statName, Slider upgradeSlider, int[] upgradeCosts, TextMeshProUGUI costText, Button upgradeButton)
+    {
+        Button skillParentButton = skillParent.GetComponent<Button>();
+        if (skillParentButton != null)
+        {
+            skillParentButton.onClick.AddListener(() =>
+            {
+                SetShopDescription(statName, upgradeSlider, upgradeCosts, costText, upgradeButton);
+            });
+        }
+    }
+
     private void SetShopDescription(string statName, Slider slider, int[] upgradeCosts, TextMeshProUGUI costText, Button upgradeButton)
     {
         int currentLevel = (int)slider.value;
-        Sprite skillSprite = upgradeButton.image.sprite;
+        Sprite skillSprite = upgradeButton != null ? upgradeButton.image.sprite : null;
         string skillName = statName;
         string skillCost = currentLevel < upgradeCosts.Length ? upgradeCosts[currentLevel].ToString() : "Max";
         float sliderValue = slider.value;
-        UnityEngine.Events.UnityAction buttonAction = upgradeButton.onClick.Invoke;
+        UnityEngine.Events.UnityAction buttonAction = upgradeButton != null ? upgradeButton.onClick.Invoke : null;
 
         shopDescription.SetDescription(skillSprite, skillName, skillCost, sliderValue, buttonAction);
     }
@@ -232,13 +263,13 @@ public class ShopManager : MonoBehaviour
 
         if (playerGold.goldTotal < currentUpgradeCost)
         {
-            Debug.Log("Không ?? vàng.");
+            Debug.Log("Khong du vang.");
             return;
         }
 
         if (currentLevel >= maxUpgradeLevel)
         {
-            Debug.Log("?ã ??t c?p t?i ?a cho " + statName);
+            Debug.Log("Da dat cap toi da cho " + statName);
             return;
         }
 
