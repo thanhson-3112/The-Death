@@ -8,31 +8,14 @@ public class ShopManager : MonoBehaviour
 {
     public static ShopManager instance;
 
+    [Header("Sprite")]
+    [SerializeField] private List<Sprite> upgradeImgs;
+
     [Header("Button")]
-    [SerializeField] private Button upgradeDamageButton;
-    [SerializeField] private Button upgradeArmorButton;
-    [SerializeField] private Button upgradeMaxHealthButton;
-    [SerializeField] private Button upgradeHealthRegenButton;
-    [SerializeField] private Button upgradeSpeedButton;
-    [SerializeField] private Button upgradePickRadiusButton;
-    [SerializeField] private Button upgradeCritChanceButton;
-    [SerializeField] private Button upgradeAbilityHasteButton;
-    [SerializeField] private Button upgradeExperienceBonusButton;
-    [SerializeField] private Button upgradeProjectilesButton;
-    [SerializeField] private Button upgradeGoldBonusButton;
+    [SerializeField] private List<Button> upgradeButtons;
 
     [Header("Cost")]
-    [SerializeField] private TextMeshProUGUI damageCostText;
-    [SerializeField] private TextMeshProUGUI armorCostText;
-    [SerializeField] private TextMeshProUGUI maxHealthCostText;
-    [SerializeField] private TextMeshProUGUI healthRegenCostText;
-    [SerializeField] private TextMeshProUGUI speedCostText;
-    [SerializeField] private TextMeshProUGUI pickRadiusCostText;
-    [SerializeField] private TextMeshProUGUI critChanceCostText;
-    [SerializeField] private TextMeshProUGUI abilityHasteCostText;
-    [SerializeField] private TextMeshProUGUI experienceBonusCostText;
-    [SerializeField] private TextMeshProUGUI projectilesCostText;
-    [SerializeField] private TextMeshProUGUI goldBonusCostText;
+    [SerializeField] private List<TextMeshProUGUI> upgradeCostTexts;
 
     [Header("Slider")]
     [SerializeField] private Slider damageSlider;
@@ -60,7 +43,7 @@ public class ShopManager : MonoBehaviour
     private int[] projectilesUpgradeCosts = { 300, 350 };
     private int[] goldBonusUpgradeCosts = { 150, 160, 170 };
 
-    // Các bi?n ?? l?u tr? c?p ?? hi?n t?i c?a m?i ch? s?
+    [Header("Slider value level")]
     public int currentDamageLevel;
     public int currentArmorLevel;
     public int currentMaxHealthLevel;
@@ -80,17 +63,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private ShopDescription shopDescription;
 
     [Header("Skill Parents")]
-    [SerializeField] private GameObject damageSkillParent;
-    [SerializeField] private GameObject armorSkillParent;
-    [SerializeField] private GameObject maxHealthSkillParent;
-    [SerializeField] private GameObject healthRegenSkillParent;
-    [SerializeField] private GameObject speedSkillParent;
-    [SerializeField] private GameObject pickRadiusSkillParent;
-    [SerializeField] private GameObject critChanceSkillParent;
-    [SerializeField] private GameObject abilityHasteSkillParent;
-    [SerializeField] private GameObject experienceBonusSkillParent;
-    [SerializeField] private GameObject projectilesSkillParent;
-    [SerializeField] private GameObject goldBonusSkillParent;
+    [SerializeField] private List<GameObject> skillParent;
 
     private void Awake()
     {
@@ -104,23 +77,21 @@ public class ShopManager : MonoBehaviour
         LoadUpgradeValues();
 
         // Gán s? ki?n click cho các nút nâng c?p
-        upgradeDamageButton.onClick.AddListener(() => UpgradeStat("Damage", ref damageSlider, damageCostText, damageUpgradeCosts.Length));
-        upgradeArmorButton.onClick.AddListener(() => UpgradeStat("Armor", ref armorSlider, armorCostText, armorUpgradeCosts.Length));
-        upgradeMaxHealthButton.onClick.AddListener(() => UpgradeStat("MaxHealth", ref maxHealthSlider, maxHealthCostText, maxHealthUpgradeCosts.Length));
-        upgradeHealthRegenButton.onClick.AddListener(() => UpgradeStat("HealthRegen", ref healthRegenSlider, healthRegenCostText, healthRegenUpgradeCosts.Length));
-        upgradeSpeedButton.onClick.AddListener(() => UpgradeStat("Speed", ref speedSlider, speedCostText, speedUpgradeCosts.Length));
-        upgradePickRadiusButton.onClick.AddListener(() => UpgradeStat("PickRadius", ref pickRadiusSlider, pickRadiusCostText, pickRadiusUpgradeCosts.Length));
-        upgradeCritChanceButton.onClick.AddListener(() => UpgradeStat("CritChance", ref critChanceSlider, critChanceCostText, critChanceUpgradeCosts.Length));
-        upgradeAbilityHasteButton.onClick.AddListener(() => UpgradeStat("AbilityHaste", ref abilityHasteSlider, abilityHasteCostText, abilityHasteUpgradeCosts.Length));
-        upgradeExperienceBonusButton.onClick.AddListener(() => UpgradeStat("ExperienceBonus", ref experienceBonusSlider, experienceBonusCostText, experienceBonusUpgradeCosts.Length));
-        upgradeProjectilesButton.onClick.AddListener(() => UpgradeStat("Projectiles", ref projectilesSlider, projectilesCostText, projectilesUpgradeCosts.Length));
-        upgradeGoldBonusButton.onClick.AddListener(() => UpgradeStat("GoldBonus", ref goldBonusSlider, goldBonusCostText, goldBonusUpgradeCosts.Length));
-
-        // Gán s? ki?n cho các nút nâng c?p
-        AssignUpgradeButtonListeners();
+        upgradeButtons[0].onClick.AddListener(() => UpgradeStat("Damage", ref damageSlider, upgradeCostTexts[0], damageUpgradeCosts.Length));
+        upgradeButtons[1].onClick.AddListener(() => UpgradeStat("Armor", ref armorSlider, upgradeCostTexts[1], armorUpgradeCosts.Length));
+        upgradeButtons[2].onClick.AddListener(() => UpgradeStat("MaxHealth", ref maxHealthSlider, upgradeCostTexts[2], maxHealthUpgradeCosts.Length));
+        upgradeButtons[3].onClick.AddListener(() => UpgradeStat("HealthRegen", ref healthRegenSlider, upgradeCostTexts[3], healthRegenUpgradeCosts.Length));
+        upgradeButtons[4].onClick.AddListener(() => UpgradeStat("Speed", ref speedSlider, upgradeCostTexts[4], speedUpgradeCosts.Length));
+        upgradeButtons[5].onClick.AddListener(() => UpgradeStat("PickRadius", ref pickRadiusSlider, upgradeCostTexts[5], pickRadiusUpgradeCosts.Length));
+        upgradeButtons[6].onClick.AddListener(() => UpgradeStat("CritChance", ref critChanceSlider, upgradeCostTexts[6], critChanceUpgradeCosts.Length));
+        upgradeButtons[7].onClick.AddListener(() => UpgradeStat("AbilityHaste", ref abilityHasteSlider, upgradeCostTexts[7], abilityHasteUpgradeCosts.Length));
+        upgradeButtons[8].onClick.AddListener(() => UpgradeStat("ExperienceBonus", ref experienceBonusSlider, upgradeCostTexts[8], experienceBonusUpgradeCosts.Length));
+        upgradeButtons[9].onClick.AddListener(() => UpgradeStat("Projectiles", ref projectilesSlider, upgradeCostTexts[9], projectilesUpgradeCosts.Length));
+        upgradeButtons[10].onClick.AddListener(() => UpgradeStat("GoldBonus", ref goldBonusSlider, upgradeCostTexts[10], goldBonusUpgradeCosts.Length));
 
         // Gán s? ki?n cho các Skill Parent
         AssignSkillParentListeners();
+
         // C?p nh?t UI v?i các giá tr? ban ??u
         UpdateGoldUI();
         UpdateCostTexts();
@@ -129,60 +100,43 @@ public class ShopManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void AssignUpgradeButtonListeners()
-    {
-        AssignListener(upgradeDamageButton, "Damage", damageUpgradeCosts, damageSlider, damageCostText);
-        AssignListener(upgradeArmorButton, "Armor", armorUpgradeCosts, armorSlider, armorCostText);
-        AssignListener(upgradeMaxHealthButton, "MaxHealth", maxHealthUpgradeCosts, maxHealthSlider, maxHealthCostText);
-        AssignListener(upgradeHealthRegenButton, "HealthRegen", healthRegenUpgradeCosts, healthRegenSlider, healthRegenCostText);
-        AssignListener(upgradeSpeedButton, "Speed", speedUpgradeCosts, speedSlider, speedCostText);
-        AssignListener(upgradePickRadiusButton, "PickRadius", pickRadiusUpgradeCosts, pickRadiusSlider, pickRadiusCostText);
-        AssignListener(upgradeCritChanceButton, "CritChance", critChanceUpgradeCosts, critChanceSlider, critChanceCostText);
-        AssignListener(upgradeAbilityHasteButton, "AbilityHaste", abilityHasteUpgradeCosts, abilityHasteSlider, abilityHasteCostText);
-        AssignListener(upgradeExperienceBonusButton, "ExperienceBonus", experienceBonusUpgradeCosts, experienceBonusSlider, experienceBonusCostText);
-        AssignListener(upgradeProjectilesButton, "Projectiles", projectilesUpgradeCosts, projectilesSlider, projectilesCostText);
-        AssignListener(upgradeGoldBonusButton, "GoldBonus", goldBonusUpgradeCosts, goldBonusSlider, goldBonusCostText);
-    }
-
-    private void AssignListener(Button upgradeButton, string statName, int[] upgradeCosts, Slider upgradeSlider, TextMeshProUGUI costText)
-    {
-        upgradeButton.onClick.AddListener(() =>
-        {
-            SetShopDescription(statName, upgradeSlider, upgradeCosts, costText, upgradeButton);
-        });
-    }
-
     private void AssignSkillParentListeners()
     {
-        AssignSkillParentListener(damageSkillParent, "Damage", damageSlider, damageUpgradeCosts, damageCostText, upgradeDamageButton);
-        AssignSkillParentListener(armorSkillParent, "Armor", armorSlider, armorUpgradeCosts, armorCostText, upgradeArmorButton);
-        AssignSkillParentListener(maxHealthSkillParent, "MaxHealth", maxHealthSlider, maxHealthUpgradeCosts, maxHealthCostText, upgradeMaxHealthButton);
-        AssignSkillParentListener(healthRegenSkillParent, "HealthRegen", healthRegenSlider, healthRegenUpgradeCosts, healthRegenCostText, upgradeHealthRegenButton);
-        AssignSkillParentListener(speedSkillParent, "Speed", speedSlider, speedUpgradeCosts, speedCostText, upgradeSpeedButton);
-        AssignSkillParentListener(pickRadiusSkillParent, "PickRadius", pickRadiusSlider, pickRadiusUpgradeCosts, pickRadiusCostText, upgradePickRadiusButton);
-        AssignSkillParentListener(critChanceSkillParent, "CritChance", critChanceSlider, critChanceUpgradeCosts, critChanceCostText, upgradeCritChanceButton);
-        AssignSkillParentListener(abilityHasteSkillParent, "AbilityHaste", abilityHasteSlider, abilityHasteUpgradeCosts, abilityHasteCostText, upgradeAbilityHasteButton);
-        AssignSkillParentListener(experienceBonusSkillParent, "ExperienceBonus", experienceBonusSlider, experienceBonusUpgradeCosts, experienceBonusCostText, upgradeExperienceBonusButton);
-        AssignSkillParentListener(projectilesSkillParent, "Projectiles", projectilesSlider, projectilesUpgradeCosts, projectilesCostText, upgradeProjectilesButton);
-        AssignSkillParentListener(goldBonusSkillParent, "GoldBonus", goldBonusSlider, goldBonusUpgradeCosts, goldBonusCostText, upgradeGoldBonusButton);
+        AssignSkillParentListener(skillParent[0], upgradeImgs[0], "Damage", damageSlider, damageUpgradeCosts, upgradeCostTexts[0], upgradeButtons[0]);
+        AssignSkillParentListener(skillParent[1], upgradeImgs[1], "Armor", armorSlider, armorUpgradeCosts, upgradeCostTexts[1], upgradeButtons[1]);
+        AssignSkillParentListener(skillParent[2], upgradeImgs[2], "MaxHealth", maxHealthSlider, maxHealthUpgradeCosts, upgradeCostTexts[2], upgradeButtons[2]);
+        AssignSkillParentListener(skillParent[3], upgradeImgs[3], "HealthRegen", healthRegenSlider, healthRegenUpgradeCosts, upgradeCostTexts[3], upgradeButtons[3]);
+        AssignSkillParentListener(skillParent[4], upgradeImgs[4], "Speed", speedSlider, speedUpgradeCosts, upgradeCostTexts[4], upgradeButtons[4]);
+        AssignSkillParentListener(skillParent[5], upgradeImgs[5], "PickRadius", pickRadiusSlider, pickRadiusUpgradeCosts, upgradeCostTexts[5], upgradeButtons[5]);
+        AssignSkillParentListener(skillParent[6], upgradeImgs[6], "CritChance", critChanceSlider, critChanceUpgradeCosts, upgradeCostTexts[6], upgradeButtons[6]);
+        AssignSkillParentListener(skillParent[7], upgradeImgs[7], "AbilityHaste", abilityHasteSlider, abilityHasteUpgradeCosts, upgradeCostTexts[7], upgradeButtons[7]);
+        AssignSkillParentListener(skillParent[8], upgradeImgs[8], "ExperienceBonus", experienceBonusSlider, experienceBonusUpgradeCosts, upgradeCostTexts[8], upgradeButtons[8]);
+        AssignSkillParentListener(skillParent[9], upgradeImgs[9], "Projectiles", projectilesSlider, projectilesUpgradeCosts, upgradeCostTexts[9], upgradeButtons[9]);
+        AssignSkillParentListener(skillParent[10], upgradeImgs[10], "GoldBonus", goldBonusSlider, goldBonusUpgradeCosts, upgradeCostTexts[10], upgradeButtons[10]);
     }
 
-    private void AssignSkillParentListener(GameObject skillParent, string statName, Slider upgradeSlider, int[] upgradeCosts, TextMeshProUGUI costText, Button upgradeButton)
+    private void AssignSkillParentListener(GameObject skillParent, Sprite Img, string statName, Slider upgradeSlider, int[] upgradeCosts, TextMeshProUGUI costText, Button upgradeButton)
     {
         Button skillParentButton = skillParent.GetComponent<Button>();
         if (skillParentButton != null)
         {
             skillParentButton.onClick.AddListener(() =>
             {
-                SetShopDescription(statName, upgradeSlider, upgradeCosts, costText, upgradeButton);
+                SetShopDescription(Img, statName, upgradeSlider, upgradeCosts, costText, upgradeButton);
             });
+
+            upgradeButton.onClick.AddListener(() =>
+            {
+                SetShopDescription(Img, statName, upgradeSlider, upgradeCosts, costText, upgradeButton);
+            });
+
         }
     }
 
-    private void SetShopDescription(string statName, Slider slider, int[] upgradeCosts, TextMeshProUGUI costText, Button upgradeButton)
+    private void SetShopDescription(Sprite Img, string statName, Slider slider, int[] upgradeCosts, TextMeshProUGUI costText, Button upgradeButton)
     {
         int currentLevel = (int)slider.value;
-        Sprite skillSprite = upgradeButton != null ? upgradeButton.image.sprite : null;
+        Sprite skillSprite = Img;
         string skillName = statName;
         string skillCost = currentLevel < upgradeCosts.Length ? upgradeCosts[currentLevel].ToString() : "Max";
         float sliderValue = slider.value;
@@ -357,60 +311,61 @@ public class ShopManager : MonoBehaviour
     {
         // Ki?m tra n?u c?p ?? hi?n t?i không v??t quá gi?i h?n c?a m?ng giá nâng c?p
         if (currentDamageLevel < damageUpgradeCosts.Length)
-            damageCostText.text = damageUpgradeCosts[currentDamageLevel].ToString();
+            upgradeCostTexts[0].text = damageUpgradeCosts[currentDamageLevel].ToString();
         else
-            damageCostText.text = "Max";
+            upgradeCostTexts[0].text = "Max";
 
         if (currentArmorLevel < armorUpgradeCosts.Length)
-            armorCostText.text = armorUpgradeCosts[currentArmorLevel].ToString();
+            upgradeCostTexts[1].text = armorUpgradeCosts[currentArmorLevel].ToString();
         else
-            armorCostText.text = "Max";
+            upgradeCostTexts[1].text = "Max";
 
         if (currentMaxHealthLevel < maxHealthUpgradeCosts.Length)
-            maxHealthCostText.text = maxHealthUpgradeCosts[currentMaxHealthLevel].ToString();
+            upgradeCostTexts[2].text = maxHealthUpgradeCosts[currentMaxHealthLevel].ToString();
         else
-            maxHealthCostText.text = "Max";
+            upgradeCostTexts[2].text = "Max";
 
         if (currentHealthRegenLevel < healthRegenUpgradeCosts.Length)
-            healthRegenCostText.text = healthRegenUpgradeCosts[currentHealthRegenLevel].ToString();
+            upgradeCostTexts[3].text = healthRegenUpgradeCosts[currentHealthRegenLevel].ToString();
         else
-            healthRegenCostText.text = "Max";
+            upgradeCostTexts[3].text = "Max";
 
         if (currentSpeedLevel < speedUpgradeCosts.Length)
-            speedCostText.text = speedUpgradeCosts[currentSpeedLevel].ToString();
+            upgradeCostTexts[4].text = speedUpgradeCosts[currentSpeedLevel].ToString();
         else
-            speedCostText.text = "Max";
+            upgradeCostTexts[4].text = "Max";
 
         if (currentPickRadiusLevel < pickRadiusUpgradeCosts.Length)
-            pickRadiusCostText.text = pickRadiusUpgradeCosts[currentPickRadiusLevel].ToString();
+            upgradeCostTexts[5].text = pickRadiusUpgradeCosts[currentPickRadiusLevel].ToString();
         else
-            pickRadiusCostText.text = "Max";
+            upgradeCostTexts[5].text = "Max";
 
         if (currentCritChanceLevel < critChanceUpgradeCosts.Length)
-            critChanceCostText.text = critChanceUpgradeCosts[currentCritChanceLevel].ToString();
+            upgradeCostTexts[6].text = critChanceUpgradeCosts[currentCritChanceLevel].ToString();
         else
-            critChanceCostText.text = "Max";
+            upgradeCostTexts[6].text = "Max";
 
         if (currentAbilityHasteLevel < abilityHasteUpgradeCosts.Length)
-            abilityHasteCostText.text = abilityHasteUpgradeCosts[currentAbilityHasteLevel].ToString();
+            upgradeCostTexts[7].text = abilityHasteUpgradeCosts[currentAbilityHasteLevel].ToString();
         else
-            abilityHasteCostText.text = "Max";
+            upgradeCostTexts[7].text = "Max";
 
         if (currentExperienceBonusLevel < experienceBonusUpgradeCosts.Length)
-            experienceBonusCostText.text = experienceBonusUpgradeCosts[currentExperienceBonusLevel].ToString();
+            upgradeCostTexts[8].text = experienceBonusUpgradeCosts[currentExperienceBonusLevel].ToString();
         else
-            experienceBonusCostText.text = "Max";
+            upgradeCostTexts[8].text = "Max";
 
         if (currentProjectilesLevel < projectilesUpgradeCosts.Length)
-            projectilesCostText.text = projectilesUpgradeCosts[currentProjectilesLevel].ToString();
+            upgradeCostTexts[9].text = projectilesUpgradeCosts[currentProjectilesLevel].ToString();
         else
-            projectilesCostText.text = "Max";
+            upgradeCostTexts[9].text = "Max";
 
         if (currentGoldBonusLevel < goldBonusUpgradeCosts.Length)
-            goldBonusCostText.text = goldBonusUpgradeCosts[currentGoldBonusLevel].ToString();
+            upgradeCostTexts[10].text = goldBonusUpgradeCosts[currentGoldBonusLevel].ToString();
         else
-            goldBonusCostText.text = "Max";
+            upgradeCostTexts[10].text = "Max";
     }
+
 
     //Save game
     public virtual void FromJson(string jsonString)
@@ -437,3 +392,4 @@ public class ShopManager : MonoBehaviour
     }
 
 }
+
