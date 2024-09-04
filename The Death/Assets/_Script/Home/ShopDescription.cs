@@ -17,6 +17,11 @@ public class ShopDescription : MonoBehaviour
     [SerializeField]
     private Button skillButton;
 
+    [SerializeField]
+    private TMP_Text upgradeValueCurrentText;
+    [SerializeField]
+    private TMP_Text upgradeValueNextText;
+
     public void Awake()
     {
         ResetDescription();
@@ -29,24 +34,25 @@ public class ShopDescription : MonoBehaviour
         skillCost.text = "";
         skillSlider.gameObject.SetActive(false);
         skillButton.gameObject.SetActive(false);
+        upgradeValueCurrentText.text = "";
+        upgradeValueNextText.text = "";
     }
 
-    public void SetDescription(Sprite sprite, string name, string cost, float sliderValue, UnityEngine.Events.UnityAction buttonAction)
+    public void SetDescription(Sprite img, string name, string cost, float sliderValue, UnityEngine.Events.UnityAction buttonAction, string upgradeLevelValueText, string nextUpgradeValueText)
     {
         skillImage.gameObject.SetActive(true);
-        skillImage.sprite = sprite; // C?p nh?t hình ?nh
+        skillImage.sprite = img;
         skillName.text = name;
         skillCost.text = cost;
         skillSlider.gameObject.SetActive(true);
         skillSlider.value = sliderValue;
-        skillButton.gameObject.SetActive(true);
-
-        // Gán s? ki?n cho nút button
+        skillButton.gameObject.SetActive(buttonAction != null);
         skillButton.onClick.RemoveAllListeners();
         if (buttonAction != null)
         {
             skillButton.onClick.AddListener(buttonAction);
         }
+        upgradeValueCurrentText.text = "" + upgradeLevelValueText;
+        upgradeValueNextText.text = "" + nextUpgradeValueText;
     }
-
 }
