@@ -48,9 +48,20 @@ public class SaveManager : MonoBehaviour
         string jsonString2 = SaveSystem.GetString(this.GetSaveName2());
         string jsonString3 = SaveSystem.GetString(this.GetSaveName3());
 
-        PlayerGold.instance.FromJson(jsonString1);
-        PlayerPower.instance.FromJson(jsonString2);
-        ShopManager.instance.FromJson(jsonString3);
+        if (PlayerGold.instance != null && !string.IsNullOrEmpty(jsonString1))
+        {
+            PlayerGold.instance.FromJson(jsonString1);
+        }
+
+        if (PlayerPower.instance != null && !string.IsNullOrEmpty(jsonString2))
+        {
+            PlayerPower.instance.FromJson(jsonString2);
+        }
+
+        if (ShopManager.instance != null && !string.IsNullOrEmpty(jsonString3))
+        {
+            ShopManager.instance.FromJson(jsonString3);
+        }
 
         Debug.Log("loadSaveGame" + jsonString1);
         Debug.Log("loadSaveGame" + jsonString2);

@@ -80,12 +80,6 @@ public class PlayerPower : MonoBehaviour
 
     public void Start()
     {
-        StartCoroutine(SetupPower());
-    }
-
-    public IEnumerator SetupPower()
-    {
-        yield return new WaitForSeconds(0.1f);
         playerCurrentDamage = playerBaseDamage; // sat thuong xong
         playerCurrentArmor = playerBaseArmor; // giap xong
         playerCurrentMaxHealth = playerBaseMaxHealth;
@@ -110,26 +104,6 @@ public class PlayerPower : MonoBehaviour
         experienceBonusText.text = "XP Bonus: " + playerCurrentExperienceBonus.ToString() + "%";
         projectilesText.text = "Projectiles: " + playerCurrentProjectiles.ToString();
         goldBonusText.text = "Gold Bonus: " + playerCurrentGoldBonus.ToString() + "%";
-    }
-
-    public void PlayerDamageUpgrade()
-    {
-        playerCurrentDamage += 2;
-    }
-
-    public void PlayerDamageUpgrade2()
-    {
-        playerCurrentDamage += 5;
-    }
-
-    public void DashUpgrade()
-    {
-        playerCurrentAbilityHaste += 0.1f;
-    }
-
-    public void DashUpgrade2()
-    {
-        playerCurrentAbilityHaste += 0.1f;
     }
 
 

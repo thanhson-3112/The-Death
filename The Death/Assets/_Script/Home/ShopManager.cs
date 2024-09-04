@@ -78,10 +78,6 @@ public class ShopManager : MonoBehaviour
     [Header("Skill Parents")]
     [SerializeField] private List<GameObject> skillParent;
 
-    [Header("Upgrade Value Text")]
-    [SerializeField] private TextMeshProUGUI upgradeValueCurrentText;
-    [SerializeField] private TextMeshProUGUI upgradeValueNextText;
-
     private void Awake()
     {
         if (ShopManager.instance != null) Debug.LogError("Only 1 ScoreManager allow");
@@ -157,17 +153,13 @@ public class ShopManager : MonoBehaviour
         string skillCost = currentLevel < upgradeCosts.Length ? upgradeCosts[currentLevel].ToString() : "MAX";
         float sliderValue = slider.value;
 
-        // Hi?n th? giá tr? hi?n t?i và giá tr? nâng c?p ti?p theo
-        string upgradeLevelValueText = "" + GetUpgradeValue(statName, currentLevel).ToString();
-        string nextUpgradeValueText = currentLevel + 1 < upgradeCosts.Length ? "" + GetUpgradeValue(statName, currentLevel + 1).ToString() : "";
-
-        // C?p nh?t giá tr? text
-        upgradeValueCurrentText.text = "" + GetUpgradeValue(statName, currentLevel).ToString();
-        upgradeValueNextText.text = currentLevel + 1 < upgradeCosts.Length ? "" + GetUpgradeValue(statName, currentLevel + 1).ToString() : "";
+        // Hi?n th? giá tr? hi?n t?i và giá tr? ti?p theo
+        string currentUpgradeValueText = "" + (currentLevel == 0 ? 0 : GetUpgradeValue(statName, currentLevel - 1).ToString());
+        string nextUpgradeValueText = currentLevel < upgradeCosts.Length ? " -> " + GetUpgradeValue(statName, currentLevel).ToString() : "";
 
         UnityEngine.Events.UnityAction buttonAction = upgradeButton != null ? upgradeButton.onClick.Invoke : null;
 
-        shopDescription.SetDescription(skillSprite, skillName, skillCost, sliderValue, buttonAction, upgradeLevelValueText, nextUpgradeValueText);
+        shopDescription.SetDescription(skillSprite, skillName, skillCost, sliderValue, buttonAction, currentUpgradeValueText, nextUpgradeValueText);
     }
 
     private float GetUpgradeValue(string statName, int level)
@@ -317,7 +309,7 @@ public class ShopManager : MonoBehaviour
                 currentCritChanceLevel = currentLevel + 1;
                 break;
             case "ABILITY HASTE":
-                PlayerPower.instance.playerBaseAbilityHaste += abilityHasteUpgradeValues[currentLevel];
+                PlayerPower.instance.playerBaseAbilityHaste -= abilityHasteUpgradeValues[currentLevel];
                 currentAbilityHasteLevel = currentLevel + 1;
                 break;
             case "EXPERIENCE":
@@ -364,7 +356,7 @@ public class ShopManager : MonoBehaviour
 
     private void UpdateCostTexts()
     {
-        // Ki?m tra n?u c?p ?? hi?n t?i không v??t quá gi?i h?n c?a m?ng giá nâng c?p
+        // KIem tra cap hien tai khong vuot qua gia tri cua mang nang cap
         if (currentDamageLevel < damageUpgradeCosts.Length)
             upgradeCostTexts[0].text = damageUpgradeCosts[currentDamageLevel].ToString();
         else
