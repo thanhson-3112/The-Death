@@ -9,7 +9,7 @@ public class UpgradeManager : MonoBehaviour
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Ratity { get; set; }
+        public string Rarity { get; set; }
         public float Increase { get; set; }
         public Sprite Sprite { get; set; }
     }
@@ -17,16 +17,11 @@ public class UpgradeManager : MonoBehaviour
     Upgrade[] Upgrades;
 
     [SerializeField] private int upgradeCount = 3;
-
     [SerializeField] GameObject upgrade_prefab;
     [SerializeField] GameObject upgradeHorizontalLayout;
 
     [Header("")]
-    [SerializeField] PlayerPower fireBallDamage;
-    [SerializeField] PlayerAttack playerAttackSpeed;
     [SerializeField] UnlockMeteo unlockMeteo;
-
-    private PlayerPower playerPower;
 
     private int[] damageUpgradeValues = { 1, 3, 5, 7, 10 };
     private int[] armorUpgradeValues = { 5, 10, 15, 20, 25, 30 };
@@ -40,29 +35,25 @@ public class UpgradeManager : MonoBehaviour
     private int[] projectilesUpgradeValues = { 1, 2 };
     private int[] goldBonusUpgradeValues = { 1, 2, 3 };
 
-    // L?u c?p ?? hi?n t?i c?a t?ng nâng c?p
     private Dictionary<string, int> upgradeLevels = new Dictionary<string, int>();
 
     public void Start()
     {
-        playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
-
         Upgrades = new Upgrade[]
         {
-            new Upgrade{Name = "Damage", Description = "Increase base damage", Ratity = "Common",  Increase = 10, Sprite = Resources.Load<Sprite>("Skill/Damage")},
-            new Upgrade{Name = "Armor", Description = "Increase base armor", Ratity = "Common", Increase = 20, Sprite = Resources.Load<Sprite>("Skill/Armor")},
-            new Upgrade{Name = "Max Health", Description = "Increase max health", Ratity = "Rare",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/MaxHealth")},
-            new Upgrade{Name = "Health Regen", Description = "Increase health regeneration", Ratity = "Rare",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/HealthRegen")},
-            new Upgrade{Name = "Speed", Description = "Increase movement speed", Ratity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/Speed")},
-            new Upgrade{Name = "Pick Radius", Description = "Increase pick radius", Ratity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/PickRadius")},
-            new Upgrade{Name = "Crit Chance", Description = "Increase critical hit chance", Ratity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/CritChance")},
-            new Upgrade{Name = "Ability Haste", Description = "Increase ability haste", Ratity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/AbilityHaste")},
-            new Upgrade{Name = "Experience", Description = "Increase experience gain", Ratity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/Experience")},
-            new Upgrade{Name = "Projectiles", Description = "Increase number of projectiles", Ratity = "Epic",  Increase = 1, Sprite = Resources.Load<Sprite>("Skill/Projectiles")},
-            new Upgrade { Name = "Gold", Description = "Increase gold gain", Ratity = "Epic", Increase = 1, Sprite = Resources.Load<Sprite>("Skill/Gold") }
+            new Upgrade{Name = "Damage", Description = "Increase base damage", Rarity = "Common",  Increase = 10, Sprite = Resources.Load<Sprite>("Skill/Damage")},
+            new Upgrade{Name = "Armor", Description = "Increase base armor", Rarity = "Common", Increase = 20, Sprite = Resources.Load<Sprite>("Skill/Armor")},
+            new Upgrade{Name = "Max Health", Description = "Increase max health", Rarity = "Rare",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/MaxHealth")},
+            new Upgrade{Name = "Health Regen", Description = "Increase health regeneration", Rarity = "Rare",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/HealthRegen")},
+            new Upgrade{Name = "Speed", Description = "Increase movement speed", Rarity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/Speed")},
+            new Upgrade{Name = "Pick Radius", Description = "Increase pick radius", Rarity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/PickRadius")},
+            new Upgrade{Name = "Crit Chance", Description = "Increase critical hit chance", Rarity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/CritChance")},
+            new Upgrade{Name = "Ability Haste", Description = "Increase ability haste", Rarity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/AbilityHaste")},
+            new Upgrade{Name = "Experience", Description = "Increase experience gain", Rarity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/Experience")},
+            new Upgrade{Name = "Projectiles", Description = "Increase number of projectiles", Rarity = "Epic",  Increase = 1, Sprite = Resources.Load<Sprite>("Skill/Projectiles")},
+            new Upgrade{Name = "Gold", Description = "Increase gold gain", Rarity = "Epic", Increase = 1, Sprite = Resources.Load<Sprite>("Skill/Gold")}
         };
 
-        // Kh?i t?o c?p ?? cho t?ng nâng c?p
         foreach (var upgrade in Upgrades)
         {
             upgradeLevels[upgrade.Name] = 0;
@@ -79,8 +70,12 @@ public class UpgradeManager : MonoBehaviour
         List<int> availableUpgrades = new List<int>();
         for (int i = 0; i < Upgrades.Length; i++)
         {
-            availableUpgrades.Add(i);
+            if (upgradeLevels[Upgrades[i].Name] < GetMaxUpgradeLevel(Upgrades[i].Name))
+            {
+                availableUpgrades.Add(i);
+            }
         }
+
         ShuffleList(availableUpgrades);
 
         while (upgradeHorizontalLayout.transform.childCount < upgradeCount)
@@ -93,35 +88,47 @@ public class UpgradeManager : MonoBehaviour
         rarityColors.Add("Rare", new Color(0.5f, 1, 0.5f, 1));
         rarityColors.Add("Epic", new Color(0.75f, 0.25f, 0.75f, 1));
 
-        for (int i = 0; i < upgradeCount; i++)
+        for (int i = 0; i < upgradeCount && i < availableUpgrades.Count; i++)
         {
             Upgrade upgrade = Upgrades[availableUpgrades[i]];
 
             GameObject upgradeObject = upgradeHorizontalLayout.transform.GetChild(i).gameObject;
             Button upgradeButton = upgradeObject.GetComponent<Button>();
+            upgradeButton.onClick.RemoveAllListeners();
             upgradeButton.onClick.AddListener(() => { UpgradeChosen(upgrade.Name); });
+
+            upgradeObject.transform.GetChild(1).GetComponent<Image>().color = rarityColors[upgrade.Rarity];
+            upgradeObject.transform.GetChild(2).GetComponent<Image>().sprite = upgrade.Sprite;
+
+            int currentLevel = upgradeLevels[upgrade.Name];
+            TextMeshProUGUI upgradeTextLevel = upgradeObject.transform.GetChild(4).GetComponent<TextMeshProUGUI>();
+
+            if (currentLevel >= GetMaxUpgradeLevel(upgrade.Name) - 1)
+            {
+                upgradeTextLevel.text = "Max";
+            }
+            else
+            {
+                upgradeTextLevel.text = $"Level: {currentLevel + 1}";
+            }
+
+            TextMeshProUGUI upgradeTextValue = upgradeObject.transform.GetChild(6).GetComponent<TextMeshProUGUI>();
+            upgradeTextValue.text = $"Value: {GetUpgradeValue(upgrade.Name, currentLevel)}";
 
             TextMeshProUGUI upgradeTextName = upgradeObject.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
             upgradeTextName.text = upgrade.Name;
 
-            TextMeshProUGUI upgradeTextDescription = upgradeObject.transform.GetChild(4).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI upgradeTextDescription = upgradeObject.transform.GetChild(5).GetComponent<TextMeshProUGUI>();
             upgradeTextDescription.text = upgrade.Description;
-
-            upgradeObject.transform.GetChild(1).GetComponent<Image>().color = rarityColors[upgrade.Ratity];
-            upgradeObject.transform.GetChild(2).GetComponent<Image>().sprite = upgrade.Sprite;
-
-            Debug.Log("Sprite path: " + "Skill/" + upgrade.Sprite);
         }
 
         Time.timeScale = 0;
     }
 
+
     private void UpgradeChosen(string upgradeChosen)
     {
-        int currentLevel = upgradeLevels[upgradeChosen];  // L?y c?p ?? hi?n t?i
-        Time.timeScale = 1;
-        transform.GetChild(0).gameObject.SetActive(false);
-        transform.GetChild(1).gameObject.SetActive(false);
+        int currentLevel = upgradeLevels[upgradeChosen];
 
         switch (upgradeChosen)
         {
@@ -158,14 +165,75 @@ public class UpgradeManager : MonoBehaviour
             case "Gold":
                 PlayerPower.instance.playerCurrentGoldBonus += goldBonusUpgradeValues[currentLevel];
                 break;
-            case "Meteo":
-                unlockMeteo.UnlockSkillMeteo();
-                break;
-            default:
-                break;
         }
 
-        upgradeLevels[upgradeChosen]++;  // T?ng c?p ?? sau khi nâng c?p
+        upgradeLevels[upgradeChosen]++;
+        Time.timeScale = 1;  // Ti?p t?c game sau khi ch?n nâng c?p
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+
+    }
+
+    private int GetMaxUpgradeLevel(string upgradeName)
+    {
+        switch (upgradeName)
+        {
+            case "Damage":
+                return damageUpgradeValues.Length;
+            case "Armor":
+                return armorUpgradeValues.Length;
+            case "Max Health":
+                return maxHealthUpgradeValues.Length;
+            case "Health Regen":
+                return healthRegenUpgradeValues.Length;
+            case "Speed":
+                return speedUpgradeValues.Length;
+            case "Pick Radius":
+                return pickRadiusUpgradeValues.Length;
+            case "Crit Chance":
+                return critChanceUpgradeValues.Length;
+            case "Ability Haste":
+                return abilityHasteUpgradeValues.Length;
+            case "Experience":
+                return experienceBonusUpgradeValues.Length;
+            case "Projectiles":
+                return projectilesUpgradeValues.Length;
+            case "Gold":
+                return goldBonusUpgradeValues.Length;
+            default:
+                return 0;
+        }
+    }
+
+    private float GetUpgradeValue(string upgradeName, int level)
+    {
+        switch (upgradeName)
+        {
+            case "Damage":
+                return damageUpgradeValues[level];
+            case "Armor":
+                return armorUpgradeValues[level];
+            case "Max Health":
+                return maxHealthUpgradeValues[level];
+            case "Health Regen":
+                return healthRegenUpgradeValues[level];
+            case "Speed":
+                return speedUpgradeValues[level];
+            case "Pick Radius":
+                return pickRadiusUpgradeValues[level];
+            case "Crit Chance":
+                return critChanceUpgradeValues[level];
+            case "Ability Haste":
+                return abilityHasteUpgradeValues[level];
+            case "Experience":
+                return experienceBonusUpgradeValues[level];
+            case "Projectiles":
+                return projectilesUpgradeValues[level];
+            case "Gold":
+                return goldBonusUpgradeValues[level];
+            default:
+                return 0;
+        }
     }
 
     private void ShuffleList(List<int> list)

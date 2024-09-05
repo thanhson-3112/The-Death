@@ -17,7 +17,7 @@ public class PlayerLevelUp : PlayerExperience
     {
         if (_currentLevel > previousLevel)
         {
-            upgradeManager.Start();
+            upgradeManager.ButtonsSet();
             PlayerLife.Heal();
             previousLevel = _currentLevel;
 
