@@ -59,7 +59,8 @@ public class UpgradeManager : MonoBehaviour
             upgradeLevels[upgrade.Name] = 0;
         }
 
-        ButtonsSet();
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
     }
 
     public void ButtonsSet()

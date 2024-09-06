@@ -100,7 +100,7 @@ public class PlayerAttack : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
             int projectileCount = playerPower.playerCurrentProjectiles;
-            float angleOffset = 30f;
+            float angleOffset = 15f;
 
             if (projectileCount == 1)
             {
@@ -139,7 +139,7 @@ public class PlayerAttack : MonoBehaviour
         firingPoint.transform.rotation = Quaternion.Euler(0, 0, angle);
 
         int projectileCount = playerPower.playerCurrentProjectiles;
-        float angleOffset = 30f;
+        float angleOffset = 15f;
 
         if (projectileCount == 1)
         {
@@ -166,6 +166,8 @@ public class PlayerAttack : MonoBehaviour
                 spawnedBullet.transform.right = bulletDirection;
             }
         }
-    }
+    }    
+
+    
 
 }
