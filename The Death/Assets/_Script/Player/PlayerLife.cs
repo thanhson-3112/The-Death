@@ -6,6 +6,7 @@ using TMPro;
 
 public class PlayerLife : MonoBehaviour
 {
+    public static PlayerLife instance;
     private Rigidbody2D rb;
     private Animator anim;
 

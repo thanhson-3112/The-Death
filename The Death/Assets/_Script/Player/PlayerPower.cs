@@ -71,7 +71,10 @@ public class PlayerPower : MonoBehaviour
     public int playerCurrentGoldBonus;
     public TextMeshProUGUI goldBonusText;
 
-    public float fireSwordDamage = 5f;
+
+    [Header("PlayerSkill")]
+    public float fireSwordDamage = 10f;
+    public float meteoDamage = 20f;
 
 
     private void Awake()

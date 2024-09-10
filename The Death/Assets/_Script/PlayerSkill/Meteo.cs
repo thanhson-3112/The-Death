@@ -1,5 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class Meteo : MonoBehaviour
 {
@@ -9,9 +10,6 @@ public class Meteo : MonoBehaviour
     [Range(1, 10)]
     [SerializeField] private float lifeTime = 3f;
 
-    private float baseDamage = 20f;
-    private float currentDamage;
-
     private Rigidbody2D rb;
     public GameObject explosionPrefab;
     private Animator anim;
@@ -19,16 +17,12 @@ public class Meteo : MonoBehaviour
     private GameObject targetEnemy; 
     private Vector2 targetPosition;
 
-    public PlayerPower playerPower;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         Destroy(gameObject, lifeTime);
-        playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
-
-        currentDamage = baseDamage;
 
         FindTargetEnemy();
     }
@@ -71,7 +65,7 @@ public class Meteo : MonoBehaviour
             IDamageAble enemyTakeDamage = collision.GetComponent<IDamageAble>();
             if (enemyTakeDamage != null)
             {
-                enemyTakeDamage.TakePlayerDamage(currentDamage);
+                enemyTakeDamage.TakePlayerDamage(PlayerPower.instance.meteoDamage);
             }
 
             Destroy(gameObject);
