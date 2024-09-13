@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2387142128405799151}
   - component: {fileID: 4676121106755455905}
   - component: {fileID: 3598978915790410376}
+  - component: {fileID: -254493413114552056}
   - component: {fileID: -7938121843707154219}
   m_Layer: 0
   m_Name: ItemInBox
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.9981165, y: 9.760909, z: 3909.229}
-  m_LocalScale: {x: 0.33751902, y: 0.24049051, z: 1}
+  m_LocalScale: {x: 0.38175339, y: 0.48535535, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,8 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -6379700280476291082, guid: 4b3b8f2e8d3d50240bef50b6f71a10ae,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7d99a1b04132a7c469a1c960bf90f53a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -149,18 +149,40 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.06215954, y: -0.0000009536743}
+  m_Offset: {x: 0.10876262, y: 0.17618251}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 13.375, y: 13.625}
+    oldSize: {x: 5.12, y: 5.12}
     newSize: {x: 10.65625, y: 11.0625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 10.496359, y: 10.849609}
+  m_Size: {x: 5.442664, y: 5.040812}
   m_EdgeRadius: 0
+--- !u!95 &-254493413114552056
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7284148602581043253}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1943fbfda53159144829f6363ad4619c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &-7938121843707154219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,4 +197,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 30
   autoMoveDistance: 5
-  itemData: {fileID: 11400000, guid: 5db22989e6e679e4787480cdd17d4ba1, type: 2}
+  itemData: {fileID: 0}

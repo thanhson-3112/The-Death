@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc5c072835936c42b7e36ff8346cedc, type: 3}
   m_Name: Speed
   m_EditorClassIdentifier: 
-  boxItemSprite: {fileID: 21300000, guid: f19f87143f7cc7741b5eec1f960cee8b, type: 3}
+  boxItemSprite: {fileID: 21300000, guid: 7d99a1b04132a7c469a1c960bf90f53a, type: 3}
   boxItemName: Speed
-  boxItemChance: 90
+  boxItemChance: 80
   boxItemType: 2
+  itemAnimatorController: {fileID: 9100000, guid: 5f378c31e7550cf4a911698c8c4d6456,
+    type: 2}

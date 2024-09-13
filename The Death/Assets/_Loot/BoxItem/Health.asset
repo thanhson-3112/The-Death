@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxItemSprite: {fileID: 21300000, guid: c8876f42f18df8442947995f8db904ae, type: 3}
   boxItemName: Health
-  boxItemChance: 90
+  boxItemChance: 80
   boxItemType: 0
+  itemAnimatorController: {fileID: 9100000, guid: e7d25ea491189e54bb38f2badbca6cbd,
+    type: 2}

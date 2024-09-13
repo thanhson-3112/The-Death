@@ -38,6 +38,12 @@ public class BoxItemSpawn : MonoBehaviour
             BoxItem boxItem = lootGameObject.GetComponent<BoxItem>();
             boxItem.itemData = droppedItem;  // Truy?n d? li?u item
 
+            Animator animator = lootGameObject.GetComponent<Animator>();
+            if (animator != null && droppedItem.itemAnimatorController != null)
+            {
+                animator.runtimeAnimatorController = droppedItem.itemAnimatorController;
+            }
+
             float dropForce = 10f;
             Vector2 dropDir = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             lootGameObject.GetComponent<Rigidbody2D>().AddForce(dropDir * dropForce, ForceMode2D.Impulse);

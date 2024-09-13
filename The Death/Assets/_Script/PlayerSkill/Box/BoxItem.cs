@@ -10,14 +10,22 @@ public class BoxItem : MonoBehaviour
     private bool isMoving = false;
     public float autoMoveDistance = 5f;
     public BoxItemSO itemData;  // Thêm thông tin v? v?t ph?m
+    private Animator anim;
 
     private PlayerLife playerLife;
+
 
     private void Start()
     {
         Destroy(gameObject, 40f);
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         playerLife = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLife>();
+        anim = GetComponent<Animator>();
+
+        if (anim != null && itemData.itemAnimatorController != null)
+        {
+            anim.runtimeAnimatorController = itemData.itemAnimatorController;
+        }
     }
 
     protected void Update()
@@ -54,11 +62,11 @@ public class BoxItem : MonoBehaviour
             case BoxItemType.Health:
                 playerLife.health += 10f;
                 break;
-            case BoxItemType.Armor:
-                PlayerPower.instance.playerCurrentArmor += 5f;
+            case BoxItemType.MaxPickRadius:
+                PlayerPower.instance.StartCoroutine(PlayerPower.instance.MaxPickRadius());
                 break;
             case BoxItemType.Speed:
-                PlayerPower.instance.playerCurrentSpeed += 1f;
+                PlayerPower.instance.StartCoroutine(PlayerPower.instance.SpeedBonus());
                 break;
         }
     }

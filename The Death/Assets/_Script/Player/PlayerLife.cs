@@ -93,8 +93,8 @@ public class PlayerLife : MonoBehaviour
     private void Die()
     {
         StartCoroutine(WaitAndLoadScene(2.0f));
-        rb.bodyType = RigidbodyType2D.Static;
-        anim.SetTrigger("PlayerDeath");
+/*        rb.bodyType = RigidbodyType2D.Static;
+*/        anim.SetTrigger("PlayerDeath");
 
         Destroy(gameObject, 1.5f);
     }

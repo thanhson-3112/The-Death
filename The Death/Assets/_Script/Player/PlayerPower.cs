@@ -31,7 +31,7 @@ public class PlayerPower : MonoBehaviour
 
     // toc do
     [Header("Speed")]
-    public float playerBaseSpeed = 20f;
+    public float playerBaseSpeed = 15f;
     public float playerCurrentSpeed;
     public TextMeshProUGUI speedText;
 
@@ -111,6 +111,21 @@ public class PlayerPower : MonoBehaviour
         goldBonusText.text = "Gold Bonus: " + playerCurrentGoldBonus.ToString() + "%";
     }
 
+
+
+    public IEnumerator MaxPickRadius()
+    {
+        playerCurrentPickRadius += 100f;
+        yield return new WaitForSeconds(5f);
+        playerCurrentPickRadius -= 100f;
+    }
+
+    public IEnumerator SpeedBonus()
+    {
+        playerCurrentSpeed += 10f;
+        yield return new WaitForSeconds(10f);
+        playerCurrentSpeed -= 10f;
+    }
 
     // save game
     public virtual void FromJson(string jsonString)

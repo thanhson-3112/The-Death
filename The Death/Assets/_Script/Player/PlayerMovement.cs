@@ -40,8 +40,6 @@ public class PlayerMovement : MonoBehaviour
 
         playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
 
-        originalMoveSpeed = playerPower.playerCurrentSpeed;
-
         dashStamina = dashMaxStamina;
         dashBar.SetMaxDash(dashMaxStamina);
     }
@@ -71,16 +69,6 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
-    }
-
-    public void SlowDown(float slowAmount)
-    {
-        playerPower.playerCurrentSpeed = slowAmount; 
-    }
-
-    public void RestoreSpeed()
-    {
-        playerPower.playerCurrentSpeed = originalMoveSpeed;
     }
 
     private void FixedUpdate()

@@ -15,9 +15,6 @@ public class PlayerAttack : MonoBehaviour
 
     private float fireTimer;
 
-    private PlayerMovement playerMovement;
-    [SerializeField] private float slowdownAmount = 10f;
-
     private bool autoAttacking = false; // Kiểm soát tấn công tự động
 
     private PlayerPower playerPower;
@@ -26,7 +23,6 @@ public class PlayerAttack : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
 
 
@@ -54,7 +50,6 @@ public class PlayerAttack : MonoBehaviour
         {
             anim.SetTrigger("attack");
             fireTimer = playerPower.playerCurrentAbilityHaste;
-            playerMovement.SlowDown(slowdownAmount);
 
             if (!autoAttacking)
             {
@@ -69,11 +64,6 @@ public class PlayerAttack : MonoBehaviour
         else
         {
             fireTimer -= Time.deltaTime;
-        }
-
-        if (fireTimer <= 0f)
-        {
-            playerMovement.RestoreSpeed();
         }
     }
 

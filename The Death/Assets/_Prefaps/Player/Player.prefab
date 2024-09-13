@@ -51,6 +51,7 @@ Transform:
   - {fileID: 1951730528586309467}
   - {fileID: 792847817685440937}
   - {fileID: 5724049244549864474}
+  - {fileID: 2402744053368847770}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2343004369994700899
@@ -348,7 +349,6 @@ MonoBehaviour:
     type: 3}
   firingPoint: {fileID: 9098070308835648686}
   firing: {fileID: 4510074338302339964}
-  slowdownAmount: 10
 --- !u!114 &7698641335165338141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,7 +471,7 @@ MonoBehaviour:
   playerCurrentMaxHealth: 0
   playerBaseHealthRegen: 0.1
   playerCurrentHealthRegen: 0
-  playerBaseSpeed: 20
+  playerBaseSpeed: 15
   playerCurrentSpeed: 0
   speedText: {fileID: 0}
   playerBasePickRadius: 5
@@ -492,6 +492,8 @@ MonoBehaviour:
   playerBaseGoldBonus: 1
   playerCurrentGoldBonus: 0
   goldBonusText: {fileID: 0}
+  fireSwordDamage: 10
+  meteoDamage: 20
 --- !u!1 &725103638204632461
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkeletonSpawnRate: 3
+  SkeletonSpawnRate: 10
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
   skeletonPrefab: {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844,
@@ -811,7 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkeletonSpawnRate: 3
+  SkeletonSpawnRate: 10
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
   skeletonPrefab: {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844,
@@ -865,7 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkeletonSpawnRate: 3
+  SkeletonSpawnRate: 10
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
   skeletonPrefab: {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844,
@@ -919,7 +921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkeletonSpawnRate: 3
+  SkeletonSpawnRate: 10
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
   skeletonPrefab: {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844,
@@ -1054,7 +1056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkeletonSpawnRate: 3
+  SkeletonSpawnRate: 10
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
   skeletonPrefab: {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844,
@@ -1210,7 +1212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkeletonSpawnRate: 3
+  SkeletonSpawnRate: 10
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
   skeletonPrefab: {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844,
@@ -1264,7 +1266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkeletonSpawnRate: 3
+  SkeletonSpawnRate: 10
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
   skeletonPrefab: {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844,
@@ -1429,7 +1431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkeletonSpawnRate: 3
+  SkeletonSpawnRate: 10
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
   skeletonPrefab: {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844,
@@ -1483,7 +1485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5890489177eecfa409ee4d941108cdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkeletonSpawnRate: 3
+  SkeletonSpawnRate: 10
   GoblinSpawnRate: 8
   ArcherSpawnRate: 20
   skeletonPrefab: {fileID: 5486859194045145805, guid: ce4d61fc8a0ec5e42a9aad00301e7844,
@@ -1559,6 +1561,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a1432eeecbb6c74c9dd09183c64ae9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &9078887270094930416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2402744053368847770}
+  - component: {fileID: 8301169289125621355}
+  m_Layer: 6
+  m_Name: FireSword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2402744053368847770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078887270094930416}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2527600667329391756}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8301169289125621355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9078887270094930416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5daa3beea969221498544453505f8e1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swordPrefab: {fileID: 3125312856481119825, guid: fc370f0ca608fca47ba9f600672f2c46,
+    type: 3}
+  swordRadius: 5
+  rotateSpeed: 50
 --- !u!1 &9098070308835648686
 GameObject:
   m_ObjectHideFlags: 0
