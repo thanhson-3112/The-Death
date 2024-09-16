@@ -33,7 +33,6 @@ public class UpgradeManager : MonoBehaviour
     private float[] abilityHasteUpgradeValues = { 0.05f, 0.10f, 0.15f, 0.20f };
     private int[] experienceBonusUpgradeValues = { 1, 2, 3, 4, 5 };
     private int[] projectilesUpgradeValues = { 1, 2 };
-    private int[] goldBonusUpgradeValues = { 1, 2, 3 };
 
     private Dictionary<string, int> upgradeLevels = new Dictionary<string, int>();
 
@@ -51,7 +50,6 @@ public class UpgradeManager : MonoBehaviour
             new Upgrade{Name = "Ability Haste", Description = "Increase ability haste", Rarity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/AbilityHaste")},
             new Upgrade{Name = "Experience", Description = "Increase experience gain", Rarity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/Experience")},
             new Upgrade{Name = "Projectiles", Description = "Increase number of projectiles", Rarity = "Epic",  Increase = 1, Sprite = Resources.Load<Sprite>("Skill/Projectiles")},
-            new Upgrade{Name = "Gold", Description = "Increase gold gain", Rarity = "Epic", Increase = 1, Sprite = Resources.Load<Sprite>("Skill/Gold")}
         };
 
         foreach (var upgrade in Upgrades)
@@ -163,9 +161,6 @@ public class UpgradeManager : MonoBehaviour
             case "Projectiles":
                 PlayerPower.instance.playerCurrentProjectiles += projectilesUpgradeValues[currentLevel];
                 break;
-            case "Gold":
-                PlayerPower.instance.playerCurrentGoldBonus += goldBonusUpgradeValues[currentLevel];
-                break;
         }
 
         upgradeLevels[upgradeChosen]++;
@@ -199,8 +194,6 @@ public class UpgradeManager : MonoBehaviour
                 return experienceBonusUpgradeValues.Length;
             case "Projectiles":
                 return projectilesUpgradeValues.Length;
-            case "Gold":
-                return goldBonusUpgradeValues.Length;
             default:
                 return 0;
         }
@@ -230,8 +223,6 @@ public class UpgradeManager : MonoBehaviour
                 return experienceBonusUpgradeValues[level];
             case "Projectiles":
                 return projectilesUpgradeValues[level];
-            case "Gold":
-                return goldBonusUpgradeValues[level];
             default:
                 return 0;
         }

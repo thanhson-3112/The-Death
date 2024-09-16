@@ -8,7 +8,6 @@ public class GoldItem : MonoBehaviour
     private Transform playerTransform;
     private bool isMoving = false;
     public int goldAmount;
-    public float autoMoveDistance = 5f;
 
     private void Start()
     {
@@ -18,7 +17,7 @@ public class GoldItem : MonoBehaviour
 
     protected void Update()
     {
-        if (!isMoving && Vector3.Distance(transform.position, playerTransform.position) < autoMoveDistance)
+        if (!isMoving && Vector3.Distance(transform.position, playerTransform.position) < PlayerPower.instance.playerCurrentPickRadius)
         {
             isMoving = true;
         }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxItemSprite: {fileID: 21300000, guid: 4768d2e9f643fe94e9939755951837fe, type: 3}
   boxItemName: Armor
-  boxItemChance: 40
+  boxItemChance: 70
   boxItemType: 1
   itemAnimatorController: {fileID: 9100000, guid: 1943fbfda53159144829f6363ad4619c,
     type: 2}
