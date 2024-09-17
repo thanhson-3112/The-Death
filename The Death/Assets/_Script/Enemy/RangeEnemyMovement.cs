@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RangeEnemyMovement : MonoBehaviour
 {
     protected Rigidbody2D rb;
     protected Animator anim;
 
-    public Transform target;
+/*    public Transform target;*/
 
     [SerializeField] private float enemySpeed = 3f;
     public float _enemySpeed { get => enemySpeed; set => enemySpeed = value; }
@@ -25,10 +26,18 @@ public class RangeEnemyMovement : MonoBehaviour
     [SerializeField] private float fireRate = 0.8f;
     private bool canShoot = true;
 
+    [SerializeField] Transform target;
+    NavMeshAgent agent;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+/*        target = GameObject.FindGameObjectWithTag("Player").transform;*/
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     void Update()
@@ -49,23 +58,8 @@ public class RangeEnemyMovement : MonoBehaviour
                 ArcherShoot();
             }
         }
+        agent.SetDestination(target.position);
     }
-
-    private void FixedUpdate()
-    {
-        if (target != null)
-        {
-            float distanceToPlayer = Vector2.Distance(target.position, transform.position);
-
-            if (distanceToPlayer > distanceToStop && distanceToPlayer > 20f)
-            {
-                // Di chuyển nếu khoảng cách lớn hơn distanceToStop và lớn hơn 20f
-                transform.position = Vector2.MoveTowards(transform.position, target.position, enemySpeed * Time.deltaTime);
-            }
-          
-        }
-    }
-
 
     public void ArcherShoot()
     {
