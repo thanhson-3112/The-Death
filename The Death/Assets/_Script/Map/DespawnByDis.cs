@@ -10,6 +10,7 @@ public class DespawnByDis : MonoBehaviour
 
     protected void FixedUpdate()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         this.GetDistance();
         this.Despawning();
     }
@@ -18,6 +19,8 @@ public class DespawnByDis : MonoBehaviour
     {
         if (this.currentDis < this.limitDis) return;
         Destroy(gameObject);
+        /*        MapPoolManager.Instance.ReturnMap(gameObject);
+        */
     }
 
     protected virtual void GetDistance()

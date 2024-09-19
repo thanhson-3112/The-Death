@@ -35,7 +35,25 @@ public class MapSpawner : MonoBehaviour
         newMap.name = this.currentMap.name;
         this.newMapInfinity = newMap.GetComponent<MapInfinity>();
 
-        //this.currentMap.Set(this.mapCode, this.newMapInfinity);
+        /*        if (this.MapIsSpawned()) return;
+
+                Vector3 spawnPos = this.currentMap.transform.position;
+                spawnPos.x += this.spawnPosOffset.x;
+                spawnPos.y += this.spawnPosOffset.y;
+                spawnPos.z += this.spawnPosOffset.z;
+
+                while (this.newMapInfinity != null && this.newMapInfinity.transform.position == spawnPos)
+                {
+                    spawnPos += new Vector3(10f, 0f, 0f); // T?ng kho?ng cách theo tr?c x ?? sinh ra ? v? trí khác
+                }
+
+                // L?y b?n ?? t? pool
+                GameObject newMap = MapPoolManager.Instance.GetMap(spawnPos);
+                newMap.name = this.currentMap.name;
+                this.newMapInfinity = newMap.GetComponent<MapInfinity>();
+        */
+
+
     }
 
     protected virtual bool MapIsSpawned()

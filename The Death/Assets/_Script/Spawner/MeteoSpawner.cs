@@ -5,9 +5,8 @@ using UnityEngine;
 public class MeteoSpawner : MonoBehaviour
 {
     [SerializeField] private float meteoSpawnRate = 4f;
-
-    [SerializeField] private GameObject meteoPrefabs;
     [SerializeField] private SpawnPoint spawnPoint;
+
 
     private bool canSpawn = true;
 
@@ -27,9 +26,17 @@ public class MeteoSpawner : MonoBehaviour
             Transform spawnTransform = spawnPoint.GetRandomPoint();
             if (spawnTransform != null)
             {
-                GameObject enemyToSpawn = meteoPrefabs;
-                Instantiate(enemyToSpawn, spawnTransform.position, Quaternion.identity);
+                GameObject meteoToSpawn = MeteoPool.Instance.GetMeteo();
+
+                if (meteoToSpawn != null)
+                {
+                    meteoToSpawn.transform.position = spawnTransform.position;
+                    meteoToSpawn.transform.rotation = Quaternion.identity;
+                    meteoToSpawn.SetActive(true);
+                }
             }
+
+
         }
     }
 

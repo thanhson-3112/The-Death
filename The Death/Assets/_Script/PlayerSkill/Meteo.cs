@@ -8,32 +8,49 @@ public class Meteo : MonoBehaviour
     [SerializeField] private float speed = 20f;
 
     [Range(1, 10)]
-    [SerializeField] private float lifeTime = 3f;
+    [SerializeField] private float lifeTime = 1.5f;
 
     private Rigidbody2D rb;
     public GameObject explosionPrefab;
     private Animator anim;
 
-    private GameObject targetEnemy; 
+    private GameObject targetEnemy;
     private Vector2 targetPosition;
 
+    public GameObject player;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        Destroy(gameObject, lifeTime);
 
+        player = GameObject.FindGameObjectWithTag("Player");
+        Invoke("ReturnToMeteo", lifeTime);
         FindTargetEnemy();
     }
 
     private void FindTargetEnemy()
     {
-        targetEnemy = GameObject.FindGameObjectWithTag("Enemy");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closestEnemy = null;
+        float closestDistance = Mathf.Infinity;
+        Vector2 playerPosition = player.transform.position; // L?y v? trí ng??i ch?i
 
-        if (targetEnemy != null)
+        foreach (GameObject enemy in enemies)
         {
-            targetPosition = targetEnemy.transform.position;
+            float distanceToPlayer = Vector2.Distance(playerPosition, enemy.transform.position);
+
+            if (distanceToPlayer < closestDistance)
+            {
+                closestDistance = distanceToPlayer;
+                closestEnemy = enemy;
+            }
+        }
+
+        if (closestEnemy != null)
+        {
+            targetEnemy = closestEnemy;
+            targetPosition = closestEnemy.transform.position;
         }
     }
 
@@ -43,7 +60,7 @@ public class Meteo : MonoBehaviour
         {
             Vector2 moveDirection = (targetPosition - (Vector2)transform.position).normalized;
 
-            // Flip theo huong enemy
+            // Flip theo h??ng enemy
             if (moveDirection.x < 0f)
             {
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
@@ -56,7 +73,6 @@ public class Meteo : MonoBehaviour
             rb.velocity = moveDirection * speed;
         }
     }
-    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -68,8 +84,13 @@ public class Meteo : MonoBehaviour
                 enemyTakeDamage.TakePlayerDamage(PlayerPower.instance.meteoDamage);
             }
 
-            Destroy(gameObject);
+            ReturnToMeteo();
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         }
+    }
+
+    public void ReturnToMeteo()
+    {
+        MeteoPool.Instance.ReturnMeteo(gameObject);
     }
 }

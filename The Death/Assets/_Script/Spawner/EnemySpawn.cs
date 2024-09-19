@@ -84,7 +84,7 @@ public class EnemySpawn : PlayerExperience
                     enemyToSpawn.transform.rotation = Quaternion.identity;
                     enemyToSpawn.SetActive(true);
 
-                    // ??t l?i máu cho quái v?t khi ???c kích ho?t
+                    // Hoi lai mau khi spawn
                     EnemyLifeBase enemyLifeBase = enemyToSpawn.GetComponent<EnemyLifeBase>();
                     if (enemyLifeBase != null)
                     {
