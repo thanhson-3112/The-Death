@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyLifeBase : MonoBehaviour, IDamageAble
@@ -9,11 +10,16 @@ public class EnemyLifeBase : MonoBehaviour, IDamageAble
 
     [SerializeField] protected float enemyMaxHealth;
     [SerializeField] protected float enemyHealth;
-    public float enemyDamage = 5f;
 
     public PlayerLife playerLife;
     public HealthBar enemyHealthBar;
     private bool isHealthBarVisible = false;
+
+    // gay damage cho nguoi choi
+    public float enemyDamage = 5f;
+    public float damageInterval = 2f;
+    private bool isDamaging = false;
+    private List<Collision2D> playerInRange = new List<Collision2D>();
 
     public virtual void Start()
     {
@@ -88,7 +94,64 @@ public class EnemyLifeBase : MonoBehaviour, IDamageAble
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerLife.TakeDamage(enemyDamage);
+            if (!playerInRange.Contains(collision))
+            {
+                playerInRange.Add(collision);
+            }
+
+            if (!isDamaging)
+            {
+                StartDamage();
+            }
         }
+    }
+
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (playerInRange.Contains(collision))
+            {
+                playerInRange.Remove(collision);
+            }
+
+            if (playerInRange.Count == 0)
+            {
+                StopDamage();
+            }
+        }
+    }
+
+    // Gay damage cho enemy
+    private void StartDamage()
+    {
+        if (!isDamaging)
+        {
+            isDamaging = true;
+            StartCoroutine(DamageCoroutine());
+        }
+    }
+
+    private IEnumerator DamageCoroutine()
+    {
+        while (isDamaging)
+        {
+            List<Collision2D> enemiesToDamage = new List<Collision2D>(playerInRange);
+
+            foreach (Collision2D enemyCollider in enemiesToDamage)
+            {
+                playerLife.TakeDamage(1f);
+                yield return new WaitForSeconds(0);
+            }
+            
+
+            yield return new WaitForSeconds(damageInterval);
+        }
+    }
+
+    private void StopDamage()
+    {
+        isDamaging = false;
     }
 }
