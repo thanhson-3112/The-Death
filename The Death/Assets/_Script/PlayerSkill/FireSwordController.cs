@@ -6,7 +6,7 @@ public class FireSwordController : MonoBehaviour
 {
     public GameObject swordPrefab; // Prefab c?a thanh ki?m
     public float swordRadius = 10f; // Bán kính quay quanh ng??i ch?i
-    public float rotateSpeed = 50f; // T?c ?? xoay
+    public float rotateSpeed = 100f; // T?c ?? xoay
     private List<GameObject> swords = new List<GameObject>(); // Danh sách các ki?m ?ã sinh ra
 
     void Start()

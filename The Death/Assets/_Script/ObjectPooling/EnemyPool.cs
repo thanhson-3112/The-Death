@@ -13,9 +13,11 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] private int goblinPoolSize = 50;
     [SerializeField] private int archerPoolSize = 50;
 
+
     public List<GameObject> skeletonPool { get; private set; }
     public List<GameObject> goblinPool { get; private set; }
     public List<GameObject> archerPool { get; private set; }
+
 
     [SerializeField] private Transform parentTransform;
 

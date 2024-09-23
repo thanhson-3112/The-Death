@@ -9,8 +9,8 @@ public class BoDLifeController : MonoBehaviour, IDamageAble
     private Rigidbody2D rb;
     private Animator anim;
 
-    [SerializeField] protected float BoDMaxHealth = 1000f;
-    [SerializeField] protected float BoDHealth;
+    [SerializeField] protected float BoDMaxHealth = 5000f;
+    [SerializeField] public float BoDHealth;
     public float BoDDamage = 5f;
 
     public PlayerLife playerLife;

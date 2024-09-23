@@ -470,9 +470,10 @@ MonoBehaviour:
   anim: {fileID: 0}
   enemyMaxHealth: 0
   enemyHealth: 0
-  enemyDamage: 5
   playerLife: {fileID: 0}
   enemyHealthBar: {fileID: 8168878161915345559}
+  enemyDamage: 5
+  damageInterval: 2
   goblinMaxHealth: 300
   goblinHealth: 0
   goblinDamage: 5
@@ -521,7 +522,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2679627627104380165}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.7500001
+  m_Radius: 0.1
   m_Speed: 10
   m_Acceleration: 8
   avoidancePriority: 50

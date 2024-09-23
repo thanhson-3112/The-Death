@@ -11,6 +11,7 @@ TagManager:
   - AudioManager
   - UpArrow
   - ShopNPC
+  - Timer
   layers:
   - Default
   - TransparentFX

@@ -312,7 +312,7 @@ namespace NavMeshPlus.Components
             }
         }
 
-        List<NavMeshBuildSource> CollectSources(NavMeshBuilderState builderState)
+        public List<NavMeshBuildSource> CollectSources(NavMeshBuilderState builderState)
         {
             var sources = new List<NavMeshBuildSource>();
             var markups = new List<NavMeshBuildMarkup>();

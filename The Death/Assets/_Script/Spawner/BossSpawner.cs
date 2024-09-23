@@ -2,29 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossSpawner : PlayerExperience
+public class BossSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemyPrefabs;
 
+    [SerializeField] private Timer gameTimer; 
     private bool bossSpawned = false;
 
     void Start()
     {   
-        base.Update();
+
+        gameTimer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
     }
 
-    protected override void Update()
+    protected void Update()
     {
         Spawner();
-
     }
 
     private void Spawner()
     {
         if (!bossSpawned)
         {
+            float elapsedTime = gameTimer.GetElapsedTime();
             GameObject enemyToSpawn = null;
-            if (_currentLevel >= 5)
+            if (elapsedTime >= 300f)
             {
                 Debug.Log("Da spawnboss");
                 enemyToSpawn = enemyPrefabs[0];

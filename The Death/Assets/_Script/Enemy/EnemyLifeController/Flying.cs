@@ -30,6 +30,7 @@ public class Flying : EnemyLifeBase
 
         anim.SetBool("FlyingDeath", true);
 
+        Destroy(gameObject, 0.75f);
     }
 
 }

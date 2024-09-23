@@ -126,8 +126,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1656006520499275995}
-        m_TargetAssemblyTypeName: SoundsManager, Assembly-CSharp
+      - m_Target: {fileID: 8204295443135351854}
+        m_TargetAssemblyTypeName: SoundsVolumeManager, Assembly-CSharp
         m_MethodName: ChangeVolume
         m_Mode: 1
         m_Arguments:
@@ -238,8 +238,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: SETTING
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c13489f1b9daa42418955a342d59a0e5, type: 2}
-  m_sharedMaterial: {fileID: -634152506677521303, guid: c13489f1b9daa42418955a342d59a0e5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a2731d36b084142439ba082828dd01af, type: 2}
+  m_sharedMaterial: {fileID: -5825015875792291467, guid: a2731d36b084142439ba082828dd01af,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -409,8 +410,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: RESUME
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c13489f1b9daa42418955a342d59a0e5, type: 2}
-  m_sharedMaterial: {fileID: -634152506677521303, guid: c13489f1b9daa42418955a342d59a0e5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a2731d36b084142439ba082828dd01af, type: 2}
+  m_sharedMaterial: {fileID: -5825015875792291467, guid: a2731d36b084142439ba082828dd01af,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -616,7 +618,8 @@ MonoBehaviour:
   m_text: 'Music '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c13489f1b9daa42418955a342d59a0e5, type: 2}
-  m_sharedMaterial: {fileID: -634152506677521303, guid: c13489f1b9daa42418955a342d59a0e5, type: 2}
+  m_sharedMaterial: {fileID: -634152506677521303, guid: c13489f1b9daa42418955a342d59a0e5,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -771,7 +774,7 @@ GameObject:
   - component: {fileID: 5554674707277608016}
   - component: {fileID: 3711529350925157794}
   - component: {fileID: 5433399353404334244}
-  - component: {fileID: 946614690229383320}
+  - component: {fileID: 2398545736497981534}
   m_Layer: 5
   m_Name: MenuCanvas
   m_TagString: Untagged
@@ -864,7 +867,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &946614690229383320
+--- !u!114 &2398545736497981534
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -873,12 +876,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3194251267117780890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db94427fcc474d04185a0ecd421dc257, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cac5a14c4f11ea4788febe04add2a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 8043662661311716418}
   pauseMusicVolume: {fileID: 2581237043684608035}
-  resumeButton: {fileID: 6489781902694246787}
 --- !u!1 &3291333460300132675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +1003,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 946614690229383320}
+      - m_Target: {fileID: 2398545736497981534}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: BackToMenu
         m_Mode: 1
@@ -1212,7 +1214,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 946614690229383320}
+      - m_Target: {fileID: 2398545736497981534}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: SettingGame
         m_Mode: 1
@@ -1452,8 +1454,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: d96d9ff786c40894fab960e7d42a4421, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 21300000, guid: 43895039d2796a9419b5c1c1996c5a61, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1765,13 +1767,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: e1bde370cb32306438631b5cca19ba5a, type: 3}
+  m_SortingOrder: 11
+  m_Sprite: {fileID: 21300000, guid: 9ab0c7c08b550f944aafce2a4f2acbf4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 9.125, y: 2.71875}
+  m_Size: {x: 13.1875, y: 4.46875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2155,7 +2157,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 946614690229383320}
+      - m_Target: {fileID: 2398545736497981534}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
@@ -2255,7 +2257,7 @@ GameObject:
   - component: {fileID: 5613153255371114860}
   - component: {fileID: 4865418698441513373}
   - component: {fileID: 6217244546411140917}
-  - component: {fileID: 1656006520499275995}
+  - component: {fileID: 8204295443135351854}
   m_Layer: 5
   m_Name: MusicVolume
   m_TagString: Untagged
@@ -2324,7 +2326,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1656006520499275995
+--- !u!114 &8204295443135351854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2333,7 +2335,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6723832491074391455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ab568cf7757a5e4292fd5f37a2e3c8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d9c558469e9e834bb1de25e32dc3e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 8911127935085777181}
@@ -2503,8 +2505,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1656006520499275995}
-        m_TargetAssemblyTypeName: SoundsManager, Assembly-CSharp
+      - m_Target: {fileID: 8204295443135351854}
+        m_TargetAssemblyTypeName: SoundsVolumeManager, Assembly-CSharp
         m_MethodName: ChangeVFXVolume
         m_Mode: 1
         m_Arguments:
@@ -2662,7 +2664,8 @@ MonoBehaviour:
   m_text: VFX
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c13489f1b9daa42418955a342d59a0e5, type: 2}
-  m_sharedMaterial: {fileID: -634152506677521303, guid: c13489f1b9daa42418955a342d59a0e5, type: 2}
+  m_sharedMaterial: {fileID: -634152506677521303, guid: c13489f1b9daa42418955a342d59a0e5,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2908,8 +2911,9 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c13489f1b9daa42418955a342d59a0e5, type: 2}
-  m_sharedMaterial: {fileID: -634152506677521303, guid: c13489f1b9daa42418955a342d59a0e5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a2731d36b084142439ba082828dd01af, type: 2}
+  m_sharedMaterial: {fileID: -5825015875792291467, guid: a2731d36b084142439ba082828dd01af,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

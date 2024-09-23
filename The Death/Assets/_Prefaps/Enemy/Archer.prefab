@@ -101,7 +101,7 @@ Transform:
   m_GameObject: {fileID: 3093933155050436622}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.2, y: -0.53, z: 0}
+  m_LocalPosition: {x: 0.299, y: -0.53, z: 0}
   m_LocalScale: {x: 0.23529412, y: 0.28070176, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -522,9 +522,10 @@ MonoBehaviour:
   anim: {fileID: 0}
   enemyMaxHealth: 0
   enemyHealth: 0
-  enemyDamage: 5
   playerLife: {fileID: 0}
   enemyHealthBar: {fileID: 4018192868769719896}
+  enemyDamage: 5
+  damageInterval: 2
   archerMaxHealth: 300
   archerHealth: 0
   archerDamage: 5
@@ -573,7 +574,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6316923703535640667}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2
+  m_Radius: 0.1
   m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50

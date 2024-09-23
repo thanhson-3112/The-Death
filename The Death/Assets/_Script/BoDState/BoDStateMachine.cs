@@ -35,6 +35,9 @@ public class BoDStateMachine : StateMachine
     BaseState LastState;
     BaseState LastTwoState;
 
+    private BoDLifeController bossLife;
+    private float bossHealth;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -45,7 +48,8 @@ public class BoDStateMachine : StateMachine
         waveAttack = new BoDWaveattackState(this, anim);
         spellState = new BoDSpellState(this, anim);
 
-        randomStates = new List<BaseState>() { movingState, dashState, spawnState, waveAttack, spellState};
+        bossLife = GetComponent<BoDLifeController>();
+
     }
 
     new void Start()
@@ -56,6 +60,16 @@ public class BoDStateMachine : StateMachine
     new public void Update()
     {
         base.Update();
+        bossHealth = bossLife.BoDHealth;
+
+        if(bossHealth >= 2500f)
+        {
+            randomStates = new List<BaseState>() { movingState, dashState, waveAttack};
+        }
+        else if(bossHealth < 2500f){
+            randomStates = new List<BaseState>() { movingState, spawnState, waveAttack, spellState };
+        }
+
         Death();
     }
 

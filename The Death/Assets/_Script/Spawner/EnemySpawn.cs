@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawn : PlayerExperience
+public class EnemySpawn : MonoBehaviour
 {
     [SerializeField] private float SkeletonSpawnRate = 3f;
     [SerializeField] private float GoblinSpawnRate = 8f;
@@ -14,12 +14,14 @@ public class EnemySpawn : PlayerExperience
     [SerializeField] private SpawnPoint spawnPoint;
 
     private bool canSpawn = true;
+    [SerializeField] private Timer gameTimer; // Thêm bi?n tham chi?u ??n Timer
+
 
     private void Start()
     {
         InitializePools();
         StartCoroutine(Spawner());
-        base.Update();
+        gameTimer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
     }
 
     private void InitializePools()
@@ -44,22 +46,23 @@ public class EnemySpawn : PlayerExperience
         {
             yield return wait;
 
+            float elapsedTime = gameTimer.GetElapsedTime();
             Transform spawnTransform = spawnPoint.GetRandomPoint();
             if (spawnTransform != null)
             {
                 GameObject enemyToSpawn = null;
                 EnemyType enemyType = EnemyType.Skeleton; // Default enemy type
 
-                if (_currentLevel < 5)
+                if (elapsedTime < 60f)
                 {
                     enemyType = EnemyType.Skeleton;
                 }
-                else if (_currentLevel >= 5 && _currentLevel < 7)
+                else if (elapsedTime >= 60f && elapsedTime <= 120f)
                 {
                     int randomChoice = Random.Range(0, 2);
                     enemyType = randomChoice == 0 ? EnemyType.Skeleton : EnemyType.Goblin;
                 }
-                else if (_currentLevel >= 7)
+                else if (elapsedTime >= 120f)
                 {
                     int randomChoice = Random.Range(0, 3);
                     if (randomChoice == 0)
