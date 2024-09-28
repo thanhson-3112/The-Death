@@ -7,42 +7,66 @@ public class Lightning : MonoBehaviour
     [SerializeField] private float speed = 50f;
 
     private Rigidbody2D rb;
-    private GameObject currentTarget;  // M?c tiêu hi?n t?i
-    private int hitCount = 0;  // ??m s? l?n va ch?m
-    private int maxHits = 5;   // T?i ?a 5 l?n
+    private GameObject currentTarget;
+    private int hitCount = 0;
+    private int maxHits = 5;
 
+    public GameObject explosionPrefab;
     public PlayerPower playerPower;
 
-    private void OnEnable()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
-        Destroy(gameObject, 3f);  // Hu? sau th?i gian lifeTime
 
-        // Tìm m?c tiêu k? ??ch ng?u nhiên ??u tiên
-        currentTarget = FindRandomEnemy();
+        currentTarget = FindClosestEnemy();
         if (currentTarget != null)
         {
-            MoveTowardsTarget();
+            MoveTowards(currentTarget.transform);
         }
+
+        Destroy(gameObject, 10f); 
     }
 
-    private void FixedUpdate()
+    // Tìm k? ??ch g?n nh?t
+    private GameObject FindClosestEnemy()
     {
-        if (currentTarget != null)
-        {
-            // Di chuy?n v? phía k? ??ch hi?n t?i
-            Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
-            rb.velocity = direction * speed;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closestEnemy = null;
+        float shortestDistance = Mathf.Infinity;
 
-            // ?i?u ch?nh góc ?? c?a tia sét theo h??ng di chuy?n
-            RotateTowardsTarget(direction);
+        foreach (GameObject enemy in enemies)
+        {
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                closestEnemy = enemy;
+            }
         }
 
-        if(hitCount >= maxHits)
-        {
-            Destroy(gameObject);
-        }
+        return closestEnemy;
+    }
+
+    // Tìm k? ??ch ng?u nhiên
+    private GameObject FindRandomEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemies.Length == 0) return null;
+
+        // Ch?n m?t k? ??ch ng?u nhiên trong danh sách
+        int randomIndex = Random.Range(0, enemies.Length);
+        return enemies[randomIndex];
+    }
+
+    // Di chuy?n v? phía k? ??ch
+    private void MoveTowards(Transform target)
+    {
+        Vector2 direction = (target.position - transform.position).normalized;
+        rb.velocity = direction * speed;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle); // Xoay tia sét theo góc ?ã tính
     }
 
     public bool IsCriticalHit()
@@ -57,7 +81,7 @@ public class Lightning : MonoBehaviour
             IDamageAble enemyTakeDamage = collision.GetComponent<IDamageAble>();
             if (enemyTakeDamage != null)
             {
-                float damage = playerPower.playerCurrentDamage;
+                float damage = playerPower.CurrentLightningDamage;
 
                 if (IsCriticalHit())
                 {
@@ -65,64 +89,29 @@ public class Lightning : MonoBehaviour
                 }
 
                 enemyTakeDamage.TakePlayerDamage(damage);
-                hitCount++;  // ??m l?n va ch?m
+                Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            }
 
-                if (hitCount < maxHits)
+            // T?ng s? l??ng l?n ?ánh
+            hitCount++;
+
+            if (hitCount >= maxHits)
+            {
+                Destroy(gameObject); // H?y tia sét n?u ?ã ??t s? l??ng m?c tiêu t?i ?a
+            }
+            else
+            {
+                // Tìm k? ??ch m?i và ti?p t?c di chuy?n ??n ?ó
+                currentTarget = FindRandomEnemy();
+                if (currentTarget != null)
                 {
-                    // Tìm k? ??ch ng?u nhiên và ti?p t?c bay ??n
-                    currentTarget = FindRandomEnemy();
-                    if (currentTarget != null)
-                    {
-                        MoveTowardsTarget();
-                    }
-                    else
-                    {
-                        // Không tìm th?y k? ??ch ti?p theo, phá h?y tia sét
-                        Destroy(gameObject);
-                    }
+                    MoveTowards(currentTarget.transform);
                 }
                 else
                 {
-                    // ?ã ??t s? l?n va ch?m t?i ?a
-                    Destroy(gameObject);
+                    Destroy(gameObject); // H?y n?u không tìm th?y k? ??ch m?i
                 }
             }
         }
-    }
-
-    // Tìm k? ??ch ng?u nhiên t? danh sách k? ??ch
-    private GameObject FindRandomEnemy()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        if (enemies.Length == 0)
-        {
-            return null;  // N?u không còn k? ??ch
-        }
-
-        // Ch?n ng?u nhiên 1 k? ??ch t? danh sách
-        int randomIndex = Random.Range(0, enemies.Length);
-        return enemies[randomIndex];
-    }
-
-    // Di chuy?n v? phía m?c tiêu
-    private void MoveTowardsTarget()
-    {
-        if (currentTarget != null)
-        {
-            Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
-            rb.velocity = direction * speed;
-
-            // ?i?u ch?nh góc ?? c?a tia sét khi di chuy?n v? phía m?c tiêu
-            RotateTowardsTarget(direction);
-        }
-    }
-
-    // Xoay tia sét v? h??ng m?c tiêu
-    private void RotateTowardsTarget(Vector2 direction)
-    {
-        // Tính toán góc gi?a h??ng hi?n t?i và m?c tiêu
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle); // ??t góc quay c?a tia sét
     }
 }

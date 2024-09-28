@@ -81,7 +81,7 @@ public class Meteo : MonoBehaviour
             IDamageAble enemyTakeDamage = collision.GetComponent<IDamageAble>();
             if (enemyTakeDamage != null)
             {
-                enemyTakeDamage.TakePlayerDamage(PlayerPower.instance.meteoDamage);
+                enemyTakeDamage.TakePlayerDamage(PlayerPower.instance.CurrentMeteoDamage);
             }
 
             ReturnToMeteo();

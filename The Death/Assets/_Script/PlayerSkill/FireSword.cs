@@ -68,7 +68,7 @@ public class SwordFire : MonoBehaviour
                 IDamageAble enemyTakeDamage = enemyCollider.GetComponent<IDamageAble>();
                 if (enemyTakeDamage != null)
                 {
-                    enemyTakeDamage.TakePlayerDamage(PlayerPower.instance.fireSwordDamage);
+                    enemyTakeDamage.TakePlayerDamage(PlayerPower.instance.CurrentFireSwordDamage);
                 }
 
                 yield return new WaitForSeconds(0);

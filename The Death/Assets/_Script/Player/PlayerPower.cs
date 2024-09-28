@@ -73,8 +73,16 @@ public class PlayerPower : MonoBehaviour
 
 
     [Header("PlayerSkill")]
-    public float fireSwordDamage = 10f;
-    public float meteoDamage = 20f;
+    public float BaseFireSwordDamage = 10f;
+    public float CurrentFireSwordDamage;
+
+    public float BaseMeteoDamage = 20f;
+    public float CurrentMeteoDamage;
+
+    public float BaseLightningDamage = 20f;
+    public float CurrentLightningDamage;
+
+
 
 
     private void Awake()
