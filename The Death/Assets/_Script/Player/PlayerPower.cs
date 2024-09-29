@@ -82,6 +82,8 @@ public class PlayerPower : MonoBehaviour
     public float BaseLightningDamage = 20f;
     public float CurrentLightningDamage;
 
+    public float BaseFireGunDamage = 20f;
+    public float CurrentFireGunDamage;
 
 
 
@@ -104,6 +106,11 @@ public class PlayerPower : MonoBehaviour
         playerCurrentExperienceBonus = playerBaseExperienceBonus; // kinh nghiem xong
         playerCurrentProjectiles = playerBaseProjectiles; // tia dan xong
         playerCurrentGoldBonus = playerBaseGoldBonus; // vang xong
+
+        CurrentMeteoDamage = BaseMeteoDamage;
+        CurrentFireSwordDamage = BaseFireSwordDamage;
+        CurrentLightningDamage = BaseLightningDamage;
+        CurrentFireGunDamage = BaseFireGunDamage;
     }
 
     void Update()

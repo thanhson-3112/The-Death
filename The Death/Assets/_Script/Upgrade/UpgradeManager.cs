@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -21,7 +21,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] GameObject upgradeHorizontalLayout;
 
     [Header("")]
-    [SerializeField] UnlockMeteo unlockMeteo;
+    [SerializeField] UnlockPlayerSkill unlockMeteo;
 
     private int[] damageUpgradeValues = { 1, 3, 5, 7, 10 };
     private int[] armorUpgradeValues = { 5, 10, 15, 20, 25, 30 };
@@ -31,8 +31,12 @@ public class UpgradeManager : MonoBehaviour
     private float[] pickRadiusUpgradeValues = { 0.5f, 1.0f, 1.5f };
     private float[] critChanceUpgradeValues = { 0.02f, 0.04f, 0.06f, 0.08f };
     private float[] abilityHasteUpgradeValues = { 0.05f, 0.10f, 0.15f, 0.20f };
-    private int[] experienceBonusUpgradeValues = { 1, 2, 3, 4, 5 };
     private int[] projectilesUpgradeValues = { 1, 2 };
+
+    private int[] meteoUpgradeValues = { 10, 20, 30 };
+    private int[] fireSwordUpgradeValues = { 10 ,20, 30 };
+    private int[] lightningUpgradeValues = { 10, 20, 30 };
+    private int[] fireGunUpgradeValues = { 10, 20, 30 };
 
     private Dictionary<string, int> upgradeLevels = new Dictionary<string, int>();
 
@@ -48,8 +52,13 @@ public class UpgradeManager : MonoBehaviour
             new Upgrade{Name = "Pick Radius", Description = "Increase pick radius", Rarity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/PickRadius")},
             new Upgrade{Name = "Crit Chance", Description = "Increase critical hit chance", Rarity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/CritChance")},
             new Upgrade{Name = "Ability Haste", Description = "Increase ability haste", Rarity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/AbilityHaste")},
-            new Upgrade{Name = "Experience", Description = "Increase experience gain", Rarity = "Epic",  Increase = 20, Sprite = Resources.Load<Sprite>("Skill/Experience")},
             new Upgrade{Name = "Projectiles", Description = "Increase number of projectiles", Rarity = "Epic",  Increase = 1, Sprite = Resources.Load<Sprite>("Skill/Projectiles")},
+
+            new Upgrade{Name = "Meteo", Description = "Increase number of Meteo", Rarity = "Epic",  Increase = 1, Sprite = Resources.Load<Sprite>("Skill/Meteo")},
+            new Upgrade{Name = "FireSword", Description = "Increase number of FireSword", Rarity = "Epic",  Increase = 1, Sprite = Resources.Load<Sprite>("Skill/FireSword")},
+            new Upgrade{Name = "Lightning", Description = "Increase number of Lightning", Rarity = "Epic",  Increase = 1, Sprite = Resources.Load<Sprite>("Skill/Lightning")},
+            new Upgrade{Name = "FireGun", Description = "Increase number of FireGun", Rarity = "Epic",  Increase = 1, Sprite = Resources.Load<Sprite>("Skill/FireGun")},
+
         };
 
         foreach (var upgrade in Upgrades)
@@ -155,11 +164,21 @@ public class UpgradeManager : MonoBehaviour
             case "Ability Haste":
                 PlayerPower.instance.playerCurrentAbilityHaste -= abilityHasteUpgradeValues[currentLevel];
                 break;
-            case "Experience":
-                PlayerPower.instance.playerCurrentExperienceBonus += experienceBonusUpgradeValues[currentLevel];
-                break;
             case "Projectiles":
                 PlayerPower.instance.playerCurrentProjectiles += projectilesUpgradeValues[currentLevel];
+                break;
+
+            case "Meteo":
+                PlayerPower.instance.CurrentMeteoDamage += meteoUpgradeValues[currentLevel];
+                break;
+            case "FireSword":
+                PlayerPower.instance.CurrentFireSwordDamage += fireSwordUpgradeValues[currentLevel];
+                break;
+            case "Lightning":
+                PlayerPower.instance.CurrentLightningDamage += lightningUpgradeValues[currentLevel];
+                break;
+            case "FireGun":
+                PlayerPower.instance.CurrentFireGunDamage += fireGunUpgradeValues[currentLevel];
                 break;
         }
 
@@ -190,10 +209,17 @@ public class UpgradeManager : MonoBehaviour
                 return critChanceUpgradeValues.Length;
             case "Ability Haste":
                 return abilityHasteUpgradeValues.Length;
-            case "Experience":
-                return experienceBonusUpgradeValues.Length;
             case "Projectiles":
                 return projectilesUpgradeValues.Length;
+
+            case "Meteo":
+                return meteoUpgradeValues.Length;
+            case "FireSword":
+                return fireSwordUpgradeValues.Length;
+            case "Lightning":
+                return lightningUpgradeValues.Length;
+            case "FireGun":
+                return fireGunUpgradeValues.Length;
             default:
                 return 0;
         }
@@ -219,10 +245,17 @@ public class UpgradeManager : MonoBehaviour
                 return critChanceUpgradeValues[level];
             case "Ability Haste":
                 return abilityHasteUpgradeValues[level];
-            case "Experience":
-                return experienceBonusUpgradeValues[level];
             case "Projectiles":
                 return projectilesUpgradeValues[level];
+
+            case "Meteo":
+                return meteoUpgradeValues[level];
+            case "FireSword":
+                return fireSwordUpgradeValues[level];
+            case "Lightning":
+                return lightningUpgradeValues[level];
+            case "FireGun":
+                return fireGunUpgradeValues[level];
             default:
                 return 0;
         }
