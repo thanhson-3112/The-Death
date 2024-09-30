@@ -10,10 +10,18 @@ public class UnlockPlayerSkill : MonoBehaviour
     public GameObject fireSword;
     public GameObject lightning;
     public GameObject fireGun;
+    public FireSwordController fireSwordController;
 
-
-    void Start()
+    private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void UnlockSkillMeteo()
@@ -24,6 +32,7 @@ public class UnlockPlayerSkill : MonoBehaviour
     public void UnlockSkillFireSword()
     {
         fireSword.gameObject.SetActive(true);
+        fireSwordController.AddSword();
     }
 
     public void UnlockSkillLightning()

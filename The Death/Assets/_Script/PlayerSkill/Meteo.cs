@@ -8,7 +8,7 @@ public class Meteo : MonoBehaviour
     [SerializeField] private float speed = 20f;
 
     [Range(1, 10)]
-    [SerializeField] private float lifeTime = 1.5f;
+    [SerializeField] private float lifeTime = 1f;
 
     private Rigidbody2D rb;
     public GameObject explosionPrefab;
@@ -25,7 +25,7 @@ public class Meteo : MonoBehaviour
         anim = GetComponent<Animator>();
 
         player = GameObject.FindGameObjectWithTag("Player");
-        Invoke("ReturnToMeteo", lifeTime);
+        Invoke("DestroyMeteo", lifeTime);
         FindTargetEnemy();
 
         // Ki?m tra n?u không có m?c tiêu, phá h?y thiên th?ch sau m?t th?i gian
@@ -90,14 +90,9 @@ public class Meteo : MonoBehaviour
                 enemyTakeDamage.TakePlayerDamage(PlayerPower.instance.CurrentMeteoDamage);
             }
 
-            ReturnToMeteo();
+            DestroyMeteo();
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         }
-    }
-
-    public void ReturnToMeteo()
-    {
-        MeteoPool.Instance.ReturnMeteo(gameObject);
     }
 
     private void DestroyMeteo()

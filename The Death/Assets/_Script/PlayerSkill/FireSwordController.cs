@@ -17,11 +17,6 @@ public class FireSwordController : MonoBehaviour
     void Update()
     {
         RotateSwords();
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            AddSword();
-        }
     }
 
     public void AddSword()
