@@ -20,12 +20,8 @@ namespace NavMeshPlus.Components
         [SerializeField]
         public float updateRate = 0.1f;
         [SerializeField]
-        private float MovementThreshold = 3;
-        [SerializeField]
-        public Vector3 NavMeshSize = new Vector3(20f, 20f, 20f);
+        public Vector3 NavMeshSize = new Vector3(20f, 20f, 0f); // ?i?u ch?nh kích th??c cho 2D (chi?u z = 0)
 
-
-        private Vector3 WorldAnchor;
         private NavMeshData NavMeshData;
         private List<NavMeshBuildSource> Sources = new List<NavMeshBuildSource>();
 
@@ -34,7 +30,7 @@ namespace NavMeshPlus.Components
             NavMeshData = new NavMeshData();
             NavMesh.AddNavMeshData(NavMeshData);
             BuildNavMesh(false);
-            /*            StartCoroutine(CheckPlayerMovement());*/
+            player = GameObject.FindGameObjectWithTag("Player").gameObject;
         }
 
         private void Update()
@@ -45,27 +41,18 @@ namespace NavMeshPlus.Components
 
         private void CheckPlayerMovement()
         {
-            /*WaitForSeconds wait = new WaitForSeconds(updateRate);
-
-            while (true)
-            {
-                if (Vector3.Distance(WorldAnchor, player.transform.position) > MovementThreshold)
-                {
-                    BuildNavMesh(true);
-                    WorldAnchor = player.transform.position;
-                }
-                yield return wait;
-            }*/
-            if (player != null) // ??m b?o target t?n t?i
+            if (player != null)
             {
                 BuildNavMesh(true);
-                transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+                // ?i?u ch?nh t?a ?? z b?ng 0 cho 2D
+                transform.position = new Vector3(player.transform.position.x, player.transform.position.y, 0);
             }
         }
 
         private void BuildNavMesh(bool Async)
         {
-            Bounds navMeshBounds = new Bounds(player.transform.position, NavMeshSize);  // Xác ??nh khu v?c NavMesh d?a trên v? trí player
+            // Ch?nh Bounds ch? theo XY, lo?i b? z vì là 2D
+            Bounds navMeshBounds = new Bounds(new Vector3(player.transform.position.x, player.transform.position.y, 0), NavMeshSize);
             List<NavMeshBuildMarkup> markups = new List<NavMeshBuildMarkup>();
             List<NavMeshModifier> modifiers;
 
@@ -104,10 +91,10 @@ namespace NavMeshPlus.Components
                 NavMeshBuilder.CollectSources(navMeshBounds, surface.layerMask, surface.useGeometry, surface.defaultArea, markups, Sources);
             }
 
-            // Xoá các ngu?n có thành ph?n NavMeshAgent
+            // Xóa các ngu?n có thành ph?n NavMeshAgent
             Sources.RemoveAll(source => source.component != null && source.component.gameObject.GetComponent<NavMeshAgent>() != null);
 
-            // C?p nh?t NavMesh
+            // C?p nh?t NavMesh cho 2D
             if (Async)
             {
                 NavMeshBuilder.UpdateNavMeshDataAsync(NavMeshData, surface.GetBuildSettings(), Sources, navMeshBounds);
@@ -118,9 +105,4 @@ namespace NavMeshPlus.Components
             }
         }
     }
-
 }
-
-
-
-

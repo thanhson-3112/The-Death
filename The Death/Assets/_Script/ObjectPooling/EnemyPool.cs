@@ -9,9 +9,9 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] private GameObject goblinPrefab;
     [SerializeField] private GameObject archerPrefab;
 
-    [SerializeField] private int skeletonPoolSize = 50;
-    [SerializeField] private int goblinPoolSize = 50;
-    [SerializeField] private int archerPoolSize = 50;
+    [SerializeField] public int skeletonPoolSize = 150;
+    [SerializeField] public int goblinPoolSize = 100;
+    [SerializeField] public int archerPoolSize = 80;
 
 
     public List<GameObject> skeletonPool { get; private set; }

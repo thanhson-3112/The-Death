@@ -27,9 +27,9 @@ public class EnemySpawn : MonoBehaviour
     private void InitializePools()
     {
         // Kh?i t?o pool cho t?ng lo?i quái v?t
-        EnemyPool.Instance.CreatePool(EnemyPool.Instance.skeletonPool, skeletonPrefab, 10);
-        EnemyPool.Instance.CreatePool(EnemyPool.Instance.goblinPool, goblinPrefab, 5);
-        EnemyPool.Instance.CreatePool(EnemyPool.Instance.archerPool, archerPrefab, 3);
+        EnemyPool.Instance.CreatePool(EnemyPool.Instance.skeletonPool, skeletonPrefab, EnemyPool.Instance.skeletonPoolSize);
+        EnemyPool.Instance.CreatePool(EnemyPool.Instance.goblinPool, goblinPrefab, EnemyPool.Instance.goblinPoolSize);
+        EnemyPool.Instance.CreatePool(EnemyPool.Instance.archerPool, archerPrefab, EnemyPool.Instance.archerPoolSize);
     }
 
 
@@ -41,6 +41,7 @@ public class EnemySpawn : MonoBehaviour
     private IEnumerator Spawner()
     {
         WaitForSeconds wait = new WaitForSeconds(SkeletonSpawnRate);
+        bool spawned20Skeletons = false;
 
         while (canSpawn)
         {
@@ -48,6 +49,32 @@ public class EnemySpawn : MonoBehaviour
 
             float elapsedTime = gameTimer.GetElapsedTime();
             Transform spawnTransform = spawnPoint.GetRandomPoint();
+
+            if (elapsedTime >= 30f && !spawned20Skeletons)
+            {
+                // Sinh ra 20 Skeleton cùng lúc
+                for (int i = 0; i < 20; i++)
+                {
+                    GameObject skeleton = GetEnemyFromPool(EnemyType.Skeleton);
+                    if (skeleton != null && spawnTransform != null)
+                    {
+                        skeleton.transform.position = spawnPoint.GetRandomPoint().position;
+                        skeleton.transform.rotation = Quaternion.identity;
+                        skeleton.SetActive(true);
+
+                        // H?i l?i máu khi spawn
+                        EnemyLifeBase enemyLifeBase = skeleton.GetComponent<EnemyLifeBase>();
+                        if (enemyLifeBase != null)
+                        {
+                            enemyLifeBase.ResetHealth();
+                        }
+                    }
+                }
+                // ?ánh d?u ?ã spawn 20 Skeletons
+                spawned20Skeletons = true;
+            }
+
+
             if (spawnTransform != null)
             {
                 GameObject enemyToSpawn = null;
