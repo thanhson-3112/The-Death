@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Archer : EnemyLifeBase
 {
-    [SerializeField] protected float archerMaxHealth = 200f;
+    [SerializeField] protected float archerMaxHealth = 700f;
     [SerializeField] protected float archerHealth;
     public float archerDamage = 5f;
 

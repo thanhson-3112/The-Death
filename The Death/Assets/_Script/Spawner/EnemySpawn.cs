@@ -7,10 +7,14 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private float SkeletonSpawnRate = 3f;
     [SerializeField] private float GoblinSpawnRate = 8f;
     [SerializeField] private float ArcherSpawnRate = 20f;
+    [SerializeField] private float FlyingSpawnRate = 30f;
 
     [SerializeField] private GameObject skeletonPrefab;
     [SerializeField] private GameObject goblinPrefab;
     [SerializeField] private GameObject archerPrefab;
+    [SerializeField] private GameObject flyingPrefab;
+
+
     [SerializeField] private SpawnPoint spawnPoint;
 
     private bool canSpawn = true;
@@ -30,6 +34,7 @@ public class EnemySpawn : MonoBehaviour
         EnemyPool.Instance.CreatePool(EnemyPool.Instance.skeletonPool, skeletonPrefab, EnemyPool.Instance.skeletonPoolSize);
         EnemyPool.Instance.CreatePool(EnemyPool.Instance.goblinPool, goblinPrefab, EnemyPool.Instance.goblinPoolSize);
         EnemyPool.Instance.CreatePool(EnemyPool.Instance.archerPool, archerPrefab, EnemyPool.Instance.archerPoolSize);
+        EnemyPool.Instance.CreatePool(EnemyPool.Instance.flyingPool, archerPrefab, EnemyPool.Instance.flyingPoolSize);
     }
 
 
@@ -80,18 +85,18 @@ public class EnemySpawn : MonoBehaviour
                 GameObject enemyToSpawn = null;
                 EnemyType enemyType = EnemyType.Skeleton; // Default enemy type
 
-                if (elapsedTime < 60f)
+                if (elapsedTime < 30f)
                 {
                     enemyType = EnemyType.Skeleton;
                 }
-                else if (elapsedTime >= 60f && elapsedTime <= 120f)
+                else if (elapsedTime >= 60f && elapsedTime <= 70f)
                 {
                     int randomChoice = Random.Range(0, 2);
                     enemyType = randomChoice == 0 ? EnemyType.Skeleton : EnemyType.Goblin;
                 }
-                else if (elapsedTime >= 120f)
+                else if (elapsedTime >= 70f)
                 {
-                    int randomChoice = Random.Range(0, 3);
+                    int randomChoice = Random.Range(0, 4);
                     if (randomChoice == 0)
                     {
                         enemyType = EnemyType.Skeleton;
@@ -100,9 +105,13 @@ public class EnemySpawn : MonoBehaviour
                     {
                         enemyType = EnemyType.Goblin;
                     }
-                    else
+                    else if (randomChoice == 2)
                     {
                         enemyType = EnemyType.Archer;
+                    }
+                    else
+                    {
+                        enemyType = EnemyType.Flying;  
                     }
                 }
 
@@ -137,6 +146,8 @@ public class EnemySpawn : MonoBehaviour
                 return new WaitForSeconds(GoblinSpawnRate);
             case EnemyType.Archer:
                 return new WaitForSeconds(ArcherSpawnRate);
+            case EnemyType.Flying:  // Thêm tr??ng h?p Flying
+                return new WaitForSeconds(FlyingSpawnRate);
             default:
                 return new WaitForSeconds(SkeletonSpawnRate); // Default
         }

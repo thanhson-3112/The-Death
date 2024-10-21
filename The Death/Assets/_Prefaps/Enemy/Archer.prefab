@@ -526,7 +526,7 @@ MonoBehaviour:
   enemyHealthBar: {fileID: 4018192868769719896}
   enemyDamage: 5
   damageInterval: 2
-  archerMaxHealth: 300
+  archerMaxHealth: 700
   archerHealth: 0
   archerDamage: 5
 --- !u!114 &284083316292535476

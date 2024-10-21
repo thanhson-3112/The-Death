@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Flying : EnemyLifeBase
 {
-    [SerializeField] protected float flyingMaxHealth = 200f;
+    [SerializeField] protected float flyingMaxHealth = 1000f;
     [SerializeField] protected float flyingHealth;
     public float flyingDamage = 5f;
 
@@ -96,9 +96,6 @@ public class Flying : EnemyLifeBase
     public override void EnemyDie()
     {
         base.EnemyDie();
-
         anim.SetBool("FlyingDeath", true);
-
-        Destroy(gameObject, 0.75f);
     }
 }

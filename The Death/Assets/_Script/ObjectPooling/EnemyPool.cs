@@ -8,16 +8,18 @@ public class EnemyPool : MonoBehaviour
     [SerializeField] private GameObject skeletonPrefab;
     [SerializeField] private GameObject goblinPrefab;
     [SerializeField] private GameObject archerPrefab;
+    [SerializeField] private GameObject flyingPrefab;
+
 
     [SerializeField] public int skeletonPoolSize = 150;
     [SerializeField] public int goblinPoolSize = 100;
-    [SerializeField] public int archerPoolSize = 80;
-
+    [SerializeField] public int archerPoolSize = 50;
+    [SerializeField] public int flyingPoolSize = 10;
 
     public List<GameObject> skeletonPool { get; private set; }
     public List<GameObject> goblinPool { get; private set; }
     public List<GameObject> archerPool { get; private set; }
-
+    public List<GameObject> flyingPool { get; private set; }
 
     [SerializeField] private Transform parentTransform;
 
@@ -39,10 +41,12 @@ public class EnemyPool : MonoBehaviour
         skeletonPool = new List<GameObject>();
         goblinPool = new List<GameObject>();
         archerPool = new List<GameObject>();
+        flyingPool = new List<GameObject>();
 
         CreatePool(skeletonPool, skeletonPrefab, skeletonPoolSize);
         CreatePool(goblinPool, goblinPrefab, goblinPoolSize);
         CreatePool(archerPool, archerPrefab, archerPoolSize);
+        CreatePool(flyingPool, flyingPrefab, flyingPoolSize);
     }
 
     public void CreatePool(List<GameObject> pool, GameObject prefab, int poolSize)
@@ -81,6 +85,8 @@ public class EnemyPool : MonoBehaviour
                 return goblinPool;
             case EnemyType.Archer:
                 return archerPool;
+            case EnemyType.Flying:  
+                return flyingPool;
             default:
                 return null;
         }
@@ -97,5 +103,6 @@ public enum EnemyType
 {
     Skeleton,
     Goblin,
-    Archer
+    Archer,
+    Flying
 }

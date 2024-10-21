@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Goblin : EnemyLifeBase
 {
-    [SerializeField] protected float goblinMaxHealth = 200f;
+    [SerializeField] protected float goblinMaxHealth = 800f;
     [SerializeField] protected float goblinHealth;
     public float goblinDamage = 5f;
 

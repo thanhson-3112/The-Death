@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Skeleton : EnemyLifeBase
 {
-    [SerializeField] protected float skeletonMaxHealth = 100f;
+    [SerializeField] protected float skeletonMaxHealth = 300f;
     [SerializeField] protected float skeletonHealth;
     public float skeletonDamage = 1f;
 
@@ -71,11 +71,10 @@ public class Skeleton : EnemyLifeBase
     // B?t ??u t?n công
     private void StartAttack()
     {
-        // Th?c hi?n animation t?n công
         if (isPlayerInRange)
         {
             anim.SetTrigger("SkeletonAttack");
-            Invoke("AttackPlayer", 0.5f);  // Gây sát th??ng sau 0.5s khi animation b?t ??u
+            Invoke("AttackPlayer", 0.5f);  
         }
         else
         {

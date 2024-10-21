@@ -324,8 +324,8 @@ MonoBehaviour:
   enemyHealthBar: {fileID: 1070607561590066984}
   enemyDamage: 5
   damageInterval: 2
-  skeletonMaxHealth: 100
-  skeletonHealth: 100
+  skeletonMaxHealth: 300
+  skeletonHealth: 300
   skeletonDamage: 1
   attackArea: {fileID: 8716176092367505653}
   attackRadius: 3.11

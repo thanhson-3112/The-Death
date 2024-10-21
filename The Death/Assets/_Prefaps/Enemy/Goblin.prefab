@@ -474,7 +474,7 @@ MonoBehaviour:
   enemyHealthBar: {fileID: 8168878161915345559}
   enemyDamage: 5
   damageInterval: 2
-  goblinMaxHealth: 300
+  goblinMaxHealth: 800
   goblinHealth: 0
   goblinDamage: 5
 --- !u!114 &4412105070022317541

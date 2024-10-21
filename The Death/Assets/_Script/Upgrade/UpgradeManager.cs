@@ -77,8 +77,6 @@ public class UpgradeManager : MonoBehaviour
 
         List<int> availableUpgrades = new List<int>();
         float totalSpawnRate = 0f;
-
-        // Calculate total SpawnRate
         foreach (var upgrade in Upgrades)
         {
             if (upgradeLevels[upgrade.Name] < GetMaxUpgradeLevel(upgrade.Name))
