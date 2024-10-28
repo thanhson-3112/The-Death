@@ -17,7 +17,7 @@ public class MapSpawner : MonoBehaviour
     protected virtual void OnTriggerEnter(Collider other)
     {
         string objTag = other.transform.parent.tag;
-        Debug.Log("other.tag: "+ objTag);
+/*        Debug.Log("other.tag: "+ objTag);*/
         if(objTag == "Player") this.SpawnMap();
     }
 

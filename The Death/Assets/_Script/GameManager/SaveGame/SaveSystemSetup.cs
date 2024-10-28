@@ -9,11 +9,16 @@ public class SaveSystemSetup : MonoBehaviour {
     void Awake()
 	{
 		SaveSystem.Initialize(fileName);
-		if(dontDestroyOnLoad) DontDestroyOnLoad(transform.gameObject);
-	}
+        if (dontDestroyOnLoad)
+        {
+            if (transform.parent != null)
+            {
+                transform.parent = null;
+            }
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
-    // if the object is present in all game scenes, auto save before exiting
-    // on some platforms there may not be an exit function, see the Unity help
     void OnApplicationQuit()
 	{
 		SaveSystem.SaveToDisk();

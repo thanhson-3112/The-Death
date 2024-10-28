@@ -16,8 +16,15 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI healthRegenText;
 
-
     private PlayerPower playerPower;
+
+    [Header("Sound Settings")]
+    public AudioClip playerDeathSoundEffect;
+    public AudioClip playerHealthSoundEffect;
+    public AudioClip playerTakeDamageSoundEffect;
+
+
+
 
     void Start()
     {
@@ -57,21 +64,23 @@ public class PlayerLife : MonoBehaviour
             if (health < playerPower.playerCurrentMaxHealth)
             {
                 health += playerPower.playerCurrentHealthRegen;
-                health = Mathf.Min(health, playerPower.playerCurrentMaxHealth); // Cap health to max health
+                health = Mathf.Min(health, playerPower.playerCurrentMaxHealth); 
             }
-            yield return new WaitForSeconds(1f); // Regenerate health every 1 second
+            yield return new WaitForSeconds(1f); 
         }
     }
 
     public void TakeDamage(float enemyDamage)
     {
-        // Calculate damage after armor reduction
+        // Tinh toan luong damage thuc nhan
         float actualDamage = CalculateDamageAfterArmor(enemyDamage, playerPower.playerCurrentArmor);
 
-        if(health >= 0)
+        if(health > 0)
         {
             health -= actualDamage;
-        }
+            health = Mathf.Max(health, 0);
+/*            SoundFxManager.instance.PlaySoundFXClip(playerTakeDamageSoundEffect, transform, 1f);
+*/        }
 
         anim.SetTrigger("PlayerTakeDamage");
 
@@ -83,7 +92,7 @@ public class PlayerLife : MonoBehaviour
 
     private float CalculateDamageAfterArmor(float damage, float armor)
     {
-        // Armor damage reduction formula
+        // tinh toan luong giap
         float damageReduction = armor / (armor + 100);
         float actualDamage = damage * (1 - damageReduction);
 
@@ -92,11 +101,11 @@ public class PlayerLife : MonoBehaviour
 
     private void Die()
     {
+        anim.SetTrigger("PlayerDeath");
+        SoundFxManager.instance.PlaySoundFXClip(playerDeathSoundEffect, transform, 1f);
+        rb.bodyType = RigidbodyType2D.Static; 
+        GetComponent<Collider2D>().enabled = false; 
         StartCoroutine(WaitAndLoadScene(2.0f));
-/*        rb.bodyType = RigidbodyType2D.Static;
-*/        anim.SetTrigger("PlayerDeath");
-
-        Destroy(gameObject, 1.5f);
     }
 
     private IEnumerator WaitAndLoadScene(float waitTime)
@@ -108,6 +117,7 @@ public class PlayerLife : MonoBehaviour
     public void Heal()
     {
         health += 10;
-        health = Mathf.Min(health, playerPower.playerCurrentMaxHealth); // Cap health to max health
+        health = Mathf.Min(health, playerPower.playerCurrentMaxHealth);
+        SoundFxManager.instance.PlaySoundFXClip(playerHealthSoundEffect, transform, 1f);
     }
 }

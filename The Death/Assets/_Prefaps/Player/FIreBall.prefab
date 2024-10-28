@@ -170,6 +170,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 8039635303305590959, guid: c29b5aaf58cf5764b9fadd7d6f0bfcf2,
     type: 3}
   playerPower: {fileID: 0}
+  fireBallSoundEffect: {fileID: 8300000, guid: e82b6608d09215d4f8b0371fb05dda5a, type: 3}
 --- !u!95 &-1239010672126107122
 Animator:
   serializedVersion: 7

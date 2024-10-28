@@ -15,6 +15,10 @@ public class FireBall : MonoBehaviour
 
     public PlayerPower playerPower;
 
+    [Header("Sound Settings")]
+    public AudioClip fireBallSoundEffect;
+
+
     private void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -50,7 +54,9 @@ public class FireBall : MonoBehaviour
             }
 
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-/*            ReturnToPool();*/
+/*            SoundFxManager.instance.PlaySoundFXClip(fireBallSoundEffect, transform, 1f);
+*/
+            /*            ReturnToPool();*/
         }
     }
 

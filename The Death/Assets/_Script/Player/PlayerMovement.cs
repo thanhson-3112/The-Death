@@ -28,8 +28,11 @@ public class PlayerMovement : MonoBehaviour
     private enum MovementState { idle, move }
     private MovementState state = MovementState.idle;
 
-
     private PlayerPower playerPower;
+
+    [Header("Sound Settings")]
+    public AudioClip playerDashSoundEffect;
+
 
     private void Start()
     {
@@ -68,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canDash && dashStamina >= 1)
         {
             StartCoroutine(Dash());
+            SoundFxManager.instance.PlaySoundFXClip(playerDashSoundEffect, transform, 1f);
+
         }
     }
 

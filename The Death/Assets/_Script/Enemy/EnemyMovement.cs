@@ -10,7 +10,11 @@ public class EnemyMovement : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            target = player.transform;
+        }
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -18,12 +22,21 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        agent.SetDestination(target.position);
-        RotateTowardsTarget();
+        if (target != null)
+        {
+            agent.SetDestination(target.position);
+            RotateTowardsTarget();
+        }
+        else
+        {
+            agent.ResetPath(); // D?ng di chuy?n khi không có m?c tiêu
+        }
     }
 
     private void RotateTowardsTarget()
     {
+        if (target == null) return;
+
         Vector3 targetDirection = target.position - transform.position;
         if (targetDirection.x > 0)
         {

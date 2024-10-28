@@ -19,6 +19,10 @@ public class PlayerAttack : MonoBehaviour
 
     private PlayerPower playerPower;
 
+    [Header("Sound Settings")]
+    public AudioClip AttackSoundEffect;
+
+
     private void Update()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -54,10 +58,12 @@ public class PlayerAttack : MonoBehaviour
             if (!autoAttacking)
             {
                 MouseAttack();
+                SoundFxManager.instance.PlaySoundFXClip(AttackSoundEffect, transform, 1f);
             }
             else
             {
                 AutoAttackNearestEnemy();
+                SoundFxManager.instance.PlaySoundFXClip(AttackSoundEffect, transform, 1f);
             }
 
         }

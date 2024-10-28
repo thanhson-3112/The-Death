@@ -46,7 +46,7 @@ public class EnemySpawn : MonoBehaviour
     private IEnumerator Spawner()
     {
         WaitForSeconds wait = new WaitForSeconds(SkeletonSpawnRate);
-        bool spawned20Skeletons = false;
+        bool spawnedWaveSkeletons = false;
 
         while (canSpawn)
         {
@@ -55,10 +55,10 @@ public class EnemySpawn : MonoBehaviour
             float elapsedTime = gameTimer.GetElapsedTime();
             Transform spawnTransform = spawnPoint.GetRandomPoint();
 
-            if (elapsedTime >= 30f && !spawned20Skeletons)
+            if (elapsedTime >= 30f && !spawnedWaveSkeletons)
             {
                 // Sinh ra 20 Skeleton cùng lúc
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < 2; i++)
                 {
                     GameObject skeleton = GetEnemyFromPool(EnemyType.Skeleton);
                     if (skeleton != null && spawnTransform != null)
@@ -75,8 +75,8 @@ public class EnemySpawn : MonoBehaviour
                         }
                     }
                 }
-                // ?ánh d?u ?ã spawn 20 Skeletons
-                spawned20Skeletons = true;
+                // danh dau da spawn
+                spawnedWaveSkeletons = true;
             }
 
 
