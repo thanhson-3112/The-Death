@@ -93,7 +93,7 @@ public class Skeleton : EnemyLifeBase
         CancelInvoke("AttackPlayer");
         base.EnemyDie();
         anim.SetBool("SkeletonDeath", true);
-        SoundFxManager.instance.PlaySoundFXClip(skeletonDeathSoundEffect, transform, 1f);
+        SoundFxManager.instance.PlaySoundFXClip(skeletonDeathSoundEffect, transform, 0.5f);
 
     }
 

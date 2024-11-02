@@ -13,6 +13,8 @@ public class PlayerGold : MonoBehaviour
 
     private PlayerPower playerPower;
 
+    [Header("Sound Settings")]
+    public AudioClip goldCollectSound;
 
     private void Awake()
     {
@@ -47,6 +49,7 @@ public class PlayerGold : MonoBehaviour
     {
         goldTotal += newGold + playerPower.playerCurrentGoldBonus;
         goldText.text = "Gold: " + goldTotal.ToString();
+        SoundFxManager.instance.PlaySoundFXClip(goldCollectSound, transform, 1f);
     }
 
     // save game

@@ -58,12 +58,12 @@ public class PlayerAttack : MonoBehaviour
             if (!autoAttacking)
             {
                 MouseAttack();
-                SoundFxManager.instance.PlaySoundFXClip(AttackSoundEffect, transform, 1f);
+                SoundFxManager.instance.PlaySoundFXClip(AttackSoundEffect, transform, 0.5f);
             }
             else
             {
                 AutoAttackNearestEnemy();
-                SoundFxManager.instance.PlaySoundFXClip(AttackSoundEffect, transform, 1f);
+                SoundFxManager.instance.PlaySoundFXClip(AttackSoundEffect, transform, 0.5f);
             }
 
         }

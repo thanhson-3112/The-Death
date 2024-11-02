@@ -177,3 +177,5 @@ MonoBehaviour:
   explosionPrefab: {fileID: 8039635303305590959, guid: 33bedb8982e1dc2459bff21589774494,
     type: 3}
   playerPower: {fileID: 0}
+  lightningSoundEffect: {fileID: 8300000, guid: 1914a4d8a9c7dd34f971203a149c9afc,
+    type: 3}

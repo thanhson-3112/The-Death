@@ -14,6 +14,10 @@ public class Lightning : MonoBehaviour
     public GameObject explosionPrefab;
     public PlayerPower playerPower;
 
+    [Header("Sound Settings")]
+    public AudioClip lightningSoundEffect;
+    
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -90,6 +94,8 @@ public class Lightning : MonoBehaviour
 
                 enemyTakeDamage.TakePlayerDamage(damage);
                 Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+                SoundFxManager.instance.PlaySoundFXClip(lightningSoundEffect, transform, 0.5f);
+
             }
 
             // T?ng s? l??ng l?n ?ánh

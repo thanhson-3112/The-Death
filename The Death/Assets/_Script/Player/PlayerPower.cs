@@ -9,7 +9,7 @@ public class PlayerPower : MonoBehaviour
 
     // player dameage
     [Header("Damage")]
-    public float playerBaseDamage = 70f;
+    public float playerBaseDamage = 100f;
     public float playerCurrentDamage;
     public TextMeshProUGUI damageText;
 
