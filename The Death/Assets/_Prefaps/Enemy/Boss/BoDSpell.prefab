@@ -201,3 +201,4 @@ MonoBehaviour:
   playerLife: {fileID: 0}
   target: {fileID: 0}
   damageInterval: 1
+  thunderSound: {fileID: 8300000, guid: e2291c5017e506c40863153fe497ccc3, type: 3}

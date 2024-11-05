@@ -76,6 +76,7 @@ public class BoDWaveattackState : BaseState
                     GameObject spawnedEnemy = GameObject.Instantiate(SM.firePrefab, SM.firing.position, Quaternion.identity);
                     spawnedEnemy.transform.right = bulletDirection; 
                     anim.SetTrigger("BoDAttack");
+                    SoundFxManager.instance.PlaySoundFXClip(SM.fireBallSound, SM.transform, 0.5f);
                 }
             }
         }

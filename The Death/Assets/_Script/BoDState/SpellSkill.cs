@@ -16,7 +16,10 @@ public class SpellSkill : MonoBehaviour
     public Transform target;
 
     private bool isDamaging = false; 
-    public float damageInterval = 1f; 
+    public float damageInterval = 1f;
+
+    [Header("Sound")]
+    public AudioClip thunderSound;
 
     void Start()
     {
@@ -24,6 +27,7 @@ public class SpellSkill : MonoBehaviour
         anim = GetComponent<Animator>();
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         playerLife = playerObject.GetComponent<PlayerLife>();
+        SoundFxManager.instance.PlaySoundFXClip(thunderSound, transform, 0.5f);
         Destroy(gameObject, 15f);
     }
 

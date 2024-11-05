@@ -328,6 +328,7 @@ MonoBehaviour:
   firingPoint: {fileID: 6336166122023061365}
   firing: {fileID: 1052334985768833454}
   fireRate: 0.8
+  fireBallSound: {fileID: 0}
 --- !u!114 &504657456980359775
 MonoBehaviour:
   m_ObjectHideFlags: 0

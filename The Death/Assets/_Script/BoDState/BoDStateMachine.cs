@@ -38,6 +38,9 @@ public class BoDStateMachine : StateMachine
     private BoDLifeController bossLife;
     private float bossHealth;
 
+    [Header("Sound")]
+    public AudioClip fireBallSound;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();

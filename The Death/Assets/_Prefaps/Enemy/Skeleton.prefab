@@ -231,7 +231,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.083033085, y: -0.0042241514}
+  m_Offset: {x: 0.05309315, y: -0.0042241514}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -241,7 +241,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.46610528, y: 0.54865724}
+  m_Size: {x: 0.4062254, y: 0.54865724}
   m_EdgeRadius: 0
 --- !u!50 &3614755845844577799
 Rigidbody2D:
@@ -328,8 +328,8 @@ MonoBehaviour:
   skeletonHealth: 300
   skeletonDamage: 1
   attackArea: {fileID: 8716176092367505653}
-  attackRadius: 3.11
-  attackAngle: 147.9
+  attackRadius: 4.49
+  attackAngle: 117.6
   attackDelay: 0.5
   cooldownTime: 1
   damage: 10
@@ -420,7 +420,7 @@ RectTransform:
   m_GameObject: {fileID: 6642318299894535197}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0063031535, y: 0.00047329484, z: 1}
+  m_LocalScale: {x: 0.004727365, y: 0.00047329484, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 500477894476105479}
@@ -429,7 +429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.6747267, y: 0.5}
-  m_AnchoredPosition: {x: -8.645, y: 0.327}
+  m_AnchoredPosition: {x: -8.641, y: 0.327}
   m_SizeDelta: {x: 82.52145, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &363659426263837778

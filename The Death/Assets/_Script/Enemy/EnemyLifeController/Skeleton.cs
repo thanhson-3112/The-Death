@@ -42,10 +42,26 @@ public class Skeleton : EnemyLifeBase
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        if (distanceToPlayer <= attackRadius && !hasStartedAttackSequence)
+        // Ki?m tra n?u ng??i ch?i n?m trong ph?m vi t?n công
+        if (distanceToPlayer <= Mathf.Abs(attackRadius) && !hasStartedAttackSequence)
         {
             Vector2 directionToPlayer = (player.position - transform.position).normalized;
             float angleToPlayer = Vector2.Angle(transform.right, directionToPlayer);
+
+            // Xác ??nh ng??i ch?i ?ang ? bên trái hay bên ph?i c?a quái v?t
+            if (player.position.x > transform.position.x)
+            {
+                // Ng??i ch?i bên ph?i - quay `attackArea` theo h??ng ph?i
+                attackArea.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                attackRadius = Mathf.Abs(attackRadius);
+            }
+            else
+            {
+                // Ng??i ch?i bên trái - quay `attackArea` theo h??ng trái
+                attackRadius = -Mathf.Abs(attackRadius);
+                attackArea.transform.localRotation = Quaternion.Euler(0, 180, 0);
+
+            }
 
             if (angleToPlayer <= attackAngle / 2)
             {
@@ -60,6 +76,7 @@ public class Skeleton : EnemyLifeBase
         }
     }
 
+
     private void StartAttack()
     {
         anim.SetTrigger("SkeletonAttack");
@@ -69,9 +86,18 @@ public class Skeleton : EnemyLifeBase
 
     private void AttackPlayer()
     {
-        if (playerLife != null)
+        // Ki?m tra l?i kho?ng cách và góc gi?a quái v?t và ng??i ch?i
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        Vector2 directionToPlayer = (player.position - transform.position).normalized;
+        float angleToPlayer = Vector2.Angle(transform.right, directionToPlayer);
+
+        // Ch? gây sát th??ng n?u ng??i ch?i v?n còn trong ph?m vi và góc t?n công
+        if (distanceToPlayer <= Mathf.Abs(attackRadius) && angleToPlayer <= attackAngle / 2)
         {
-            playerLife.TakeDamage(1f);
+            if (playerLife != null)
+            {
+                playerLife.TakeDamage(damage);
+            }
         }
 
         attackArea.SetActive(false);
@@ -93,7 +119,7 @@ public class Skeleton : EnemyLifeBase
         CancelInvoke("AttackPlayer");
         base.EnemyDie();
         anim.SetBool("SkeletonDeath", true);
-        SoundFxManager.instance.PlaySoundFXClip(skeletonDeathSoundEffect, transform, 0.5f);
+        SoundFxManager.instance.PlaySoundFXClip(skeletonDeathSoundEffect, transform, 0.4f);
 
     }
 
