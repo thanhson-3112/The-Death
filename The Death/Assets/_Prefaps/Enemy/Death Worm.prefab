@@ -568,6 +568,8 @@ MonoBehaviour:
   attackDelay: 0.5
   damage: 10
   cooldownTime: 2
+  DWAttackSoundEffect: {fileID: 8300000, guid: 23c37dc8d7c7b80429ecd0faed6ef009, type: 3}
+  DWDeathSoundEffect: {fileID: 8300000, guid: 0b8a9f4b31eba424482d85feca13e049, type: 3}
 --- !u!114 &2674276116965581923
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -658,6 +658,10 @@ MonoBehaviour:
   attackDelay: 1
   damage: 10
   cooldownTime: 2
+  flyingAttackSoundEffect: {fileID: 8300000, guid: b12657f77c6896449bfde159410e6c43,
+    type: 3}
+  flyingDeathSoundEffect: {fileID: 8300000, guid: 8f2372abffa45854d92e8998e7724558,
+    type: 3}
 --- !u!114 &3078260009507637103
 MonoBehaviour:
   m_ObjectHideFlags: 0

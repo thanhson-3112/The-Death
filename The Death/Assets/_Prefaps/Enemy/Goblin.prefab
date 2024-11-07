@@ -584,6 +584,8 @@ MonoBehaviour:
   attackDelay: 0.5
   cooldownTime: 1
   damage: 10
+  goblinAttackSoundEffect: {fileID: 8300000, guid: 550c89b2bf17c3a408b68df50c681270,
+    type: 3}
   goblinDeathSoundEffect: {fileID: 8300000, guid: e90e757af209b704dad76a4f04e46fcb,
     type: 3}
 --- !u!114 &6273572956803421295
@@ -689,8 +691,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1044200207628611810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.00061035156, y: 0.002811432}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

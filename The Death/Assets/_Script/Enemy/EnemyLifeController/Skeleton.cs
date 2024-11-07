@@ -21,7 +21,9 @@ public class Skeleton : EnemyLifeBase
     private bool isCooldown = false;
 
     [Header("Sound Settings")]
+    public AudioClip skeletonAttackSoundEffect;
     public AudioClip skeletonDeathSoundEffect;
+   
 
     public override void Start()
     {
@@ -42,26 +44,12 @@ public class Skeleton : EnemyLifeBase
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        // Ki?m tra n?u ng??i ch?i n?m trong ph?m vi t?n công
-        if (distanceToPlayer <= Mathf.Abs(attackRadius) && !hasStartedAttackSequence)
+        if (distanceToPlayer <= attackRadius && !hasStartedAttackSequence)
         {
             Vector2 directionToPlayer = (player.position - transform.position).normalized;
-            float angleToPlayer = Vector2.Angle(transform.right, directionToPlayer);
+            Vector2 forward = transform.localScale.x > 0 ? transform.right : -transform.right;  // Xác ??nh h??ng quái d?a trên scale
 
-            // Xác ??nh ng??i ch?i ?ang ? bên trái hay bên ph?i c?a quái v?t
-            if (player.position.x > transform.position.x)
-            {
-                // Ng??i ch?i bên ph?i - quay `attackArea` theo h??ng ph?i
-                attackArea.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                attackRadius = Mathf.Abs(attackRadius);
-            }
-            else
-            {
-                // Ng??i ch?i bên trái - quay `attackArea` theo h??ng trái
-                attackRadius = -Mathf.Abs(attackRadius);
-                attackArea.transform.localRotation = Quaternion.Euler(0, 180, 0);
-
-            }
+            float angleToPlayer = Vector2.Angle(forward, directionToPlayer);
 
             if (angleToPlayer <= attackAngle / 2)
             {
@@ -79,6 +67,7 @@ public class Skeleton : EnemyLifeBase
 
     private void StartAttack()
     {
+        SoundFxManager.instance.PlaySoundFXClip(skeletonAttackSoundEffect, transform, 0.4f);
         anim.SetTrigger("SkeletonAttack");
         Invoke("AttackPlayer", 0.5f);
         StartCoroutine(Cooldown());
@@ -86,13 +75,11 @@ public class Skeleton : EnemyLifeBase
 
     private void AttackPlayer()
     {
-        // Ki?m tra l?i kho?ng cách và góc gi?a quái v?t và ng??i ch?i
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
         Vector2 directionToPlayer = (player.position - transform.position).normalized;
         float angleToPlayer = Vector2.Angle(transform.right, directionToPlayer);
 
-        // Ch? gây sát th??ng n?u ng??i ch?i v?n còn trong ph?m vi và góc t?n công
-        if (distanceToPlayer <= Mathf.Abs(attackRadius) && angleToPlayer <= attackAngle / 2)
+        if (distanceToPlayer <= attackRadius && angleToPlayer <= attackAngle / 2)
         {
             if (playerLife != null)
             {

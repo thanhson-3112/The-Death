@@ -12,11 +12,15 @@ public class Flying : EnemyLifeBase
     public float attackRadius = 5f; 
     public float attackDelay = 0.5f; 
     public int damage = 10;         
-    public float cooldownTime = 2f; 
+    public float cooldownTime = 1f; 
     private Transform player;
     private bool hasDetectedPlayer = false; 
     private bool isAttacking = false;
-    private bool isOnCooldown = false;  
+    private bool isOnCooldown = false;
+
+    [Header("Sound Settings")]
+    public AudioClip flyingAttackSoundEffect;
+    public AudioClip flyingDeathSoundEffect;
 
     public override void Start()
     {
@@ -54,7 +58,7 @@ public class Flying : EnemyLifeBase
 
     private void StartAttack()
     {
-
+        SoundFxManager.instance.PlaySoundFXClip(flyingAttackSoundEffect, transform, 0.4f);
         anim.SetTrigger("FlyingAttack");
         Invoke("AttackPlayer", 0.5f);  
     }
@@ -91,6 +95,7 @@ public class Flying : EnemyLifeBase
     public override void EnemyDie()
     {
         base.EnemyDie();
+        SoundFxManager.instance.PlaySoundFXClip(flyingDeathSoundEffect, transform, 0.4f);
         anim.SetBool("FlyingDeath", true);
     }
 }

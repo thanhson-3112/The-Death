@@ -320,7 +320,7 @@ MonoBehaviour:
   bossSpawnRate: 3
   spawnRadius: 8
   enemyPrefabs:
-  - {fileID: 8298595932592208452, guid: dcb13d2480f8b1f428b14ddd80d9f1e8, type: 3}
+  - {fileID: 6703048248857396634, guid: e1cd53fde4696584b9d98c8d20a0b889, type: 3}
   spellPrefabs: {fileID: 903247472251057663, guid: 07e287af8398bc5458e1e57049f30b06,
     type: 3}
   firePrefab: {fileID: 537310980404299418, guid: 0ee934d2f655ea64ca8565d1d1868372,
@@ -328,7 +328,7 @@ MonoBehaviour:
   firingPoint: {fileID: 6336166122023061365}
   firing: {fileID: 1052334985768833454}
   fireRate: 0.8
-  fireBallSound: {fileID: 0}
+  fireBallSound: {fileID: 8300000, guid: d49bb874ff3578f41b9c742734790350, type: 3}
 --- !u!114 &504657456980359775
 MonoBehaviour:
   m_ObjectHideFlags: 0

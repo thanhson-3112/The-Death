@@ -333,6 +333,8 @@ MonoBehaviour:
   attackDelay: 0.5
   cooldownTime: 1
   damage: 10
+  skeletonAttackSoundEffect: {fileID: 8300000, guid: 57eac92f0f72da8409df4d387e528aca,
+    type: 3}
   skeletonDeathSoundEffect: {fileID: 8300000, guid: 358887ac726f4c44dac40015827f3fef,
     type: 3}
 --- !u!114 &-117270996628912026

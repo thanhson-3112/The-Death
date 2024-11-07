@@ -21,6 +21,7 @@ public class Goblin : EnemyLifeBase
     private bool isCooldown = false;
 
     [Header("Sound Settings")]
+    public AudioClip goblinAttackSoundEffect;
     public AudioClip goblinDeathSoundEffect;
 
 
@@ -48,7 +49,9 @@ public class Goblin : EnemyLifeBase
         if (distanceToPlayer <= attackRadius && !hasStartedAttackSequence)
         {
             Vector2 directionToPlayer = (player.position - transform.position).normalized;
-            float angleToPlayer = Vector2.Angle(transform.right, directionToPlayer);
+            Vector2 forward = transform.localScale.x > 0 ? transform.right : -transform.right;  // Xác ??nh h??ng quái d?a trên scale
+
+            float angleToPlayer = Vector2.Angle(forward, directionToPlayer);
 
             if (angleToPlayer <= attackAngle / 2)
             {
@@ -63,8 +66,11 @@ public class Goblin : EnemyLifeBase
         }
     }
 
+
     private void StartAttack()
     {
+        SoundFxManager.instance.PlaySoundFXClip(goblinAttackSoundEffect, transform, 0.4f);
+
         anim.SetTrigger("goblinAttack");
         Invoke("AttackPlayer", 0.5f);
         StartCoroutine(Cooldown());
@@ -72,12 +78,10 @@ public class Goblin : EnemyLifeBase
 
     private void AttackPlayer()
     {
-        // Ki?m tra l?i kho?ng cách và góc gi?a quái v?t và ng??i ch?i
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
         Vector2 directionToPlayer = (player.position - transform.position).normalized;
         float angleToPlayer = Vector2.Angle(transform.right, directionToPlayer);
 
-        // Ch? gây sát th??ng n?u ng??i ch?i v?n còn trong ph?m vi và góc t?n công
         if (distanceToPlayer <= attackRadius && angleToPlayer <= attackAngle / 2)
         {
             if (playerLife != null)

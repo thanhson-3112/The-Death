@@ -18,6 +18,10 @@ public class DeathWorm : EnemyLifeBase
     private bool isAttacking = false;
     private bool isOnCooldown = false;
 
+    [Header("Sound Settings")]
+    public AudioClip DWAttackSoundEffect;
+    public AudioClip DWDeathSoundEffect;
+
     public override void Start()
     {
         DWHealth = DWMaxHealth;
@@ -54,7 +58,7 @@ public class DeathWorm : EnemyLifeBase
 
     private void StartAttack()
     {
-
+        SoundFxManager.instance.PlaySoundFXClip(DWAttackSoundEffect, transform, 0.4f);
         anim.SetTrigger("DWAttack");
         Invoke("AttackPlayer", 0.5f);
     }
@@ -100,6 +104,8 @@ public class DeathWorm : EnemyLifeBase
     public override void EnemyDie()
     {
         base.EnemyDie();
+        SoundFxManager.instance.PlaySoundFXClip(DWDeathSoundEffect, transform, 0.4f);
         anim.SetBool("DWDeath", true);
+        Destroy(gameObject);
     }
 }
