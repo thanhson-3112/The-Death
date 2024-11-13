@@ -214,6 +214,7 @@ public class ShopManager : MonoBehaviour
         int currentLevel = (int)upgradeSlider.value;
         int currentUpgradeCost = 0;
 
+        // Gia tien hien tai gan bang gia tri hien tai cua mang Upgr cost
         switch (statName)
         {
             case "DAMAGE":
@@ -274,10 +275,10 @@ public class ShopManager : MonoBehaviour
             return;
         }
 
-        // Tr? vàng
+        // Tru vang 
         playerGold.goldTotal -= currentUpgradeCost;
 
-        // Th?c hi?n nâng c?p
+        // Thuc hien nang cap
         switch (statName)
         {
             case "DAMAGE":
@@ -349,11 +350,13 @@ public class ShopManager : MonoBehaviour
         goldBonusSlider.value = currentGoldBonusLevel;
     }
 
+    // Hien thi gia tien
     private void UpdateGoldUI()
     {
         goldText.text = playerGold.goldTotal.ToString();
     }
 
+    // Thay doi hien thi gia tien
     private void UpdateCostTexts()
     {
         // KIem tra cap hien tai khong vuot qua gia tri cua mang nang cap

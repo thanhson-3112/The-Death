@@ -22,7 +22,7 @@ public class ComeTheDeath : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             yield return new WaitForSeconds(2f); 
-            SceneManager.LoadScene(2); 
+            SceneManager.LoadScene(3); 
         }
     }
 }

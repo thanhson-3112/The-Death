@@ -6,16 +6,19 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/StartMenu.unity
+    path: Assets/_Scenes/1. StartGame.unity
     guid: 6dbf1c4690762bb4b9ee8fccf118e46c
   - enabled: 1
-    path: Assets/_Scenes/Home.unity
+    path: Assets/_Scenes/2. ChoiceGame.unity
+    guid: f37bc2fd23e621c428d2021276362fbc
+  - enabled: 1
+    path: Assets/_Scenes/3. HomeMap.unity
     guid: 86532aff2422f194ea8f50e910bc5df4
   - enabled: 1
-    path: Assets/_Scenes/The Death.unity
+    path: Assets/_Scenes/4. The Death.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/_Scenes/DeathScene.unity
+    path: Assets/_Scenes/5. DeathScene.unity
     guid: 192dce39f22f3b34195e0b2d52927144
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

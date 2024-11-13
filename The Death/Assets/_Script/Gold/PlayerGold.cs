@@ -24,8 +24,13 @@ public class PlayerGold : MonoBehaviour
 
     protected virtual void Start()
     {
-        goldText.text = "Gold: " + goldTotal.ToString();
         playerPower = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerPower>();
+
+    }
+
+    protected virtual void Update()
+    {
+        goldText.text = "Gold: " + goldTotal.ToString();
 
     }
 

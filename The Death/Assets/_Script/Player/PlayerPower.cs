@@ -15,7 +15,7 @@ public class PlayerPower : MonoBehaviour
 
     // Giap
     [Header("Armor")]
-    public float playerBaseArmor = 70f;
+    public float playerBaseArmor = 10f;
     public float playerCurrentArmor;
     public TextMeshProUGUI armorText;
 
@@ -43,7 +43,7 @@ public class PlayerPower : MonoBehaviour
 
     // chi mang
     [Header("CritChance")]
-    public float playerBaseCritChance = 10;
+    public float playerBaseCritChance = 10f;
     public float playerCurrentCritChance;
     public TextMeshProUGUI critChanceText;
 
