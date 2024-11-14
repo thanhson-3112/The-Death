@@ -9,16 +9,27 @@ public class MapSpawner : MonoBehaviour
     [SerializeField] protected MapInfinity newMapInfinity;
     [SerializeField] protected Vector3 spawnPosOffset = new Vector3(0,0,0);
 
+    protected bool isMapSpawned = false;
+
     protected virtual void Awake()
     {
         this.LoadCurrentMap();
     }
 
+/*    protected virtual void OnTriggerEnter(Collider other)
+    {
+        string objTag = other.transform.parent.tag;
+*//*        Debug.Log("other.tag: "+ objTag);*//*
+        if(objTag == "Player") this.SpawnMap();
+    }*/
+
     protected virtual void OnTriggerEnter(Collider other)
     {
         string objTag = other.transform.parent.tag;
-/*        Debug.Log("other.tag: "+ objTag);*/
-        if(objTag == "Player") this.SpawnMap();
+        if (objTag == "Player")
+        {
+            this.SpawnMap();
+        }
     }
 
     protected virtual void SpawnMap()

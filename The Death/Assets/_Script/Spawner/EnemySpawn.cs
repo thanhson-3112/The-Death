@@ -55,7 +55,7 @@ public class EnemySpawn : MonoBehaviour
             float elapsedTime = gameTimer.GetElapsedTime();
             Transform spawnTransform = spawnPoint.GetRandomPoint();
 
-            if (elapsedTime >= 30f && !spawnedWaveSkeletons)
+            if (elapsedTime >= 60f && !spawnedWaveSkeletons)
             {
                 // Sinh ra 20 Skeleton cùng lúc
                 for (int i = 0; i < 2; i++)
@@ -89,12 +89,12 @@ public class EnemySpawn : MonoBehaviour
                 {
                     enemyType = EnemyType.Skeleton;
                 }
-                else if (elapsedTime >= 60f && elapsedTime <= 70f)
+                else if (elapsedTime >= 120f && elapsedTime <= 180f)
                 {
                     int randomChoice = Random.Range(0, 2);
                     enemyType = randomChoice == 0 ? EnemyType.Skeleton : EnemyType.Goblin;
                 }
-                else if (elapsedTime >= 70f)
+                else if (elapsedTime >= 180f)
                 {
                     int randomChoice = Random.Range(0, 4);
                     if (randomChoice == 0)

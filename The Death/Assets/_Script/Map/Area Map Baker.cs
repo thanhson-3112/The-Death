@@ -3,7 +3,6 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
