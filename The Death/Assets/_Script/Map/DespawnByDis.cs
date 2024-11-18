@@ -6,7 +6,7 @@ public class DespawnByDis : MonoBehaviour
 {
     public Transform player;
     public float currentDis = 0f;
-    public float limitDis = 100f;
+    public float limitDis = 180f;
 
     protected void FixedUpdate()
     {

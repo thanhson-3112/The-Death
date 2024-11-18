@@ -20,7 +20,6 @@ public class EnemySpawn : MonoBehaviour
     private bool canSpawn = true;
     [SerializeField] private Timer gameTimer; // Thêm bi?n tham chi?u ??n Timer
 
-
     private void Start()
     {
         InitializePools();
@@ -152,4 +151,5 @@ public class EnemySpawn : MonoBehaviour
                 return new WaitForSeconds(SkeletonSpawnRate); // Default
         }
     }
+
 }

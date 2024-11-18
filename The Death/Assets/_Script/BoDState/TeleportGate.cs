@@ -20,8 +20,10 @@ public class TeleportGate : MonoBehaviour
         if (isPlayerInside && Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log("Da an F");
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(3);
         }
+
+        SpawnPoint.instance.StopSpawnEnemy();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

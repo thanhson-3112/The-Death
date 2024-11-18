@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour
 {
+    public static SpawnPoint instance;
+
     [SerializeField] protected List<Transform> points;
+
+    public void Awake()
+    {
+        instance = this;
+    }
 
     protected virtual void Update()
     {
@@ -31,5 +38,10 @@ public class SpawnPoint : MonoBehaviour
 
         int randIndex = Random.Range(0, points.Count);
         return points[randIndex];
+    }
+
+    public void StopSpawnEnemy()
+    {
+        points.Clear();
     }
 }

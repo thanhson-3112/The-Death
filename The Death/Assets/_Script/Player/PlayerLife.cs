@@ -111,7 +111,7 @@ public class PlayerLife : MonoBehaviour
     private IEnumerator WaitAndLoadScene(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
 
     public void Heal()

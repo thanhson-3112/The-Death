@@ -62,7 +62,7 @@ public class BoDLifeController : MonoBehaviour, IDamageAble
 
         anim.SetBool("BoDDeath", true);
 
-        int weaponsSpawned = 0;
+        /*int weaponsSpawned = 0;
 
         // mang de luu chi so cua vu khi da chon
         List<int> indices = new List<int>();
@@ -103,7 +103,7 @@ public class BoDLifeController : MonoBehaviour, IDamageAble
                 weaponsSpawned++;
                 indices.Add(randomIndex); // them chi so da chon vao mang
             }
-        }
+        }*/
         // spawn cong dich chuyen khi boss chet
         Instantiate(finishLevelObject, transform.position, Quaternion.identity);
         BoDHealthBar.SetHealthBar();
