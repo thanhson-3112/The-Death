@@ -7,7 +7,7 @@ public class BoDWaveattackState : BaseState
     private BoDStateMachine SM;
     private Animator anim;
 
-    public BoDWaveattackState(BoDStateMachine stateMachine, Animator animator) : base("WaveAttack", stateMachine)
+    public BoDWaveattackState(BoDStateMachine stateMachine, Animator animator)
     {
         SM = stateMachine;
         anim = animator;

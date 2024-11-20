@@ -9,7 +9,7 @@ public class BoDDashState : BaseState
     public int DashNumber = 3;
     private Animator anim;
 
-    public BoDDashState(BoDStateMachine stateMachine, Animator animator, int dashNumber = 3) : base("Dash", stateMachine)
+    public BoDDashState(BoDStateMachine stateMachine, Animator animator, int dashNumber = 3)
     {
         DashNumber = dashNumber;
         SM = stateMachine;
@@ -41,6 +41,7 @@ public class BoDDashState : BaseState
             SM.gameObject.GetComponent<Rigidbody2D>().velocity = targetDirection * SM.dashSpeed;
 
             anim.SetTrigger("BoDAttack");
+            SoundFxManager.instance.PlaySoundFXClip(SM.dashAttackSound, SM.transform, 0.5f);
             yield return new WaitForSeconds(2f);
         }
 

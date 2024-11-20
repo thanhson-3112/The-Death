@@ -328,7 +328,9 @@ MonoBehaviour:
   firingPoint: {fileID: 6336166122023061365}
   firing: {fileID: 1052334985768833454}
   fireRate: 0.8
+  dashAttackSound: {fileID: 8300000, guid: ed6889fe34101514b83631f6615e45ae, type: 3}
   fireBallSound: {fileID: 8300000, guid: d49bb874ff3578f41b9c742734790350, type: 3}
+  castSpellSound: {fileID: 8300000, guid: bf781d1c06f0ae543ab22d8ffcd93f88, type: 3}
 --- !u!114 &504657456980359775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad512fcc394b1c9439375e0b63b5ff08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoDMaxHealth: 1000
+  BoDMaxHealth: 5000
   BoDHealth: 0
   BoDDamage: 5
   playerLife: {fileID: 0}

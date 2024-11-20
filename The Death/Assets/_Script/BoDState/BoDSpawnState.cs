@@ -8,7 +8,7 @@ public class BoDSpawnState : BaseState
     private Animator anim;
     private bool spawning = true;
 
-    public BoDSpawnState(BoDStateMachine stateMachine, Animator animator) : base("Spawn", stateMachine)
+    public BoDSpawnState(BoDStateMachine stateMachine, Animator animator)
     {
         SM = stateMachine;
         anim = animator;
@@ -19,6 +19,7 @@ public class BoDSpawnState : BaseState
         base.Enter();
         spawning = true;
         anim.SetTrigger("BoDCastSpell");
+        SoundFxManager.instance.PlaySoundFXClip(SM.castSpellSound, SM.transform, 0.5f);
         SM.StartCoroutine(Spawner());
     }
 
@@ -33,6 +34,7 @@ public class BoDSpawnState : BaseState
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("BoDTakeHit"))
         {
             anim.SetTrigger("BoDRun");
+            SoundFxManager.instance.StopAudio(SM.castSpellSound);
             SM.NextState();
             spawning = false; 
         }

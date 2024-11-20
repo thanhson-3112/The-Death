@@ -12,7 +12,7 @@ public class BoDMovingState : BaseState
     public float activationDistance = 10f;
     private bool isAttacking = false;
 
-    public BoDMovingState(BoDStateMachine stateMachine, Animator animator) : base("Move", stateMachine)
+    public BoDMovingState(BoDStateMachine stateMachine, Animator animator)
     {
         SM = stateMachine;
         anim = animator;

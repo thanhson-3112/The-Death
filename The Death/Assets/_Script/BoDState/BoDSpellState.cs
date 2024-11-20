@@ -8,7 +8,7 @@ public class BoDSpellState : BaseState
     private Animator anim;
     private bool spawning = true;
 
-    public BoDSpellState(BoDStateMachine stateMachine, Animator animator) : base("Spell", stateMachine)
+    public BoDSpellState(BoDStateMachine stateMachine, Animator animator)
     {
         SM = stateMachine;
         anim = animator;

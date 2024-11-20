@@ -9,7 +9,7 @@ public class BoDAttackState : BaseState
     private bool hasAttacked;
     private bool isAttacking;
 
-    public BoDAttackState(BoDStateMachine stateMachine, Animator animator) : base("Attack", stateMachine)
+    public BoDAttackState(BoDStateMachine stateMachine, Animator animator)
     {
         SM = stateMachine;
         anim = animator;

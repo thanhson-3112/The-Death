@@ -39,7 +39,9 @@ public class BoDStateMachine : StateMachine
     private float bossHealth;
 
     [Header("Sound")]
+    public AudioClip dashAttackSound;
     public AudioClip fireBallSound;
+    public AudioClip castSpellSound;
 
     private void Awake()
     {
