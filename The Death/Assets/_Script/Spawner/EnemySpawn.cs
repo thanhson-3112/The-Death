@@ -93,7 +93,25 @@ public class EnemySpawn : MonoBehaviour
                     int randomChoice = Random.Range(0, 2);
                     enemyType = randomChoice == 0 ? EnemyType.Skeleton : EnemyType.Goblin;
                 }
-                else if (elapsedTime >= 180f)
+
+                else if (elapsedTime >= 180f && elapsedTime <= 240f)
+                {
+                    int randomChoice = Random.Range(0, 3);
+                    if (randomChoice == 0)
+                    {
+                        enemyType = EnemyType.Skeleton;
+                    }
+                    else if (randomChoice == 1)
+                    {
+                        enemyType = EnemyType.Goblin;
+                    }
+                    else if (randomChoice == 2)
+                    {
+                        enemyType = EnemyType.Archer;
+                    }
+                }
+
+                else if (elapsedTime >= 240f)
                 {
                     int randomChoice = Random.Range(0, 4);
                     if (randomChoice == 0)

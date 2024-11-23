@@ -26,7 +26,7 @@ public class BossSpawner : MonoBehaviour
         {
             float elapsedTime = gameTimer.GetElapsedTime();
             GameObject enemyToSpawn = null;
-            if (elapsedTime >= 300f)
+            if (elapsedTime >= 360f)
             {
                 Debug.Log("Da spawnboss");
                 enemyToSpawn = enemyPrefabs[0];
