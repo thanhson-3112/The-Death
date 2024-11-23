@@ -49,7 +49,7 @@ public class PlayerPower : MonoBehaviour
 
     // thoi gian hoi chieu
     [Header("AbilityHaste")]
-    public float playerBaseAbilityHaste = 0.5f;
+    public float playerBaseAbilityHaste = 1.8f;
     public float playerCurrentAbilityHaste;
     public TextMeshProUGUI abilityHasteText;
 

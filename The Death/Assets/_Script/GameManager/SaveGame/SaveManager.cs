@@ -94,7 +94,7 @@ public class SaveManager : MonoBehaviour
         PlayerPower.instance.playerBaseSpeed = 15f;
         PlayerPower.instance.playerBasePickRadius = 5f;
         PlayerPower.instance.playerBaseCritChance = 10f;
-        PlayerPower.instance.playerBaseAbilityHaste = 0.5f;
+        PlayerPower.instance.playerBaseAbilityHaste = 1.8f;
         PlayerPower.instance.playerBaseExperienceBonus = 10;
         PlayerPower.instance.playerBaseProjectiles = 1;
         PlayerPower.instance.playerBaseGoldBonus = 1;

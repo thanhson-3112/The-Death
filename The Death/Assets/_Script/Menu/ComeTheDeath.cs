@@ -17,6 +17,7 @@ public class ComeTheDeath : MonoBehaviour
 
     public void Start()
     {
+
         loadingPanel.SetActive(false);
         currentProgress = 0f;
         loadingSlider.value = 0f;
