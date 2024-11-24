@@ -20,7 +20,7 @@ public class TeleportGate : MonoBehaviour
         if (isPlayerInside && Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log("Da an F");
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(2);
         }
 
         SpawnPoint.instance.StopSpawnEnemy();

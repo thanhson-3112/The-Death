@@ -51,8 +51,12 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         UpdateAnimationState();
-        // Hoi lai stamina theo thoi gian
-        dashStamina += playerPower.playerCurrentAbilityHaste * Time.deltaTime;
+
+        // H?i l?i stamina theo t? l? ngh?ch v?i playerCurrentAbilityHaste
+        float staminaRecoveryRate = Mathf.Max(1f / playerPower.playerCurrentAbilityHaste - 0.3f , 0.1f); // Gi?i h?n t?i thi?u ?? tránh chia cho 0
+        dashStamina += staminaRecoveryRate * Time.deltaTime;
+
+        // Gi?i h?n dashStamina trong kho?ng t? 0 ??n dashMaxStamina
         dashStamina = Mathf.Clamp(dashStamina, 0f, dashMaxStamina);
         dashBar.SetDash(dashStamina);
     }

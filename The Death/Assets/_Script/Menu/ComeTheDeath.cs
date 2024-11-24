@@ -46,6 +46,9 @@ public class ComeTheDeath : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            SaveManager.instance.SaveGame();
+            SaveSystem.SaveToDisk();
+
             yield return new WaitForSeconds(1f);
             loadingPanel.SetActive(true);
             ResetProgress();

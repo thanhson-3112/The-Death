@@ -104,7 +104,10 @@ public class PlayerLife : MonoBehaviour
         anim.SetTrigger("PlayerDeath");
         SoundFxManager.instance.PlaySoundFXClip(playerDeathSoundEffect, transform, 1f);
         rb.bodyType = RigidbodyType2D.Static; 
-        GetComponent<Collider2D>().enabled = false; 
+        GetComponent<Collider2D>().enabled = false;
+
+        SaveManager.instance.SaveGame();
+        SaveSystem.SaveToDisk();
         StartCoroutine(WaitAndLoadScene(2.0f));
     }
 

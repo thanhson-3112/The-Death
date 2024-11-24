@@ -7,7 +7,7 @@ public class BoxPool : MonoBehaviour
     public static BoxPool Instance;
 
     [SerializeField] private GameObject boxPrefab;
-    [SerializeField] private int poolSize = 10;
+    [SerializeField] private int poolSize = 13;
 
     // Danh sách các v? trí spawn
     [SerializeField] private List<Transform> spawnPositions;
@@ -42,7 +42,7 @@ public class BoxPool : MonoBehaviour
         // ?n h?p khi nó b? phá h?y
         box.SetActive(false);
 
-        // G?i hàm ?? tái xu?t hi?n h?p sau 10 giây
+        // G?i hàm ?? tái xu?t hi?n h?p sau 30 giây
         StartCoroutine(ReappearBoxAfterDelay(box, 30f));
     }
 
